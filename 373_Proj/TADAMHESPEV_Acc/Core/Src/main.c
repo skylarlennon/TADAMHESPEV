@@ -33,6 +33,9 @@
 /* USER CODE BEGIN PD */
 #define SAD_W_M 0x3C
 #define SAD_R_M 0x3D
+
+#define ACC_ADDR_R 0x33
+#define ACC_ADDR_W 0x32
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -90,9 +93,32 @@ int main(void)
   MX_GPIO_Init();
   MX_I2C1_Init();
   /* USER CODE BEGIN 2 */
-  uint8_t buf[10]= {0x0A};//IRA_REG_M returns 0x48
+//  void testI2C(){
+//
+//  }
 
-  ret = HAL_I2C_Master_Transmit(&hi2c1, SAD_W_M, &buf[0], 1, 1000);
+  void testI2C(){
+	  uint8_t buf[10]= {0x0A};//IRA_REG_M returns 0x48
+	  HAL_StatusTypeDef ret = HAL_I2C_Master_Transmit(&hi2c1, SAD_W_M, &buf[0], 1, 1000);
+	  ret = HAL_I2C_Master_Receive(&hi2c1, SAD_R_M, &buf[0], 1, 1000);
+
+	  if(ret == 0){
+		  printf("SUCCCESSFUL DATA READ");
+	  }
+	  else{
+		  printf("UNSUCCCESSFUL DATA READ");
+	  }
+  }
+
+
+  void configAccel(){
+
+  }
+
+
+
+
+
 
   /* USER CODE END 2 */
 
