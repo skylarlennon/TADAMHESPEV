@@ -90,11 +90,14 @@ int main(void)
   MX_SPI1_Init();
   /* USER CODE BEGIN 2 */
   LCD_begin(&hspi1);
+  LCD_writePixels(&hspi1,HX8357_WHITE,0,0,480,320);
+  LCD_writePixels(&hspi1,HX8357_BLUE,0,0,50,50);
 
 
   char * word = "TADAMHESPEV";
-  LCD_drawString(&hspi1,25,100,word,11,HX8357_BLACK,4);
-  LCD_drawStringNoBG(&hspi1,25,200,word,11,HX8357_BLACK,4);
+  char * word2 = "Accel: 20 MPH^2";
+  LCD_drawString(&hspi1,0,100,word,11,HX8357_BLACK,4);
+  LCD_drawStringNoBG(&hspi1,100,200,word2,15,HX8357_BLACK,4);
 
   invertDisplay(&hspi1,1);
   /* USER CODE END 2 */

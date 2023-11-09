@@ -58,8 +58,8 @@ static uint8_t init[] = {
 	  0x27, 0x1B, 0x08, 0x09, 0x03, 0x00, 0x01,
 	HX8357_COLMOD, 1,
 	  0x55,                      // 16 bit
-	HX8357_MADCTL, 1,
-	  0xC0,
+	HX8357_MADCTL, 1,			// edit this to adjust rotation (horizontal = 0x60, vertical = 0xC0)
+	  0x60,
 	HX8357_TEON, 1,
 	  0x00,                      // TW off
 	HX8357_TEARLINE, 2,

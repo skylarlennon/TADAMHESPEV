@@ -10,11 +10,11 @@
 
 #include "stm32l4xx_hal.h"
 
-#define HX8357_TFTWIDTH 320  ///< 320 pixels wide
-#define HX8357_TFTHEIGHT 480 ///< 480 pixels tall
+#define HX8357_TFTWIDTH 480  ///< 480 pixels wide
+#define HX8357_TFTHEIGHT 320 ///< 320 pixels tall
 
-#define LCD_WIDTH 320  ///< 320 pixels wide
-#define LCD_HEIGHT 480 ///< 480 pixels tall
+#define LCD_WIDTH 480  ///< 480 pixels wide
+#define LCD_HEIGHT 320 ///< 320 pixels tall
 
 #define HX8357_NOP 0x00     ///< No op
 #define HX8357_SWRESET 0x01 ///< software reset
