@@ -18,7 +18,7 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-
+#include "lcd.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 
@@ -89,8 +89,14 @@ int main(void)
   MX_GPIO_Init();
   MX_SPI1_Init();
   /* USER CODE BEGIN 2 */
-  LCD_begin(hspi1);
-  LCD_pushColor(hspi1,HX8357_BLUE);
+  LCD_begin(&hspi1);
+
+
+  char * word = "TADAMHESPEV";
+  LCD_drawString(&hspi1,25,100,word,11,HX8357_BLACK,4);
+  LCD_drawStringNoBG(&hspi1,25,200,word,11,HX8357_BLACK,4);
+
+  invertDisplay(&hspi1,1);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -100,6 +106,7 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+
   }
   /* USER CODE END 3 */
 }
