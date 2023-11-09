@@ -752,3 +752,5 @@
 2023-11-08 18:16:55,892 [INFO] ProjectBuilder:4626 - Time for Generating toolchain IDE Files: 1775mS.
 2023-11-08 18:16:55,893 [INFO] ProjectBuilder:2935 - Time for Copy CMSIS : 1mS.
 2023-11-08 18:16:55,898 [INFO] ProjectBuilder:2935 - Time for Copy CMSIS : 0mS.
+2023-11-08 19:40:30,267 [ERROR] ConfigurationRetriever:142 - IOException on connection: Read timed out
+2023-11-08 19:40:37,665 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 

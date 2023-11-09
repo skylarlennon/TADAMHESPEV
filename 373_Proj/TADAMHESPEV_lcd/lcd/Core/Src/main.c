@@ -89,7 +89,8 @@ int main(void)
   MX_GPIO_Init();
   MX_SPI1_Init();
   /* USER CODE BEGIN 2 */
-
+  LCD_begin(hspi1);
+  LCD_pushColor(hspi1,HX8357_BLUE);
   /* USER CODE END 2 */
 
   /* Infinite loop */
