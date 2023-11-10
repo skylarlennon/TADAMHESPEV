@@ -685,3 +685,37 @@ void LCD_drawButtonNoBG(SPI_HandleTypeDef* spi, int16_t x, int16_t y, int button
 	}
 	LCD_endWrite();
 }
+
+//homemade functions for TADAMHASPEV, move to different file
+void LCD_drawBattery(SPI_HandleTypeDef* spi, int16_t x, int16_y, uint16_t color) {
+	//left
+	if(!LCD_setAddrWindow(spi, x, y + 10, 1, 220)) return 0;
+	if (!LCD_pushColorCopy(spi, color, 220)) return 0;
+
+	//right
+	if(!LCD_setAddrWindow(spi, x + 100, y + 10, 1, 220)) return 0;
+	if (!LCD_pushColorCopy(spi, color, 220)) return 0;
+
+	//top
+	if(!LCD_setAddrWindow(spi, x, y + 10, 100, 1)) return 0;
+	if (!LCD_pushColorCopy(spi, color, 100)) return 0;
+
+	//bottom
+	if(!LCD_setAddrWindow(spi, x, y + 230, 100, 1)) return 0;
+	if (!LCD_pushColorCopy(spi, color, 100)) return 0;
+
+	//lil cap
+	if(!LCD_setAddrWindow(spi, x + 35, y, 30, 1)) return 0;
+	if (!LCD_pushColorCopy(spi, color, 30)) return 0;
+
+	if(!LCD_setAddrWindow(spi, x + 35, y, 1, 10)) return 0;
+	if (!LCD_pushColorCopy(spi, color, 10)) return 0;
+
+	if(!LCD_setAddrWindow(spi, x + 65, y, 1, 10)) return 0;
+	if (!LCD_pushColorCopy(spi, color, 10)) return 0;
+	return 1;
+}
+
+void LCD_drawBattery(SPI_HandleTypeDef* spi, uint16_t color) {
+
+}
