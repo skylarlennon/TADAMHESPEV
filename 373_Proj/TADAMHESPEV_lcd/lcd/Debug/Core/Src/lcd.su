@@ -21,3 +21,6 @@
 ../Core/Src/lcd.c:630:6:LCD_drawStringNoBG	40	static
 ../Core/Src/lcd.c:635:6:LCD_drawButton	48	static
 ../Core/Src/lcd.c:665:6:LCD_drawButtonNoBG	48	static
+../Core/Src/lcd.c:690:6:LCD_drawBattery	32	static
+../Core/Src/lcd.c:719:6:LCD_drawFrame	24	static
+../Core/Src/lcd.c:736:6:LCD_fillBattery	40	static

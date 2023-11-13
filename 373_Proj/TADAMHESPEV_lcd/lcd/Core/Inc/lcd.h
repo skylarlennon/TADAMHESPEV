@@ -137,7 +137,8 @@ void LCD_drawCharOPT(SPI_HandleTypeDef* spi, int16_t x, int16_t y, unsigned char
 void LCD_drawStringOPT(SPI_HandleTypeDef* spi, int16_t x, int16_t y, unsigned char* c1, unsigned char* c2, uint32_t length, uint16_t color, uint32_t size);
 
 //homemade functions for TADAMHASPEV, move to different file?
-void LCD_drawBattery(SPI_HandleTypeDef* spi, int16_t x, int16_y, uint16_t color);
-void LCD_drawBattery(SPI_HandleTypeDef* spi, uint16_t color);
+void LCD_drawBattery(SPI_HandleTypeDef* spi, int16_t x, int16_t y, uint16_t color, uint32_t size);
+void LCD_drawFrame(SPI_HandleTypeDef* spi, uint16_t color);
+void LCD_fillBattery(SPI_HandleTypeDef* spi, int16_t x, int16_t y, uint32_t size, uint32_t level);
 
 #endif /* INC_LCD_H_ */

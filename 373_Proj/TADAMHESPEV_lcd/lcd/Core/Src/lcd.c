@@ -687,35 +687,55 @@ void LCD_drawButtonNoBG(SPI_HandleTypeDef* spi, int16_t x, int16_t y, int button
 }
 
 //homemade functions for TADAMHASPEV, move to different file
-void LCD_drawBattery(SPI_HandleTypeDef* spi, int16_t x, int16_y, uint16_t color) {
+void LCD_drawBattery(SPI_HandleTypeDef* spi, int16_t x, int16_t y, uint16_t color, uint32_t size) {
+	//make battery thicker?
 	//left
-	if(!LCD_setAddrWindow(spi, x, y + 10, 1, 220)) return 0;
-	if (!LCD_pushColorCopy(spi, color, 220)) return 0;
+	if(!LCD_setAddrWindow(spi, x, y + 10, 1, 22*size)) return;
+	if (!LCD_pushColorCopy(spi, color, 22*size)) return;
 
 	//right
-	if(!LCD_setAddrWindow(spi, x + 100, y + 10, 1, 220)) return 0;
-	if (!LCD_pushColorCopy(spi, color, 220)) return 0;
+	if(!LCD_setAddrWindow(spi, x + 100, y + 10, 1, 22*size)) return;
+	if (!LCD_pushColorCopy(spi, color, 22*size)) return;
 
 	//top
-	if(!LCD_setAddrWindow(spi, x, y + 10, 100, 1)) return 0;
-	if (!LCD_pushColorCopy(spi, color, 100)) return 0;
+	if(!LCD_setAddrWindow(spi, x, y + 10, 10*size, 1)) return;
+	if (!LCD_pushColorCopy(spi, color, 10*size)) return;
 
 	//bottom
-	if(!LCD_setAddrWindow(spi, x, y + 230, 100, 1)) return 0;
-	if (!LCD_pushColorCopy(spi, color, 100)) return 0;
+	if(!LCD_setAddrWindow(spi, x, y + 230, 10*size, 1)) return;
+	if (!LCD_pushColorCopy(spi, color, 10*size)) return;
 
 	//lil cap
-	if(!LCD_setAddrWindow(spi, x + 35, y, 30, 1)) return 0;
-	if (!LCD_pushColorCopy(spi, color, 30)) return 0;
+	if(!LCD_setAddrWindow(spi, x + 35, y, 3*size, 1)) return;
+	if (!LCD_pushColorCopy(spi, color, 3*size)) return;
 
-	if(!LCD_setAddrWindow(spi, x + 35, y, 1, 10)) return 0;
-	if (!LCD_pushColorCopy(spi, color, 10)) return 0;
+	if(!LCD_setAddrWindow(spi, x + 35, y, 1, size)) return;
+	if (!LCD_pushColorCopy(spi, color, size)) return;
 
-	if(!LCD_setAddrWindow(spi, x + 65, y, 1, 10)) return 0;
-	if (!LCD_pushColorCopy(spi, color, 10)) return 0;
-	return 1;
+	if(!LCD_setAddrWindow(spi, x + 65, y, 1, size)) return;
+	if (!LCD_pushColorCopy(spi, color, size)) return;
+	return;
 }
 
-void LCD_drawBattery(SPI_HandleTypeDef* spi, uint16_t color) {
+void LCD_drawFrame(SPI_HandleTypeDef* spi, uint16_t color) {
+	//rows
+	if(!LCD_setAddrWindow(spi, 0, 80, 320, 1)) return;
+	if (!LCD_pushColorCopy(spi, color, 320)) return;
 
+	if(!LCD_setAddrWindow(spi, 0, 160, 320, 1)) return;
+	if (!LCD_pushColorCopy(spi, color, 320)) return;
+
+	if(!LCD_setAddrWindow(spi, 0, 240, 320, 1)) return;
+	if (!LCD_pushColorCopy(spi, color, 320)) return;
+
+	//column
+	if(!LCD_setAddrWindow(spi, 320, 0, 1, 320)) return;
+	if (!LCD_pushColorCopy(spi, color, 320)) return;
+	return;
+}
+
+void LCD_fillBattery(SPI_HandleTypeDef* spi, int16_t x, int16_t y, uint32_t size, uint32_t level) {
+	//include battery level adjustment and coloring
+	//also fix border between battery juice and battery
+	LCD_writePixels(spi, HX8357_GREEN, x + 3, (y + 10) + 3, 10*size - 3, 22*size - 3);
 }
