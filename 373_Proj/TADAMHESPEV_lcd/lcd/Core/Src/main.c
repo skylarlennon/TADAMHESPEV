@@ -95,13 +95,29 @@ int main(void)
   /* USER CODE BEGIN 2 */
   LCD_begin(&hspi1);
   LCD_writePixels(&hspi1,HX8357_WHITE,0,0,480,320);
-  LCD_drawBattery(&hspi1,350,70,HX8357_BLACK,10);
+  LCD_drawBattery(&hspi1,380,120,HX8357_BLACK,8);
   LCD_drawFrame(&hspi1,HX8357_BLACK);
 
 
-  char * word = "TADAMHESPEV";
+  char * name = "TADAMHESPEV | UMSM";
+  char * speed = "SPEED:";
+  char * temp = "TEMP:";
+  char * power = "POWER:";
 
-  LCD_fillBattery(&hspi1,350,70,10,100);
+  char * mph = "mph";
+  char * deg = "C";
+  char * watt = "W";
+  LCD_drawString(&hspi1,25,30 + 80*0,name,18,HX8357_BLACK,3);
+  LCD_drawString(&hspi1,5,30 + 80*1,speed,6,HX8357_BLACK,4);
+  LCD_drawString(&hspi1,5,30 + 80*2,temp,5,HX8357_BLACK,4);
+  LCD_drawString(&hspi1,5,30 + 80*3,power,6,HX8357_BLACK,4);
+
+  LCD_drawString(&hspi1,280,30 + 80*1,mph,3,HX8357_BLACK,4);
+  LCD_drawString(&hspi1,306,30 + 80*2,deg,1,HX8357_BLACK,4);
+  LCD_drawString(&hspi1,306,30 + 80*3,watt,1,HX8357_BLACK,4);
+
+  LCD_fillBattery(&hspi1,380,120,8,100);
+  LCD_drawString(&hspi1,370,50,"100%",4,HX8357_BLACK,4);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -111,11 +127,10 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-	  for(int i = 0; i < 4; i++) {
-		  LCD_drawString(&hspi1,5,40 + 80*i,word,11,HX8357_BLACK,2);
-		  HAL_Delay(500);
-		  LCD_writePixels(&hspi1,HX8357_WHITE,5,40+80*i,150,40);
-	  }
+		  LCD_drawString(&hspi1,192,30 + 80*1,"4",3,HX8357_BLACK,4);
+		  LCD_drawString(&hspi1,192,30 + 80*2,"6",3,HX8357_BLACK,4);
+		  LCD_drawString(&hspi1,192,30 + 80*3,"8",3,HX8357_BLACK,4);
+		  HAL_Delay(250);
   }
   /* USER CODE END 3 */
 }

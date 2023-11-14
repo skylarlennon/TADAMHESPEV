@@ -22,5 +22,5 @@
 ../Core/Src/lcd.c:635:6:LCD_drawButton	8
 ../Core/Src/lcd.c:665:6:LCD_drawButtonNoBG	7
 ../Core/Src/lcd.c:690:6:LCD_drawBattery	14
-../Core/Src/lcd.c:719:6:LCD_drawFrame	8
-../Core/Src/lcd.c:736:6:LCD_fillBattery	1
+../Core/Src/lcd.c:720:6:LCD_drawFrame	8
+../Core/Src/lcd.c:737:6:LCD_fillBattery	1
