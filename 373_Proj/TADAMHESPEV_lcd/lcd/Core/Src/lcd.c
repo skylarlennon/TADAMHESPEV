@@ -735,7 +735,14 @@ void LCD_drawFrame(SPI_HandleTypeDef* spi, uint16_t color) {
 }
 
 void LCD_fillBattery(SPI_HandleTypeDef* spi, int16_t x, int16_t y, uint32_t size, uint32_t level) {
-	//include battery level adjustment and coloring
-	//also fix border between battery juice and battery
-	LCD_writePixels(spi, HX8357_GREEN, x + 3, (y + size) + 3, 10*size - 6, 22*size - 6);
+	uint32_t color = HX8357_GREEN;
+	if (level < 20) {
+		color = HX8357_RED;
+	} else if (level < 50) {
+		color = HX8357_YELLOW;
+	}
+	//level = 100 --> y offset 0
+	//level = 0 --> y offset 22*size
+	int offset = 22*size - (22*size)*(level/100.0);
+	LCD_writePixels(spi, color, x + 3, ((y + size) + 3) + offset, 10*size - 6, (22*size - 6) - offset);
 }

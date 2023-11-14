@@ -22,6 +22,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "lcd.h"
+#include <stdlib.h>
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -107,17 +108,22 @@ int main(void)
   char * mph = "mph";
   char * deg = "C";
   char * watt = "W";
-  LCD_drawString(&hspi1,25,30 + 80*0,name,18,HX8357_BLACK,3);
-  LCD_drawString(&hspi1,5,30 + 80*1,speed,6,HX8357_BLACK,4);
-  LCD_drawString(&hspi1,5,30 + 80*2,temp,5,HX8357_BLACK,4);
-  LCD_drawString(&hspi1,5,30 + 80*3,power,6,HX8357_BLACK,4);
+  LCD_drawString(&hspi1,20,30 + 80*0,name,18,HX8357_BLACK,3);
+  LCD_drawString(&hspi1,5,30 + 80*1,speed,6,HX8357_BLACK,3);
+  LCD_drawString(&hspi1,5,30 + 80*2,temp,5,HX8357_BLACK,3);
+  LCD_drawString(&hspi1,5,30 + 80*3,power,6,HX8357_BLACK,3);
 
-  LCD_drawString(&hspi1,280,30 + 80*1,mph,3,HX8357_BLACK,4);
-  LCD_drawString(&hspi1,306,30 + 80*2,deg,1,HX8357_BLACK,4);
-  LCD_drawString(&hspi1,306,30 + 80*3,watt,1,HX8357_BLACK,4);
+  LCD_drawString(&hspi1,280,30 + 80*1,mph,3,HX8357_BLACK,3);
+  LCD_drawString(&hspi1,306,30 + 80*2,deg,1,HX8357_BLACK,3);
+  LCD_drawString(&hspi1,306,30 + 80*3,watt,1,HX8357_BLACK,3);
 
-  LCD_fillBattery(&hspi1,380,120,8,100);
-  LCD_drawString(&hspi1,370,50,"100%",4,HX8357_BLACK,4);
+  int volt_percent = 85;
+  char lev[801];
+  itoa(volt_percent,lev,10);
+
+  LCD_fillBattery(&hspi1,380,120,8,volt_percent);
+  LCD_drawString(&hspi1,370,50,lev,3,HX8357_BLACK,4);
+  LCD_drawString(&hspi1,442,50,"%",1,HX8357_BLACK,4);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -127,10 +133,10 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-		  LCD_drawString(&hspi1,192,30 + 80*1,"4",3,HX8357_BLACK,4);
-		  LCD_drawString(&hspi1,192,30 + 80*2,"6",3,HX8357_BLACK,4);
-		  LCD_drawString(&hspi1,192,30 + 80*3,"8",3,HX8357_BLACK,4);
-		  HAL_Delay(250);
+	LCD_drawString(&hspi1,146,30 + 80*1,"4",4,HX8357_BLACK,4);
+	LCD_drawString(&hspi1,146,30 + 80*2,"6",4,HX8357_BLACK,4);
+	LCD_drawString(&hspi1,146,30 + 80*3,"8",4,HX8357_BLACK,4);
+	HAL_Delay(250);
   }
   /* USER CODE END 3 */
 }
