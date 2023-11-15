@@ -112,7 +112,66 @@ void ReadAccData(){
 			accVal = (raw / (float)((1 << 15) - 1))*2;
 		}
 
-		printf("%i\t%f\n",cnt++, accVal);
+		uint8_t binAcc = accFloat2Binary(accVal);
+		//[TODO] - error check if binAcc = -1;
+
+		printf("%i\t%b\n",binAcc);
+
+//		printf("%i\t%f\n",cnt++, accVal);
+}
+
+uint8_t accFloat2Binary(float accVal){
+	if(accVal < 0.125){
+		return 0;
+	}
+	else if(accVal < 0.25){
+		return 1;
+	}
+	else if(accVal < 0.375){
+		return 2;
+	}
+	else if(accVal < 0.5){
+		return 3;
+	}
+	else if(accVal < 0.625){
+		return 4;
+	}
+	else if(accVal < 0.75){
+		return 5;
+	}
+	else if(accVal < 0.875){
+		return 6;
+	}
+	else if(accVal < 1){
+		return 7;
+	}
+	else if(accVal < 1.125){
+		return 8;
+	}
+	else if(accVal < 1.25){
+		return 9;
+	}
+	else if(accVal < 1.375){
+		return 10;
+	}
+	else if(accVal < 1.5){
+		return 11;
+	}
+	else if(accVal < 1.625){
+		return 12;
+	}
+	else if(accVal < 1.75){
+		return 13;
+	}
+	else if(accVal < 1.875){
+		return 14;
+	}
+	else if(accVal < 2){
+		return 15;
+	}
+	else{
+		return 0xFF;
+	}
 }
 /* USER CODE END 0 */
 
