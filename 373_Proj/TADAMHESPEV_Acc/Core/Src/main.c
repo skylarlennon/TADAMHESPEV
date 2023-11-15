@@ -19,6 +19,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "stdio.h"
+#include "math.h"
 //#include "time.h"
 
 /* Private includes ----------------------------------------------------------*/
@@ -121,52 +122,52 @@ void ReadAccData(){
 }
 
 uint8_t accFloat2Binary(float accVal){
-	if(accVal < 0.125){
+	if(fabs(accVal) < 0.125){
 		return 0;
 	}
-	else if(accVal < 0.25){
+	else if(fabs(accVal) < 0.25){
 		return 1;
 	}
-	else if(accVal < 0.375){
+	else if(fabs(accVal) < 0.375){
 		return 2;
 	}
-	else if(accVal < 0.5){
+	else if(fabs(accVal) < 0.5){
 		return 3;
 	}
-	else if(accVal < 0.625){
+	else if(fabs(accVal) < 0.625){
 		return 4;
 	}
-	else if(accVal < 0.75){
+	else if(fabs(accVal) < 0.75){
 		return 5;
 	}
-	else if(accVal < 0.875){
+	else if(fabs(accVal) < 0.875){
 		return 6;
 	}
-	else if(accVal < 1){
+	else if(fabs(accVal) < 1){
 		return 7;
 	}
-	else if(accVal < 1.125){
+	else if(fabs(accVal) < 1.125){
 		return 8;
 	}
-	else if(accVal < 1.25){
+	else if(fabs(accVal) < 1.25){
 		return 9;
 	}
-	else if(accVal < 1.375){
+	else if(fabs(accVal) < 1.375){
 		return 10;
 	}
-	else if(accVal < 1.5){
+	else if(fabs(accVal) < 1.5){
 		return 11;
 	}
-	else if(accVal < 1.625){
+	else if(fabs(accVal) < 1.625){
 		return 12;
 	}
-	else if(accVal < 1.75){
+	else if(fabs(accVal) < 1.75){
 		return 13;
 	}
-	else if(accVal < 1.875){
+	else if(fabs(accVal) < 1.875){
 		return 14;
 	}
-	else if(accVal < 2){
+	else if(fabs(accVal) < 2){
 		return 15;
 	}
 	else{
