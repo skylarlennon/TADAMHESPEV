@@ -18,9 +18,6 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-#include "stdio.h"
-#include "math.h"
-//#include "time.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -89,7 +86,7 @@ void setupAccModule(){
 	}
 }
 
-void ReadAccData(){
+float ReadAccData(){
 		uint8_t buf[1]= {OUT_X_L_A | 1 << 7}; //Auto-Increment OUT_X_L_A
 		uint8_t rbuf[2];
 		char axischars[3] = {'x', 'z', 'y'};
@@ -112,11 +109,11 @@ void ReadAccData(){
 		else{ //positive acceleration
 			accVal = (raw / (float)((1 << 15) - 1))*2;
 		}
-
-		uint8_t binAcc = accFloat2Binary(accVal);
+		return accVal;
+//		uint8_t binAcc = accFloat2Binary(accVal);
 		//[TODO] - error check if binAcc = -1;
 
-		printf("%i\t%b\n",binAcc);
+//		printf("%i\t%b\n",binAcc);
 
 //		printf("%i\t%f\n",cnt++, accVal);
 }
@@ -174,6 +171,17 @@ uint8_t accFloat2Binary(float accVal){
 		return 0xFF;
 	}
 }
+
+void write4BitGPIOs(uint8_t binVal){
+//	HAL_GPIO_WritePin(GPIOX, GPIO_PIN_XX,  pin_state);
+
+	//PB6, PB5, PB4, PB3 MSB --> LSB
+	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_6, (binVal >> 3) & 1);
+	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_5, (binVal >> 2) & 1);
+	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_4, (binVal >> 1) & 1);
+	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_6, binVal & 1);
+}
+
 /* USER CODE END 0 */
 
 /**
@@ -214,7 +222,9 @@ int main(void)
   setupAccModule();
   while (1)
   {
-	 ReadAccData();
+	 float acc = ReadAccData();
+	 uint8_t binAcc = accFloat2Binary(acc);
+	 write4BitGPIOs(binAcc);
 	 HAL_Delay(10);
     /* USER CODE END WHILE */
 
@@ -385,6 +395,9 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOG_CLK_ENABLE();
   HAL_PWREx_EnableVddIO2();
 
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_3|GPIO_PIN_4|GPIO_PIN_5|GPIO_PIN_6, GPIO_PIN_RESET);
+
   /*Configure GPIO pins : PE2 PE3 */
   GPIO_InitStruct.Pin = GPIO_PIN_2|GPIO_PIN_3;
   GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
@@ -453,8 +466,8 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : PB2 PB6 */
-  GPIO_InitStruct.Pin = GPIO_PIN_2|GPIO_PIN_6;
+  /*Configure GPIO pin : PB2 */
+  GPIO_InitStruct.Pin = GPIO_PIN_2;
   GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
@@ -581,12 +594,11 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Alternate = GPIO_AF7_USART2;
   HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : PB3 PB4 PB5 */
-  GPIO_InitStruct.Pin = GPIO_PIN_3|GPIO_PIN_4|GPIO_PIN_5;
-  GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
+  /*Configure GPIO pins : PB3 PB4 PB5 PB6 */
+  GPIO_InitStruct.Pin = GPIO_PIN_3|GPIO_PIN_4|GPIO_PIN_5|GPIO_PIN_6;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
-  GPIO_InitStruct.Alternate = GPIO_AF6_SPI3;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
   /*Configure GPIO pin : PE0 */
