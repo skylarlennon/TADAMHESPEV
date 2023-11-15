@@ -18,6 +18,8 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "stdio.h"
+//#include "time.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -31,11 +33,22 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-#define SAD_W_M 0x3C
-#define SAD_R_M 0x3D
 
-#define ACC_ADDR_R 0x33
-#define ACC_ADDR_W 0x32
+/**********CONFIG ACCELEROMETER**********/
+#define ACC_IR_CTRL1 0x20
+#define CTR1_SETUP 0b10010111 // enable xyz accel measurement and select data rate
+
+/**********ACCELEROMETER I2C ADDR AND SUB ADDRESSES**********/
+#define ACC_I2C_ADDR 	0b0011001
+//#define ACC_I2C_ADDR_WRITE 	0b00110010
+
+#define OUT_X_L_A 0x28
+#define OUT_X_H_A 0x29
+#define OUT_Y_L_A 0x2A
+#define OUT_Y_H_A 0x2B
+#define OUT_Z_L_A 0x2C
+#define OUT_Z_H_A 0x2D
+
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -46,6 +59,8 @@
 /* Private variables ---------------------------------------------------------*/
 I2C_HandleTypeDef hi2c1;
 
+UART_HandleTypeDef hlpuart1;
+
 /* USER CODE BEGIN PV */
 
 /* USER CODE END PV */
@@ -54,13 +69,51 @@ I2C_HandleTypeDef hi2c1;
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_I2C1_Init(void);
+static void MX_LPUART1_UART_Init(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+//
+void setupAccModule(){
+	uint8_t buf[10]= {ACC_IR_CTRL1, CTR1_SETUP};
+	HAL_StatusTypeDef ret = HAL_I2C_Master_Transmit(&hi2c1, ACC_I2C_ADDR << 1, buf, 2, 1000);
+	if(ret == 0){
+		printf("We gucci\n");
+	}
+	else{
+		printf("we not gucci\n");
+	}
+}
 
+void ReadAccData(){
+		uint8_t buf[1]= {OUT_X_L_A | 1 << 7}; //Auto-Increment OUT_X_L_A
+		uint8_t rbuf[2];
+		char axischars[3] = {'x', 'z', 'y'};
+		static int cnt = 0;
+		float accVal = 0;
+
+		HAL_StatusTypeDef ret = HAL_I2C_Master_Transmit(&hi2c1, ACC_I2C_ADDR << 1, buf, 1, 1000);
+		//[TODO] - Have error checking for communication errors
+		ret =  HAL_I2C_Master_Receive(&hi2c1, ACC_I2C_ADDR << 1, rbuf, 2, 1000);
+		//[TODO] - Have error checking for communication errors
+
+		uint16_t raw = (rbuf[1] << 8) | rbuf[0];	// 2's compliment, +-2g's
+		if(raw > 64100){
+			accVal = 0;
+		}
+		else if(raw & 0x8000){ //if value is negative
+			int16_t temp = -((raw ^ 0xFFFF) + 1);
+			accVal = (temp / (float)(1 << 15))*2;
+		}
+		else{ //positive acceleration
+			accVal = (raw / (float)((1 << 15) - 1))*2;
+		}
+
+		printf("%i\t%f\n",cnt++, accVal);
+}
 /* USER CODE END 0 */
 
 /**
@@ -92,40 +145,17 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_I2C1_Init();
+  MX_LPUART1_UART_Init();
   /* USER CODE BEGIN 2 */
-//  void testI2C(){
-//
-//  }
-
-  void testI2C(){
-	  uint8_t buf[10]= {0x0A};//IRA_REG_M returns 0x48
-	  HAL_StatusTypeDef ret = HAL_I2C_Master_Transmit(&hi2c1, SAD_W_M, &buf[0], 1, 1000);
-	  ret = HAL_I2C_Master_Receive(&hi2c1, SAD_R_M, &buf[0], 1, 1000);
-
-	  if(ret == 0){
-		  printf("SUCCCESSFUL DATA READ");
-	  }
-	  else{
-		  printf("UNSUCCCESSFUL DATA READ");
-	  }
-  }
-
-
-  void configAccel(){
-
-  }
-
-
-
-
-
-
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+  setupAccModule();
   while (1)
   {
+	 ReadAccData();
+	 HAL_Delay(10);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -222,6 +252,54 @@ static void MX_I2C1_Init(void)
   /* USER CODE BEGIN I2C1_Init 2 */
 
   /* USER CODE END I2C1_Init 2 */
+
+}
+
+/**
+  * @brief LPUART1 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_LPUART1_UART_Init(void)
+{
+
+  /* USER CODE BEGIN LPUART1_Init 0 */
+
+  /* USER CODE END LPUART1_Init 0 */
+
+  /* USER CODE BEGIN LPUART1_Init 1 */
+
+  /* USER CODE END LPUART1_Init 1 */
+  hlpuart1.Instance = LPUART1;
+  hlpuart1.Init.BaudRate = 115200;
+  hlpuart1.Init.WordLength = UART_WORDLENGTH_8B;
+  hlpuart1.Init.StopBits = UART_STOPBITS_1;
+  hlpuart1.Init.Parity = UART_PARITY_NONE;
+  hlpuart1.Init.Mode = UART_MODE_TX_RX;
+  hlpuart1.Init.HwFlowCtl = UART_HWCONTROL_NONE;
+  hlpuart1.Init.OneBitSampling = UART_ONE_BIT_SAMPLE_DISABLE;
+  hlpuart1.Init.ClockPrescaler = UART_PRESCALER_DIV1;
+  hlpuart1.AdvancedInit.AdvFeatureInit = UART_ADVFEATURE_NO_INIT;
+  hlpuart1.FifoMode = UART_FIFOMODE_DISABLE;
+  if (HAL_UART_Init(&hlpuart1) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  if (HAL_UARTEx_SetTxFifoThreshold(&hlpuart1, UART_TXFIFO_THRESHOLD_1_8) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  if (HAL_UARTEx_SetRxFifoThreshold(&hlpuart1, UART_RXFIFO_THRESHOLD_1_8) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  if (HAL_UARTEx_DisableFifoMode(&hlpuart1) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN LPUART1_Init 2 */
+
+  /* USER CODE END LPUART1_Init 2 */
 
 }
 
@@ -379,14 +457,6 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Alternate = GPIO_AF2_TIM4;
   HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : PG7 PG8 */
-  GPIO_InitStruct.Pin = GPIO_PIN_7|GPIO_PIN_8;
-  GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
-  GPIO_InitStruct.Alternate = GPIO_AF8_LPUART1;
-  HAL_GPIO_Init(GPIOG, &GPIO_InitStruct);
-
   /*Configure GPIO pin : PC6 */
   GPIO_InitStruct.Pin = GPIO_PIN_6;
   GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
@@ -472,6 +542,16 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
+#ifdef __GNUC__
+#define PUTCHAR_PROTOTYPE int __io_putchar(int ch)
+#else
+  #define PUTCHAR_PROTOTYPE int fputc(int ch, FILE *f)
+#endif /* __GNUC__ */
+PUTCHAR_PROTOTYPE
+{
+  HAL_UART_Transmit(&hlpuart1, (uint8_t *)&ch, 1, 0xFFFF);
+  return ch;
+}
 
 /* USER CODE END 4 */
 
