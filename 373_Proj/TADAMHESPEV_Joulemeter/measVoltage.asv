@@ -9,25 +9,23 @@ clc;clear;
 
 syms r1 r2
 
-Vmin = 46;                  %Volts
-Vmax = 54;                  %Volts
+Vmin = 40; %    Volts
+Vmax = 54; %    Volts
 ADC_Bits = 12;
-Vref_ADC = 3.3;             %Volts
-maxPowerVoltMeter = 0.25;   %Watts
 
 %Create a graph for power consumed as a function of battery voltage
 %and the total resistance of the voltage divider
-peqn = maxPowerVoltMeter == Vmax^2/(r1 + r2);
+peqn = 0.25 == Vmax^2/(r1 + r2);
 vd_eqn = Vmax * r2 / (r1 + r2) == 3.3;
 
 a = solve([peqn vd_eqn], [r1 r2]);
 
-r1Val = a.r1;
-r2Val = a.r2;
+r1Val = a.r1
+r2Val = a.r2
 
 VoltageRange = (Vmax*r1Val/(r1Val + r2Val)) - (Vmin*r1Val/(r1Val + r2Val));
-numADCVals = vpa((2^12/Vref_ADC) * VoltageRange, 4)
-adcResolution = vpa(VoltageRange / numADCVals, 4) %volts/adcVal
+
+
 
 
 
