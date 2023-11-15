@@ -19,6 +19,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "stdio.h"
+//#include "time.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -91,16 +92,27 @@ void ReadAccData(){
 		uint8_t buf[1]= {OUT_X_L_A | 1 << 7}; //Auto-Increment OUT_X_L_A
 		uint8_t rbuf[2];
 		char axischars[3] = {'x', 'z', 'y'};
+		static int cnt = 0;
+		float accVal = 0;
 
 		HAL_StatusTypeDef ret = HAL_I2C_Master_Transmit(&hi2c1, ACC_I2C_ADDR << 1, buf, 1, 1000);
 		//[TODO] - Have error checking for communication errors
 		ret =  HAL_I2C_Master_Receive(&hi2c1, ACC_I2C_ADDR << 1, rbuf, 2, 1000);
 		//[TODO] - Have error checking for communication errors
-		uint16_t raw = (rbuf[1] << 8) | rbuf[0];
-		printf("%u\n", raw);
-//		float axis = ( ((float)(rbuf[0]))/((1<<16) -1) )*4 ;
-//		printf("data axis %c: %f\t raw: %u\n", axischars[0], axis, rbuf[0] );
-//		printf("\n");
+
+		uint16_t raw = (rbuf[1] << 8) | rbuf[0];	// 2's compliment, +-2g's
+		if(raw > 64100){
+			accVal = 0;
+		}
+		else if(raw & 0x8000){ //if value is negative
+			int16_t temp = -((raw ^ 0xFFFF) + 1);
+			accVal = (temp / (float)(1 << 15))*2;
+		}
+		else{ //positive acceleration
+			accVal = (raw / (float)((1 << 15) - 1))*2;
+		}
+
+		printf("%i\t%f\n",cnt++, accVal);
 }
 /* USER CODE END 0 */
 
@@ -143,7 +155,7 @@ int main(void)
   while (1)
   {
 	 ReadAccData();
-	 HAL_Delay(50);
+	 HAL_Delay(10);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
