@@ -135,10 +135,18 @@ void LCD_drawCharNoBG(SPI_HandleTypeDef* spi, int16_t x, int16_t y, unsigned cha
 void LCD_drawStringNoBG(SPI_HandleTypeDef* spi, int16_t x, int16_t y, unsigned char* c, uint32_t length, uint16_t color, uint32_t size);
 void LCD_drawCharOPT(SPI_HandleTypeDef* spi, int16_t x, int16_t y, unsigned char c1, unsigned char c2, uint16_t color, uint32_t size);
 void LCD_drawStringOPT(SPI_HandleTypeDef* spi, int16_t x, int16_t y, unsigned char* c1, unsigned char* c2, uint32_t length, uint16_t color, uint32_t size);
+void LCD_writeLine(SPI_HandleTypeDef *spi, int x0, int y0, int x1, int y1, int color);
+void LCD_fillRect(SPI_HandleTypeDef *spi, int16_t x, int16_t y, int16_t w, int16_t h, uint16_t color);
+void LCD_fillTriangle(SPI_HandleTypeDef *spi, int16_t x0, int16_t y0, int16_t x1, int16_t y1, int16_t x2, int16_t y2, uint16_t color);
+void LCD_writeFastVLine(SPI_HandleTypeDef *spi, int16_t x, int16_t y, int16_t h, uint16_t color);
+void LCD_writeFastHLine(SPI_HandleTypeDef *spi, int16_t x, int16_t y, int16_t w, uint16_t color);
 
 //homemade functions for TADAMHASPEV, move to different file?
 void LCD_drawBattery(SPI_HandleTypeDef* spi, int16_t x, int16_t y, uint16_t color, uint32_t size);
 void LCD_drawFrame(SPI_HandleTypeDef* spi, uint16_t color);
 void LCD_fillBattery(SPI_HandleTypeDef* spi, int16_t x, int16_t y, uint32_t size, uint32_t level);
+void LCD_updateVals(SPI_HandleTypeDef* spi, int buf[], uint16_t color);
+void LCD_tempWarning(SPI_HandleTypeDef* spi);
+void LCD_battWarning(SPI_HandleTypeDef* spi);
 
 #endif /* INC_LCD_H_ */

@@ -9,6 +9,15 @@
 #include "stm32l4xx_hal.h"
 #include <stdlib.h>
 
+#ifndef _swap_int16_t
+#define _swap_int16_t(a, b)                                                    \
+  {                                                                            \
+    int16_t t = a;                                                             \
+    a = b;                                                                     \
+    b = t;                                                                     \
+  }
+#endif
+
 // Probably going to move these to a different file, but for now
 void uint16_to_bytes(uint16_t in, uint8_t *out)
 {
@@ -686,6 +695,138 @@ void LCD_drawButtonNoBG(SPI_HandleTypeDef* spi, int16_t x, int16_t y, int button
 	LCD_endWrite();
 }
 
+void LCD_writeLine(SPI_HandleTypeDef *spi, int x0, int y0, int x1, int y1, int color) {
+  int16_t steep = abs(y1 - y0) > abs(x1 - x0);
+  if (steep) {
+    _swap_int16_t(x0, y0);
+    _swap_int16_t(x1, y1);
+  }
+
+  if (x0 > x1) {
+    _swap_int16_t(x0, x1);
+    _swap_int16_t(y0, y1);
+  }
+
+  int16_t dx, dy;
+  dx = x1 - x0;
+  dy = abs(y1 - y0);
+
+  int16_t err = dx / 2;
+  int16_t ystep;
+
+  if (y0 < y1) {
+    ystep = 1;
+  } else {
+    ystep = -1;
+  }
+
+  for (; x0 <= x1; x0++) {
+    if (steep) {
+      LCD_writePixel(spi, y0, x0, color);
+    } else {
+      LCD_writePixel(spi, x0, y0, color);
+    }
+    err -= dy;
+    if (err < 0) {
+      y0 += ystep;
+      err += dx;
+    }
+  }
+}
+
+void LCD_fillRect(SPI_HandleTypeDef *spi, int16_t x, int16_t y, int16_t w, int16_t h, uint16_t color) {
+	for (int16_t i = x; i < x + w; i++) {
+		writeFastVLine(spi, i, y, h, color);
+	}
+}
+
+void LCD_fillTriangle(SPI_HandleTypeDef *spi, int16_t x0, int16_t y0, int16_t x1, int16_t y1, int16_t x2, int16_t y2, uint16_t color) {
+	int16_t a, b, y, last;
+
+	  // Sort coordinates by Y order (y2 >= y1 >= y0)
+	  if (y0 > y1) {
+	    _swap_int16_t(y0, y1);
+	    _swap_int16_t(x0, x1);
+	  }
+	  if (y1 > y2) {
+	    _swap_int16_t(y2, y1);
+	    _swap_int16_t(x2, x1);
+	  }
+	  if (y0 > y1) {
+	    _swap_int16_t(y0, y1);
+	    _swap_int16_t(x0, x1);
+	  }
+
+	  if (y0 == y2) { // Handle awkward all-on-same-line case as its own thing
+	    a = b = x0;
+	    if (x1 < a)
+	      a = x1;
+	    else if (x1 > b)
+	      b = x1;
+	    if (x2 < a)
+	      a = x2;
+	    else if (x2 > b)
+	      b = x2;
+	    LCD_writeFastHLine(spi, a, y0, b - a + 1, color);
+	    return;
+	  }
+
+	  int16_t dx01 = x1 - x0, dy01 = y1 - y0, dx02 = x2 - x0, dy02 = y2 - y0,
+	          dx12 = x2 - x1, dy12 = y2 - y1;
+	  int32_t sa = 0, sb = 0;
+
+	  // For upper part of triangle, find scanline crossings for segments
+	  // 0-1 and 0-2.  If y1=y2 (flat-bottomed triangle), the scanline y1
+	  // is included here (and second loop will be skipped, avoiding a /0
+	  // error there), otherwise scanline y1 is skipped here and handled
+	  // in the second loop...which also avoids a /0 error here if y0=y1
+	  // (flat-topped triangle).
+	  if (y1 == y2)
+	    last = y1; // Include y1 scanline
+	  else
+	    last = y1 - 1; // Skip it
+
+	  for (y = y0; y <= last; y++) {
+	    a = x0 + sa / dy01;
+	    b = x0 + sb / dy02;
+	    sa += dx01;
+	    sb += dx02;
+	    /* longhand:
+	    a = x0 + (x1 - x0) * (y - y0) / (y1 - y0);
+	    b = x0 + (x2 - x0) * (y - y0) / (y2 - y0);
+	    */
+	    if (a > b)
+	      _swap_int16_t(a, b);
+	    LCD_writeFastHLine(spi, a, y, b - a + 1, color);
+	  }
+
+	  // For lower part of triangle, find scanline crossings for segments
+	  // 0-2 and 1-2.  This loop is skipped if y1=y2.
+	  sa = (int32_t)dx12 * (y - y1);
+	  sb = (int32_t)dx02 * (y - y0);
+	  for (; y <= y2; y++) {
+	    a = x1 + sa / dy12;
+	    b = x0 + sb / dy02;
+	    sa += dx12;
+	    sb += dx02;
+	    /* longhand:
+	    a = x1 + (x2 - x1) * (y - y1) / (y2 - y1);
+	    b = x0 + (x2 - x0) * (y - y0) / (y2 - y0);
+	    */
+	    if (a > b)
+	      _swap_int16_t(a, b);
+	    LCD_writeFastHLine(spi, a, y, b - a + 1, color);
+	  }
+}
+
+void LCD_writeFastVLine(SPI_HandleTypeDef *spi, int16_t x, int16_t y, int16_t h, uint16_t color) {
+	LCD_writeLine(spi, x, y, x, y + h - 1, color);
+}
+
+void LCD_writeFastHLine(SPI_HandleTypeDef *spi, int16_t x, int16_t y, int16_t w, uint16_t color) {
+	LCD_writeLine(spi, x, y, x + w - 1, y, color);
+}
+
 //homemade functions for TADAMHASPEV, move to different file
 void LCD_drawBattery(SPI_HandleTypeDef* spi, int16_t x, int16_t y, uint16_t color, uint32_t size) {
 	//make battery thicker?
@@ -719,18 +860,12 @@ void LCD_drawBattery(SPI_HandleTypeDef* spi, int16_t x, int16_t y, uint16_t colo
 
 void LCD_drawFrame(SPI_HandleTypeDef* spi, uint16_t color) {
 	//rows
-	if(!LCD_setAddrWindow(spi, 0, 80, 360, 1)) return;
-	if (!LCD_pushColorCopy(spi, color, 360)) return;
-
-	if(!LCD_setAddrWindow(spi, 0, 160, 360, 1)) return;
-	if (!LCD_pushColorCopy(spi, color, 360)) return;
-
-	if(!LCD_setAddrWindow(spi, 0, 240, 360, 1)) return;
-	if (!LCD_pushColorCopy(spi, color, 360)) return;
+	LCD_writeLine(spi,0,80,360,80,HX8357_BLACK);
+	LCD_writeLine(spi,0,160,360,160,HX8357_BLACK);
+	LCD_writeLine(spi,0,240,360,240,HX8357_BLACK);
 
 	//column
-	if(!LCD_setAddrWindow(spi, 360, 0, 1, 320)) return;
-	if (!LCD_pushColorCopy(spi, color, 320)) return;
+	LCD_writeLine(spi,360,0,360,320,HX8357_BLACK);
 	return;
 }
 
@@ -744,5 +879,30 @@ void LCD_fillBattery(SPI_HandleTypeDef* spi, int16_t x, int16_t y, uint32_t size
 	//level = 100 --> y offset 0
 	//level = 0 --> y offset 22*size
 	int offset = 22*size - (22*size)*(level/100.0);
+	LCD_writePixels(spi, HX8357_WHITE, x + 3, ((y + size) + 3), 10*size - 6, (22*size - 6));
 	LCD_writePixels(spi, color, x + 3, ((y + size) + 3) + offset, 10*size - 6, (22*size - 6) - offset);
+}
+
+void LCD_updateVals(SPI_HandleTypeDef* spi, int buf[], uint16_t color) {
+	//buf[0:1] accel, buf[2:3] temp, buf[4:5] power
+	int accel = (buf[0] << 4) | buf[1];
+	int temp = (buf[2] << 4) | buf[3];
+	int power = (buf[4] << 4) | buf[5];
+	char var1[100];
+	char var2[100];
+	char var3[100];
+	itoa(accel,var1,10);
+	itoa(temp,var2,10);
+	itoa(power,var3,10);
+	LCD_drawString(spi,146,30 + 80*1,var1,4,color,4);
+	LCD_drawString(spi,146,30 + 80*2,var2,4,color,4);
+	LCD_drawString(spi,146,30 + 80*3,var3,4,color,4);
+}
+
+void LCD_tempWarning(SPI_HandleTypeDef* spi) {
+
+}
+
+void LCD_battWarning(SPI_HandleTypeDef* spi) {
+
 }

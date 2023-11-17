@@ -124,6 +124,9 @@ int main(void)
   LCD_fillBattery(&hspi1,380,120,8,volt_percent);
   LCD_drawString(&hspi1,370,50,lev,3,HX8357_BLACK,4);
   LCD_drawString(&hspi1,442,50,"%",1,HX8357_BLACK,4);
+
+  int buf[10] = {4,3,1,4,5,2};
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -133,10 +136,7 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-	LCD_drawString(&hspi1,146,30 + 80*1,"4",4,HX8357_BLACK,4);
-	LCD_drawString(&hspi1,146,30 + 80*2,"6",4,HX8357_BLACK,4);
-	LCD_drawString(&hspi1,146,30 + 80*3,"8",4,HX8357_BLACK,4);
-	HAL_Delay(250);
+	  LCD_updateVals(&hspi1,buf,HX8357_BLACK);
   }
   /* USER CODE END 3 */
 }
