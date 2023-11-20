@@ -45,8 +45,13 @@ RTC_HandleTypeDef hrtc;
 
 SPI_HandleTypeDef hspi1;
 
-/* USER CODE BEGIN PV */
+TIM_HandleTypeDef htim15;
+TIM_HandleTypeDef htim16;
 
+/* USER CODE BEGIN PV */
+int buf[10] = {4,3,1,4,5,2};
+int warning = 0;
+int volt_percent = 100;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -54,6 +59,8 @@ void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_RTC_Init(void);
 static void MX_SPI1_Init(void);
+static void MX_TIM15_Init(void);
+static void MX_TIM16_Init(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -93,6 +100,8 @@ int main(void)
   MX_GPIO_Init();
   MX_RTC_Init();
   MX_SPI1_Init();
+  MX_TIM15_Init();
+  MX_TIM16_Init();
   /* USER CODE BEGIN 2 */
   	LCD_begin(&hspi1);
   	//LCD_fillRect(&hspi1, 0, 0, 480, 320, HX8357_WHITE);
@@ -118,12 +127,11 @@ int main(void)
     LCD_drawString(&hspi1,306,30 + 80*2,deg,1,HX8357_BLACK,3);
     LCD_drawString(&hspi1,306,30 + 80*3,watt,1,HX8357_BLACK,3);
 
-    int volt_percent = 85;
     LCD_updateBattery(&hspi1,volt_percent);
     LCD_drawString(&hspi1,442,50,"%",1,HX8357_BLACK,4);
 
-    int buf[10] = {4,3,1,4,5,2};
-    int warning = 0;
+    HAL_TIM_Base_Start_IT(&htim15);
+    HAL_TIM_Base_Start_IT(&htim16);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -133,23 +141,6 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-	  //test warnings
-	  buf[2] = 1;
-	  volt_percent = 75;
-	  LCD_updateVals(&hspi1,buf,HX8357_BLACK);
-	  LCD_updateBattery(&hspi1,volt_percent);
-	  LCD_warnings(&hspi1, (buf[2] << 4) | buf[3],volt_percent,&warning);
-	  HAL_Delay(500);
-
-	  buf[2] = 3;
-	  LCD_updateVals(&hspi1,buf,HX8357_BLACK);
-	  LCD_warnings(&hspi1, (buf[2] << 4) | buf[3],volt_percent,&warning);
-	  HAL_Delay(500);
-
-	  volt_percent = 20;
-	  LCD_updateBattery(&hspi1,volt_percent);
-	  LCD_warnings(&hspi1, (buf[2] << 4) | buf[3],volt_percent,&warning);
-	  HAL_Delay(500);
   }
   /* USER CODE END 3 */
 }
@@ -291,6 +282,84 @@ static void MX_SPI1_Init(void)
 }
 
 /**
+  * @brief TIM15 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_TIM15_Init(void)
+{
+
+  /* USER CODE BEGIN TIM15_Init 0 */
+
+  /* USER CODE END TIM15_Init 0 */
+
+  TIM_ClockConfigTypeDef sClockSourceConfig = {0};
+  TIM_MasterConfigTypeDef sMasterConfig = {0};
+
+  /* USER CODE BEGIN TIM15_Init 1 */
+
+  /* USER CODE END TIM15_Init 1 */
+  htim15.Instance = TIM15;
+  htim15.Init.Prescaler = 7999;
+  htim15.Init.CounterMode = TIM_COUNTERMODE_UP;
+  htim15.Init.Period = 9999;
+  htim15.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+  htim15.Init.RepetitionCounter = 0;
+  htim15.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
+  if (HAL_TIM_Base_Init(&htim15) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sClockSourceConfig.ClockSource = TIM_CLOCKSOURCE_INTERNAL;
+  if (HAL_TIM_ConfigClockSource(&htim15, &sClockSourceConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
+  sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
+  if (HAL_TIMEx_MasterConfigSynchronization(&htim15, &sMasterConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN TIM15_Init 2 */
+
+  /* USER CODE END TIM15_Init 2 */
+
+}
+
+/**
+  * @brief TIM16 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_TIM16_Init(void)
+{
+
+  /* USER CODE BEGIN TIM16_Init 0 */
+
+  /* USER CODE END TIM16_Init 0 */
+
+  /* USER CODE BEGIN TIM16_Init 1 */
+
+  /* USER CODE END TIM16_Init 1 */
+  htim16.Instance = TIM16;
+  htim16.Init.Prescaler = 7999;
+  htim16.Init.CounterMode = TIM_COUNTERMODE_UP;
+  htim16.Init.Period = 49999;
+  htim16.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+  htim16.Init.RepetitionCounter = 0;
+  htim16.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
+  if (HAL_TIM_Base_Init(&htim16) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN TIM16_Init 2 */
+
+  /* USER CODE END TIM16_Init 2 */
+
+}
+
+/**
   * @brief GPIO Initialization Function
   * @param None
   * @retval None
@@ -357,7 +426,14 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
     HAL_IncTick();
   }
   /* USER CODE BEGIN Callback 1 */
-
+  if (htim->Instance == TIM15) {
+	  LCD_updateVals(&hspi1,buf,HX8357_BLACK);
+	  LCD_warnings(&hspi1, (buf[2] << 4) | buf[3],volt_percent,&warning)
+  }
+  if (htim->Instance == TIM16) {
+	  LCD_updateBattery(&hspi1,volt_percent);
+	  LCD_warnings(&hspi1, (buf[2] << 4) | buf[3],volt_percent,&warning)
+  }
   /* USER CODE END Callback 1 */
 }
 
