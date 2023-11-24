@@ -1,0 +1,9 @@
+../Core/Src/acc.c:35:6:setupAccModule	32	static
+../Core/Src/acc.c:46:9:accFloat2Binary	16	static
+../Core/Src/acc.c:100:6:printBinaryNewline	24	static
+../Core/Src/acc.c:108:6:printBinary	24	static
+../Core/Src/acc.c:115:6:printAll	24	static
+../Core/Src/acc.c:121:7:ReadAccData	32	static
+../Core/Src/acc.c:151:6:print_raw_acc_bin	32	static
+../Core/Src/acc.c:182:6:write4BitGPIOs	16	static
+../Core/Src/acc.c:192:6:writeGPIOCountTest	8	static
