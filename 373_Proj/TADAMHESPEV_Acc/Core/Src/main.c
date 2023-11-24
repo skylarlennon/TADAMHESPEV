@@ -23,6 +23,7 @@
 /* USER CODE BEGIN Includes */
 #include "stdio.h"
 #include "math.h"
+#include "stdlib.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -348,12 +349,29 @@ int main(void)
   /* USER CODE BEGIN WHILE */
 //  static int cnt = 0;
   setupAccModule();
+
+  float acc = ReadAccData();
+  uint8_t binAccRead = accFloat2Binary(acc);
+  uint8_t dispBinAcc = binAccRead;
+  int diffTol = 5;
+
   while (1)
   {
-	 float acc = ReadAccData();
-	 uint8_t binAcc = accFloat2Binary(acc);
-	 printBinaryNewline(binAcc);
-	 write4BitGPIOs(binAcc);
+	 acc = ReadAccData();
+	 binAccRead = accFloat2Binary(acc);
+
+	 //ignore values that are different by more than a tollerance
+	 if(abs(binAccRead - dispBinAcc) < diffTol){
+		 //change the dispBinAcc
+		 if(binAccRead > dispBinAcc){
+			 dispBinAcc++;
+		 }
+		 if(binAccRead < dispBinAcc){
+			 dispBinAcc--;
+		 }
+	 }
+	 printBinaryNewline(binAccRead);
+	 write4BitGPIOs(binAccRead);
 	 HAL_Delay(10);
 
 
