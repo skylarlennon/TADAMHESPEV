@@ -139,6 +139,7 @@ float ReadAccData(){
 		else{ //positive acceleration
 			accVal = (raw / (float)((1 << 15) - 1))*2;
 		}
+		printf("Accel:\t%f",accVal);
 		return accVal;
 //		uint8_t binAcc = accFloat2Binary(accVal);
 		//[TODO] - error check if binAcc = -1;

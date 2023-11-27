@@ -119,8 +119,11 @@ int main(void)
 
   while (1)
   {
-	 acc = ReadAccData();
-	 printLEDs(acc);
+//	 acc = ReadAccData();
+//	 printLEDs(acc);
+
+
+	  ledTest();
 //	 binAccRead = accFloat2Binary(acc);
 
 	 //ignore values that are different by more than a tollerance
