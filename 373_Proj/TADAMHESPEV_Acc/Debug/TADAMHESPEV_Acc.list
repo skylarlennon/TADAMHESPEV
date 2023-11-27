@@ -21,9 +21,9 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, ALLOC, LOAD, DATA
   8 .data         000001d8  20000000  08008c5c  00020000  2**2
                   CONTENTS, ALLOC, LOAD, DATA
-  9 .bss          00000360  200001d8  08008e34  000201d8  2**2
+  9 .bss          00000354  200001d8  08008e34  000201d8  2**2
                   ALLOC
- 10 ._user_heap_stack 00000600  20000538  08008e34  00020538  2**0
+ 10 ._user_heap_stack 00000604  2000052c  08008e34  0002052c  2**0
                   ALLOC
  11 .ARM.attributes 00000030  00000000  00000000  000201d8  2**0
                   CONTENTS, READONLY
@@ -39,9 +39,9 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING, OCTETS
  17 .debug_macro  0002b86d  00000000  00000000  00037c20  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_line   000151fd  00000000  00000000  0006348d  2**0
+ 18 .debug_line   000151fe  00000000  00000000  0006348d  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .debug_str    0010493f  00000000  00000000  0007868a  2**0
+ 19 .debug_str    0010493f  00000000  00000000  0007868b  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
  20 .debug_frame  000053b4  00000000  00000000  0017cfcc  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
@@ -1255,7 +1255,7 @@ void setupAccModule(){
  8000f16:	3710      	adds	r7, #16
  8000f18:	46bd      	mov	sp, r7
  8000f1a:	bd80      	pop	{r7, pc}
- 8000f1c:	20000298 	.word	0x20000298
+ 8000f1c:	2000028c 	.word	0x2000028c
  8000f20:	08008820 	.word	0x08008820
  8000f24:	0800882c 	.word	0x0800882c
 
@@ -1367,7 +1367,7 @@ float ReadAccData(){
  8000fe6:	46bd      	mov	sp, r7
  8000fe8:	bd80      	pop	{r7, pc}
  8000fea:	bf00      	nop
- 8000fec:	20000298 	.word	0x20000298
+ 8000fec:	2000028c 	.word	0x2000028c
  8000ff0:	47000000 	.word	0x47000000
  8000ff4:	46fffe00 	.word	0x46fffe00
  8000ff8:	0800885c 	.word	0x0800885c
@@ -1383,124 +1383,124 @@ void setupLEDS(){
  8000ffe:	b085      	sub	sp, #20
  8001000:	af00      	add	r7, sp, #0
 	float acc_inc = MAX_ACCEL/NUM_LEDS;
- 8001002:	4b2c      	ldr	r3, [pc, #176]	; (80010b4 <setupLEDS+0xb8>)
- 8001004:	607b      	str	r3, [r7, #4]
+ 8001002:	f04f 5378 	mov.w	r3, #1040187392	; 0x3e000000
+ 8001006:	607b      	str	r3, [r7, #4]
 	for(int i = 0; i < NUM_LEDS; ++i){
- 8001006:	2300      	movs	r3, #0
- 8001008:	60fb      	str	r3, [r7, #12]
- 800100a:	e028      	b.n	800105e <setupLEDS+0x62>
+ 8001008:	2300      	movs	r3, #0
+ 800100a:	60fb      	str	r3, [r7, #12]
+ 800100c:	e028      	b.n	8001060 <setupLEDS+0x64>
 		//setup LED_INDEX_THRESHOLD
 		LED_INDEX_THRESHOLD[i] = i*acc_inc;
- 800100c:	68fb      	ldr	r3, [r7, #12]
- 800100e:	ee07 3a90 	vmov	s15, r3
- 8001012:	eeb8 7ae7 	vcvt.f32.s32	s14, s15
- 8001016:	edd7 7a01 	vldr	s15, [r7, #4]
- 800101a:	ee67 7a27 	vmul.f32	s15, s14, s15
- 800101e:	4a26      	ldr	r2, [pc, #152]	; (80010b8 <setupLEDS+0xbc>)
- 8001020:	68fb      	ldr	r3, [r7, #12]
- 8001022:	009b      	lsls	r3, r3, #2
- 8001024:	4413      	add	r3, r2
- 8001026:	edc3 7a00 	vstr	s15, [r3]
+ 800100e:	68fb      	ldr	r3, [r7, #12]
+ 8001010:	ee07 3a90 	vmov	s15, r3
+ 8001014:	eeb8 7ae7 	vcvt.f32.s32	s14, s15
+ 8001018:	edd7 7a01 	vldr	s15, [r7, #4]
+ 800101c:	ee67 7a27 	vmul.f32	s15, s14, s15
+ 8001020:	4a25      	ldr	r2, [pc, #148]	; (80010b8 <setupLEDS+0xbc>)
+ 8001022:	68fb      	ldr	r3, [r7, #12]
+ 8001024:	009b      	lsls	r3, r3, #2
+ 8001026:	4413      	add	r3, r2
+ 8001028:	edc3 7a00 	vstr	s15, [r3]
 
 		//setup LED_COLOR_ARR
 		if(i < NUM_GREEN){
- 800102a:	68fb      	ldr	r3, [r7, #12]
- 800102c:	2b04      	cmp	r3, #4
- 800102e:	dc05      	bgt.n	800103c <setupLEDS+0x40>
+ 800102c:	68fb      	ldr	r3, [r7, #12]
+ 800102e:	2b04      	cmp	r3, #4
+ 8001030:	dc05      	bgt.n	800103e <setupLEDS+0x42>
 			LED_COLOR_ARR[i] = 0; // 0 = green
- 8001030:	4a22      	ldr	r2, [pc, #136]	; (80010bc <setupLEDS+0xc0>)
- 8001032:	68fb      	ldr	r3, [r7, #12]
- 8001034:	4413      	add	r3, r2
- 8001036:	2200      	movs	r2, #0
- 8001038:	701a      	strb	r2, [r3, #0]
- 800103a:	e00d      	b.n	8001058 <setupLEDS+0x5c>
+ 8001032:	4a22      	ldr	r2, [pc, #136]	; (80010bc <setupLEDS+0xc0>)
+ 8001034:	68fb      	ldr	r3, [r7, #12]
+ 8001036:	4413      	add	r3, r2
+ 8001038:	2200      	movs	r2, #0
+ 800103a:	701a      	strb	r2, [r3, #0]
+ 800103c:	e00d      	b.n	800105a <setupLEDS+0x5e>
 		}
 		else if(i < NUM_GREEN + NUM_YELLOW){
- 800103c:	68fb      	ldr	r3, [r7, #12]
- 800103e:	2b0c      	cmp	r3, #12
- 8001040:	dc05      	bgt.n	800104e <setupLEDS+0x52>
+ 800103e:	68fb      	ldr	r3, [r7, #12]
+ 8001040:	2b0b      	cmp	r3, #11
+ 8001042:	dc05      	bgt.n	8001050 <setupLEDS+0x54>
 			LED_COLOR_ARR[i] = 1; // 1 = yellow
- 8001042:	4a1e      	ldr	r2, [pc, #120]	; (80010bc <setupLEDS+0xc0>)
- 8001044:	68fb      	ldr	r3, [r7, #12]
- 8001046:	4413      	add	r3, r2
- 8001048:	2201      	movs	r2, #1
- 800104a:	701a      	strb	r2, [r3, #0]
- 800104c:	e004      	b.n	8001058 <setupLEDS+0x5c>
+ 8001044:	4a1d      	ldr	r2, [pc, #116]	; (80010bc <setupLEDS+0xc0>)
+ 8001046:	68fb      	ldr	r3, [r7, #12]
+ 8001048:	4413      	add	r3, r2
+ 800104a:	2201      	movs	r2, #1
+ 800104c:	701a      	strb	r2, [r3, #0]
+ 800104e:	e004      	b.n	800105a <setupLEDS+0x5e>
 		}
 		else{
 			LED_COLOR_ARR[i] = 2; // 2 = red
- 800104e:	4a1b      	ldr	r2, [pc, #108]	; (80010bc <setupLEDS+0xc0>)
- 8001050:	68fb      	ldr	r3, [r7, #12]
- 8001052:	4413      	add	r3, r2
- 8001054:	2202      	movs	r2, #2
- 8001056:	701a      	strb	r2, [r3, #0]
+ 8001050:	4a1a      	ldr	r2, [pc, #104]	; (80010bc <setupLEDS+0xc0>)
+ 8001052:	68fb      	ldr	r3, [r7, #12]
+ 8001054:	4413      	add	r3, r2
+ 8001056:	2202      	movs	r2, #2
+ 8001058:	701a      	strb	r2, [r3, #0]
 	for(int i = 0; i < NUM_LEDS; ++i){
- 8001058:	68fb      	ldr	r3, [r7, #12]
- 800105a:	3301      	adds	r3, #1
- 800105c:	60fb      	str	r3, [r7, #12]
- 800105e:	68fb      	ldr	r3, [r7, #12]
- 8001060:	2b10      	cmp	r3, #16
- 8001062:	ddd3      	ble.n	800100c <setupLEDS+0x10>
+ 800105a:	68fb      	ldr	r3, [r7, #12]
+ 800105c:	3301      	adds	r3, #1
+ 800105e:	60fb      	str	r3, [r7, #12]
+ 8001060:	68fb      	ldr	r3, [r7, #12]
+ 8001062:	2b0f      	cmp	r3, #15
+ 8001064:	ddd3      	ble.n	800100e <setupLEDS+0x12>
 		}
 	}
 
 	//initialize a blank LED strip array
 	for(int j = 0; j < NUM_MSG_BYTES; ++j){
- 8001064:	2300      	movs	r3, #0
- 8001066:	60bb      	str	r3, [r7, #8]
- 8001068:	e01a      	b.n	80010a0 <setupLEDS+0xa4>
+ 8001066:	2300      	movs	r3, #0
+ 8001068:	60bb      	str	r3, [r7, #8]
+ 800106a:	e01a      	b.n	80010a2 <setupLEDS+0xa6>
 		if(j < 4){
- 800106a:	68bb      	ldr	r3, [r7, #8]
- 800106c:	2b03      	cmp	r3, #3
- 800106e:	dc05      	bgt.n	800107c <setupLEDS+0x80>
+ 800106c:	68bb      	ldr	r3, [r7, #8]
+ 800106e:	2b03      	cmp	r3, #3
+ 8001070:	dc05      	bgt.n	800107e <setupLEDS+0x82>
 			clearLEDs[j] = 0;
- 8001070:	4a13      	ldr	r2, [pc, #76]	; (80010c0 <setupLEDS+0xc4>)
- 8001072:	68bb      	ldr	r3, [r7, #8]
- 8001074:	4413      	add	r3, r2
- 8001076:	2200      	movs	r2, #0
- 8001078:	701a      	strb	r2, [r3, #0]
- 800107a:	e00e      	b.n	800109a <setupLEDS+0x9e>
+ 8001072:	4a13      	ldr	r2, [pc, #76]	; (80010c0 <setupLEDS+0xc4>)
+ 8001074:	68bb      	ldr	r3, [r7, #8]
+ 8001076:	4413      	add	r3, r2
+ 8001078:	2200      	movs	r2, #0
+ 800107a:	701a      	strb	r2, [r3, #0]
+ 800107c:	e00e      	b.n	800109c <setupLEDS+0xa0>
 		}
 		else if(j < (NUM_MSG_BYTES - 1)){
- 800107c:	68bb      	ldr	r3, [r7, #8]
- 800107e:	2b47      	cmp	r3, #71	; 0x47
- 8001080:	dc06      	bgt.n	8001090 <setupLEDS+0x94>
+ 800107e:	68bb      	ldr	r3, [r7, #8]
+ 8001080:	2b43      	cmp	r3, #67	; 0x43
+ 8001082:	dc06      	bgt.n	8001092 <setupLEDS+0x96>
 			memcpy(&clearLEDs[j],BLANK_LED,sizeof(BLANK_LED));
- 8001082:	68bb      	ldr	r3, [r7, #8]
- 8001084:	4a0e      	ldr	r2, [pc, #56]	; (80010c0 <setupLEDS+0xc4>)
- 8001086:	4413      	add	r3, r2
- 8001088:	4a0e      	ldr	r2, [pc, #56]	; (80010c4 <setupLEDS+0xc8>)
- 800108a:	6812      	ldr	r2, [r2, #0]
- 800108c:	601a      	str	r2, [r3, #0]
- 800108e:	e004      	b.n	800109a <setupLEDS+0x9e>
+ 8001084:	68bb      	ldr	r3, [r7, #8]
+ 8001086:	4a0e      	ldr	r2, [pc, #56]	; (80010c0 <setupLEDS+0xc4>)
+ 8001088:	4413      	add	r3, r2
+ 800108a:	4a0e      	ldr	r2, [pc, #56]	; (80010c4 <setupLEDS+0xc8>)
+ 800108c:	6812      	ldr	r2, [r2, #0]
+ 800108e:	601a      	str	r2, [r3, #0]
+ 8001090:	e004      	b.n	800109c <setupLEDS+0xa0>
 		}
 		else{
 			clearLEDs[j] = 0;
- 8001090:	4a0b      	ldr	r2, [pc, #44]	; (80010c0 <setupLEDS+0xc4>)
- 8001092:	68bb      	ldr	r3, [r7, #8]
- 8001094:	4413      	add	r3, r2
- 8001096:	2200      	movs	r2, #0
- 8001098:	701a      	strb	r2, [r3, #0]
+ 8001092:	4a0b      	ldr	r2, [pc, #44]	; (80010c0 <setupLEDS+0xc4>)
+ 8001094:	68bb      	ldr	r3, [r7, #8]
+ 8001096:	4413      	add	r3, r2
+ 8001098:	2200      	movs	r2, #0
+ 800109a:	701a      	strb	r2, [r3, #0]
 	for(int j = 0; j < NUM_MSG_BYTES; ++j){
- 800109a:	68bb      	ldr	r3, [r7, #8]
- 800109c:	3301      	adds	r3, #1
- 800109e:	60bb      	str	r3, [r7, #8]
- 80010a0:	68bb      	ldr	r3, [r7, #8]
- 80010a2:	2b48      	cmp	r3, #72	; 0x48
- 80010a4:	dde1      	ble.n	800106a <setupLEDS+0x6e>
+ 800109c:	68bb      	ldr	r3, [r7, #8]
+ 800109e:	3301      	adds	r3, #1
+ 80010a0:	60bb      	str	r3, [r7, #8]
+ 80010a2:	68bb      	ldr	r3, [r7, #8]
+ 80010a4:	2b44      	cmp	r3, #68	; 0x44
+ 80010a6:	dde1      	ble.n	800106c <setupLEDS+0x70>
 		}
 	}
 }
- 80010a6:	bf00      	nop
  80010a8:	bf00      	nop
- 80010aa:	3714      	adds	r7, #20
- 80010ac:	46bd      	mov	sp, r7
- 80010ae:	f85d 7b04 	ldr.w	r7, [sp], #4
- 80010b2:	4770      	bx	lr
- 80010b4:	3df0f0f1 	.word	0x3df0f0f1
+ 80010aa:	bf00      	nop
+ 80010ac:	3714      	adds	r7, #20
+ 80010ae:	46bd      	mov	sp, r7
+ 80010b0:	f85d 7b04 	ldr.w	r7, [sp], #4
+ 80010b4:	4770      	bx	lr
+ 80010b6:	bf00      	nop
  80010b8:	200001f4 	.word	0x200001f4
- 80010bc:	20000238 	.word	0x20000238
- 80010c0:	2000024c 	.word	0x2000024c
+ 80010bc:	20000234 	.word	0x20000234
+ 80010c0:	20000244 	.word	0x20000244
  80010c4:	20000000 	.word	0x20000000
 
 080010c8 <makeLEDFrame>:
@@ -1646,7 +1646,7 @@ void printLEDs(float accVal){
 	for(; i < 4; ++i){
  800118e:	e008      	b.n	80011a2 <printLEDs+0x2e>
 		led_msg[i] = 0;
- 8001190:	f107 020c 	add.w	r2, r7, #12
+ 8001190:	f107 0210 	add.w	r2, r7, #16
  8001194:	6dfb      	ldr	r3, [r7, #92]	; 0x5c
  8001196:	4413      	add	r3, r2
  8001198:	2200      	movs	r2, #0
@@ -1681,7 +1681,7 @@ void printLEDs(float accVal){
  80011ca:	6dbb      	ldr	r3, [r7, #88]	; 0x58
  80011cc:	4413      	add	r3, r2
  80011ce:	781a      	ldrb	r2, [r3, #0]
- 80011d0:	f107 0308 	add.w	r3, r7, #8
+ 80011d0:	f107 030c 	add.w	r3, r7, #12
  80011d4:	4611      	mov	r1, r2
  80011d6:	4618      	mov	r0, r3
  80011d8:	f7ff ff76 	bl	80010c8 <makeLEDFrame>
@@ -1689,17 +1689,17 @@ void printLEDs(float accVal){
 		}
 		else{
 			makeLEDFrame(led_frame,4); //no brightness
- 80011de:	f107 0308 	add.w	r3, r7, #8
+ 80011de:	f107 030c 	add.w	r3, r7, #12
  80011e2:	2104      	movs	r1, #4
  80011e4:	4618      	mov	r0, r3
  80011e6:	f7ff ff6f 	bl	80010c8 <makeLEDFrame>
 		}
 		//add the frame to the rest of the message
 		memcpy(&led_msg[i],led_frame,sizeof(led_frame));
- 80011ea:	f107 020c 	add.w	r2, r7, #12
+ 80011ea:	f107 0210 	add.w	r2, r7, #16
  80011ee:	6dfb      	ldr	r3, [r7, #92]	; 0x5c
  80011f0:	4413      	add	r3, r2
- 80011f2:	68ba      	ldr	r2, [r7, #8]
+ 80011f2:	68fa      	ldr	r2, [r7, #12]
  80011f4:	601a      	str	r2, [r3, #0]
 //		led_msg[i] = led_frame;
 		i = i + 4;
@@ -1711,7 +1711,7 @@ void printLEDs(float accVal){
  80011fe:	3301      	adds	r3, #1
  8001200:	65bb      	str	r3, [r7, #88]	; 0x58
  8001202:	6dbb      	ldr	r3, [r7, #88]	; 0x58
- 8001204:	2b10      	cmp	r3, #16
+ 8001204:	2b0f      	cmp	r3, #15
  8001206:	ddd2      	ble.n	80011ae <printLEDs+0x3a>
 			//full pause
 		}
@@ -1721,7 +1721,7 @@ void printLEDs(float accVal){
 	for(; i < NUM_MSG_BYTES; ++i){
  8001208:	e008      	b.n	800121c <printLEDs+0xa8>
 		led_msg[i] = 0;
- 800120a:	f107 020c 	add.w	r2, r7, #12
+ 800120a:	f107 0210 	add.w	r2, r7, #16
  800120e:	6dfb      	ldr	r3, [r7, #92]	; 0x5c
  8001210:	4413      	add	r3, r2
  8001212:	2200      	movs	r2, #0
@@ -1731,14 +1731,14 @@ void printLEDs(float accVal){
  8001218:	3301      	adds	r3, #1
  800121a:	65fb      	str	r3, [r7, #92]	; 0x5c
  800121c:	6dfb      	ldr	r3, [r7, #92]	; 0x5c
- 800121e:	2b48      	cmp	r3, #72	; 0x48
+ 800121e:	2b44      	cmp	r3, #68	; 0x44
  8001220:	ddf3      	ble.n	800120a <printLEDs+0x96>
 	}
 
 	HAL_StatusTypeDef ret = HAL_SPI_Transmit(&hspi1, (uint8_t *)led_msg, NUM_MSG_BYTES,1000);
- 8001222:	f107 010c 	add.w	r1, r7, #12
+ 8001222:	f107 0110 	add.w	r1, r7, #16
  8001226:	f44f 737a 	mov.w	r3, #1000	; 0x3e8
- 800122a:	2249      	movs	r2, #73	; 0x49
+ 800122a:	2245      	movs	r2, #69	; 0x45
  800122c:	4806      	ldr	r0, [pc, #24]	; (8001248 <printLEDs+0xd4>)
  800122e:	f003 fc06 	bl	8004a3e <HAL_SPI_Transmit>
  8001232:	4603      	mov	r3, r0
@@ -1753,8 +1753,8 @@ void printLEDs(float accVal){
  800123c:	46bd      	mov	sp, r7
  800123e:	bd80      	pop	{r7, pc}
  8001240:	200001f4 	.word	0x200001f4
- 8001244:	20000238 	.word	0x20000238
- 8001248:	20000380 	.word	0x20000380
+ 8001244:	20000234 	.word	0x20000234
+ 8001248:	20000374 	.word	0x20000374
 
 0800124c <main>:
 /**
@@ -2021,7 +2021,7 @@ static void MX_I2C1_Init(void)
 }
  8001388:	bf00      	nop
  800138a:	bd80      	pop	{r7, pc}
- 800138c:	20000298 	.word	0x20000298
+ 800138c:	2000028c 	.word	0x2000028c
  8001390:	40005400 	.word	0x40005400
 
 08001394 <MX_LPUART1_UART_Init>:
@@ -2131,7 +2131,7 @@ static void MX_LPUART1_UART_Init(void)
 }
  8001420:	bf00      	nop
  8001422:	bd80      	pop	{r7, pc}
- 8001424:	200002ec 	.word	0x200002ec
+ 8001424:	200002e0 	.word	0x200002e0
  8001428:	40008000 	.word	0x40008000
 
 0800142c <MX_SPI1_Init>:
@@ -2222,7 +2222,7 @@ static void MX_SPI1_Init(void)
  800149a:	bf00      	nop
  800149c:	bd80      	pop	{r7, pc}
  800149e:	bf00      	nop
- 80014a0:	20000380 	.word	0x20000380
+ 80014a0:	20000374 	.word	0x20000374
  80014a4:	40013000 	.word	0x40013000
 
 080014a8 <MX_GPIO_Init>:
@@ -2934,7 +2934,7 @@ PUTCHAR_PROTOTYPE
  800190a:	3708      	adds	r7, #8
  800190c:	46bd      	mov	sp, r7
  800190e:	bd80      	pop	{r7, pc}
- 8001910:	200002ec 	.word	0x200002ec
+ 8001910:	200002e0 	.word	0x200002e0
 
 08001914 <Error_Handler>:
 /**
@@ -3797,8 +3797,8 @@ void *_sbrk(ptrdiff_t incr)
  8001d36:	bd80      	pop	{r7, pc}
  8001d38:	200a0000 	.word	0x200a0000
  8001d3c:	00000400 	.word	0x00000400
- 8001d40:	200003e4 	.word	0x200003e4
- 8001d44:	20000538 	.word	0x20000538
+ 8001d40:	200003d8 	.word	0x200003d8
+ 8001d44:	20000530 	.word	0x20000530
 
 08001d48 <SystemInit>:
   * @brief  Setup the microcontroller system.
@@ -3923,7 +3923,7 @@ LoopForever:
   ldr r2, =_sbss
  8001db4:	200001d8 	.word	0x200001d8
   ldr r4, =_ebss
- 8001db8:	20000538 	.word	0x20000538
+ 8001db8:	2000052c 	.word	0x2000052c
 
 08001dbc <ADC1_IRQHandler>:
  * @retval : None
@@ -4102,7 +4102,7 @@ __weak void HAL_IncTick(void)
  8001e84:	4770      	bx	lr
  8001e86:	bf00      	nop
  8001e88:	2000000c 	.word	0x2000000c
- 8001e8c:	200003e8 	.word	0x200003e8
+ 8001e8c:	200003dc 	.word	0x200003dc
 
 08001e90 <HAL_GetTick>:
   * @note This function is declared as __weak to be overwritten in case of other
@@ -4122,7 +4122,7 @@ __weak uint32_t HAL_GetTick(void)
  8001e9c:	f85d 7b04 	ldr.w	r7, [sp], #4
  8001ea0:	4770      	bx	lr
  8001ea2:	bf00      	nop
- 8001ea4:	200003e8 	.word	0x200003e8
+ 8001ea4:	200003dc 	.word	0x200003dc
 
 08001ea8 <__NVIC_SetPriorityGrouping>:
            In case of a conflict between priority grouping and available
@@ -16163,9 +16163,9 @@ static void UARTEx_SetNbDataToProcess(UART_HandleTypeDef *huart)
  8006738:	f001 b9fa 	b.w	8007b30 <_fflush_r>
  800673c:	bd10      	pop	{r4, pc}
  800673e:	bf00      	nop
- 8006740:	200003ec 	.word	0x200003ec
- 8006744:	20000454 	.word	0x20000454
- 8006748:	200004bc 	.word	0x200004bc
+ 8006740:	200003e0 	.word	0x200003e0
+ 8006744:	20000448 	.word	0x20000448
+ 8006748:	200004b0 	.word	0x200004b0
 
 0800674c <global_stdio_init.part.0>:
  800674c:	b510      	push	{r4, lr}
@@ -16186,21 +16186,21 @@ static void UARTEx_SetNbDataToProcess(UART_HandleTypeDef *huart)
  8006772:	e8bd 4010 	ldmia.w	sp!, {r4, lr}
  8006776:	2112      	movs	r1, #18
  8006778:	f7ff bf98 	b.w	80066ac <std>
- 800677c:	20000524 	.word	0x20000524
- 8006780:	200003ec 	.word	0x200003ec
+ 800677c:	20000518 	.word	0x20000518
+ 8006780:	200003e0 	.word	0x200003e0
  8006784:	080066f5 	.word	0x080066f5
 
 08006788 <__sfp_lock_acquire>:
  8006788:	4801      	ldr	r0, [pc, #4]	; (8006790 <__sfp_lock_acquire+0x8>)
  800678a:	f000 b8e3 	b.w	8006954 <__retarget_lock_acquire_recursive>
  800678e:	bf00      	nop
- 8006790:	20000529 	.word	0x20000529
+ 8006790:	2000051d 	.word	0x2000051d
 
 08006794 <__sfp_lock_release>:
  8006794:	4801      	ldr	r0, [pc, #4]	; (800679c <__sfp_lock_release+0x8>)
  8006796:	f000 b8de 	b.w	8006956 <__retarget_lock_release_recursive>
  800679a:	bf00      	nop
- 800679c:	20000529 	.word	0x20000529
+ 800679c:	2000051d 	.word	0x2000051d
 
 080067a0 <__sinit>:
  80067a0:	b510      	push	{r4, lr}
@@ -16220,7 +16220,7 @@ static void UARTEx_SetNbDataToProcess(UART_HandleTypeDef *huart)
  80067c4:	e7f2      	b.n	80067ac <__sinit+0xc>
  80067c6:	bf00      	nop
  80067c8:	0800670d 	.word	0x0800670d
- 80067cc:	20000524 	.word	0x20000524
+ 80067cc:	20000518 	.word	0x20000518
 
 080067d0 <_fwalk_sglue>:
  80067d0:	e92d 43f8 	stmdb	sp!, {r3, r4, r5, r6, r7, r8, r9, lr}
@@ -18013,7 +18013,7 @@ static void UARTEx_SetNbDataToProcess(UART_HandleTypeDef *huart)
  8007918:	f04f 34ff 	mov.w	r4, #4294967295	; 0xffffffff
  800791c:	4620      	mov	r0, r4
  800791e:	bd70      	pop	{r4, r5, r6, pc}
- 8007920:	20000530 	.word	0x20000530
+ 8007920:	20000524 	.word	0x20000524
 
 08007924 <_malloc_r>:
  8007924:	e92d 43f8 	stmdb	sp!, {r3, r4, r5, r6, r7, r8, r9, lr}
@@ -18124,7 +18124,7 @@ static void UARTEx_SetNbDataToProcess(UART_HandleTypeDef *huart)
  8007a1a:	605b      	str	r3, [r3, #4]
  8007a1c:	deff      	udf	#255	; 0xff
  8007a1e:	bf00      	nop
- 8007a20:	2000052c 	.word	0x2000052c
+ 8007a20:	20000520 	.word	0x20000520
 
 08007a24 <__sflush_r>:
  8007a24:	898a      	ldrh	r2, [r1, #12]
@@ -18291,13 +18291,13 @@ static void UARTEx_SetNbDataToProcess(UART_HandleTypeDef *huart)
  8007b80:	4801      	ldr	r0, [pc, #4]	; (8007b88 <__malloc_lock+0x8>)
  8007b82:	f7fe bee7 	b.w	8006954 <__retarget_lock_acquire_recursive>
  8007b86:	bf00      	nop
- 8007b88:	20000528 	.word	0x20000528
+ 8007b88:	2000051c 	.word	0x2000051c
 
 08007b8c <__malloc_unlock>:
  8007b8c:	4801      	ldr	r0, [pc, #4]	; (8007b94 <__malloc_unlock+0x8>)
  8007b8e:	f7fe bee2 	b.w	8006956 <__retarget_lock_release_recursive>
  8007b92:	bf00      	nop
- 8007b94:	20000528 	.word	0x20000528
+ 8007b94:	2000051c 	.word	0x2000051c
 
 08007b98 <_Balloc>:
  8007b98:	b570      	push	{r4, r5, r6, lr}
@@ -19286,7 +19286,7 @@ static void UARTEx_SetNbDataToProcess(UART_HandleTypeDef *huart)
  800851a:	b103      	cbz	r3, 800851e <_close_r+0x1a>
  800851c:	6023      	str	r3, [r4, #0]
  800851e:	bd38      	pop	{r3, r4, r5, pc}
- 8008520:	20000534 	.word	0x20000534
+ 8008520:	20000528 	.word	0x20000528
 
 08008524 <_fstat_r>:
  8008524:	b538      	push	{r3, r4, r5, lr}
@@ -19304,7 +19304,7 @@ static void UARTEx_SetNbDataToProcess(UART_HandleTypeDef *huart)
  800853e:	6023      	str	r3, [r4, #0]
  8008540:	bd38      	pop	{r3, r4, r5, pc}
  8008542:	bf00      	nop
- 8008544:	20000534 	.word	0x20000534
+ 8008544:	20000528 	.word	0x20000528
 
 08008548 <_isatty_r>:
  8008548:	b538      	push	{r3, r4, r5, lr}
@@ -19320,7 +19320,7 @@ static void UARTEx_SetNbDataToProcess(UART_HandleTypeDef *huart)
  800855e:	b103      	cbz	r3, 8008562 <_isatty_r+0x1a>
  8008560:	6023      	str	r3, [r4, #0]
  8008562:	bd38      	pop	{r3, r4, r5, pc}
- 8008564:	20000534 	.word	0x20000534
+ 8008564:	20000528 	.word	0x20000528
 
 08008568 <_lseek_r>:
  8008568:	b538      	push	{r3, r4, r5, lr}
@@ -19338,7 +19338,7 @@ static void UARTEx_SetNbDataToProcess(UART_HandleTypeDef *huart)
  8008582:	b103      	cbz	r3, 8008586 <_lseek_r+0x1e>
  8008584:	6023      	str	r3, [r4, #0]
  8008586:	bd38      	pop	{r3, r4, r5, pc}
- 8008588:	20000534 	.word	0x20000534
+ 8008588:	20000528 	.word	0x20000528
 
 0800858c <_read_r>:
  800858c:	b538      	push	{r3, r4, r5, lr}
@@ -19356,7 +19356,7 @@ static void UARTEx_SetNbDataToProcess(UART_HandleTypeDef *huart)
  80085a6:	b103      	cbz	r3, 80085aa <_read_r+0x1e>
  80085a8:	6023      	str	r3, [r4, #0]
  80085aa:	bd38      	pop	{r3, r4, r5, pc}
- 80085ac:	20000534 	.word	0x20000534
+ 80085ac:	20000528 	.word	0x20000528
 
 080085b0 <_sbrk_r>:
  80085b0:	b538      	push	{r3, r4, r5, lr}
@@ -19372,7 +19372,7 @@ static void UARTEx_SetNbDataToProcess(UART_HandleTypeDef *huart)
  80085c6:	b103      	cbz	r3, 80085ca <_sbrk_r+0x1a>
  80085c8:	6023      	str	r3, [r4, #0]
  80085ca:	bd38      	pop	{r3, r4, r5, pc}
- 80085cc:	20000534 	.word	0x20000534
+ 80085cc:	20000528 	.word	0x20000528
 
 080085d0 <_write_r>:
  80085d0:	b538      	push	{r3, r4, r5, lr}
@@ -19390,7 +19390,7 @@ static void UARTEx_SetNbDataToProcess(UART_HandleTypeDef *huart)
  80085ea:	b103      	cbz	r3, 80085ee <_write_r+0x1e>
  80085ec:	6023      	str	r3, [r4, #0]
  80085ee:	bd38      	pop	{r3, r4, r5, pc}
- 80085f0:	20000534 	.word	0x20000534
+ 80085f0:	20000528 	.word	0x20000528
 
 080085f4 <memcpy>:
  80085f4:	440a      	add	r2, r1
@@ -19521,7 +19521,7 @@ static void UARTEx_SetNbDataToProcess(UART_HandleTypeDef *huart)
  8008706:	e7ca      	b.n	800869e <_free_r+0x26>
  8008708:	b003      	add	sp, #12
  800870a:	bd30      	pop	{r4, r5, pc}
- 800870c:	2000052c 	.word	0x2000052c
+ 800870c:	20000520 	.word	0x20000520
 
 08008710 <__ascii_mbtowc>:
  8008710:	b082      	sub	sp, #8
@@ -19639,7 +19639,7 @@ static void UARTEx_SetNbDataToProcess(UART_HandleTypeDef *huart)
  80087fa:	6023      	str	r3, [r4, #0]
  80087fc:	bd38      	pop	{r3, r4, r5, pc}
  80087fe:	bf00      	nop
- 8008800:	20000534 	.word	0x20000534
+ 8008800:	20000528 	.word	0x20000528
 
 08008804 <_getpid_r>:
  8008804:	f7f9 b9da 	b.w	8001bbc <_getpid>
