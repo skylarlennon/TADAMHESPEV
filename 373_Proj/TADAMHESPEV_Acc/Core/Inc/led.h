@@ -11,6 +11,7 @@
 #include "stdint.h"
 
 void setupLEDS();
+void clearLEDstrip();
 void ledTest();
 void makeLEDFrame(uint8_t* frame, uint8_t gr_yel_red);
 void printLEDs(float accVal);

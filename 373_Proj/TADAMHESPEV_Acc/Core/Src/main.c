@@ -24,6 +24,8 @@
 #include "stdio.h"
 #include "math.h"
 #include "stdlib.h"
+//#include "stdint.h"
+//#include "string.h"
 #include "acc.h"
 #include "led.h"
 /* USER CODE END Includes */
@@ -111,19 +113,20 @@ int main(void)
   /* USER CODE BEGIN WHILE */
 //  static int cnt = 0;
   setupAccModule();
+  setupLEDS();
 
-  float acc = ReadAccData();
-  uint8_t binAccRead = accFloat2Binary(acc);
-  uint8_t dispBinAcc = binAccRead;
-  int diffTol = 5;
+  float acc = 0;
+//  uint8_t binAccRead = accFloat2Binary(acc);
+//  uint8_t dispBinAcc = binAccRead;
+//  int diffTol = 5;
 
   while (1)
   {
-//	 acc = ReadAccData();
-//	 printLEDs(acc);
+	 acc = ReadAccData();
+	 printLEDs(acc);
 
-
-	  ledTest();
+//	  ledTest(); //lights up the second LED
+//	  clearLEDstrip();
 //	 binAccRead = accFloat2Binary(acc);
 
 	 //ignore values that are different by more than a tollerance
