@@ -1,0 +1,4 @@
+../Core/Src/led.c:31:6:setupLEDS	16	static
+../Core/Src/led.c:48:6:ledTest	24	static
+../Core/Src/led.c:85:6:makeLEDFrame	16	static
+../Core/Src/led.c:115:6:printLEDs	104	static
