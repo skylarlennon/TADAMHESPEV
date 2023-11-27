@@ -29,6 +29,6 @@
 ../Core/Src/lcd_smol.c:832:6:LCD_drawBattery	32	static
 ../Core/Src/lcd_smol.c:862:6:LCD_drawFrame	24	static
 ../Core/Src/lcd_smol.c:873:6:LCD_fillBattery	56	static
-../Core/Src/lcd_smol.c:887:6:LCD_updateVals	352	static
-../Core/Src/lcd_smol.c:903:6:LCD_warnings	40	static
-../Core/Src/lcd_smol.c:926:6:LCD_updateBattery	840	static
+../Core/Src/lcd_smol.c:889:6:LCD_updateVals	64	static
+../Core/Src/lcd_smol.c:905:6:LCD_warnings	40	static
+../Core/Src/lcd_smol.c:928:6:LCD_updateBattery	40	static

@@ -51,7 +51,7 @@ TIM_HandleTypeDef htim16;
 /* USER CODE BEGIN PV */
 int buf[10] = {4,3,1,4,5,2};
 int warning = 0;
-int volt_percent = 100;
+int voltage = 54;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -126,10 +126,13 @@ int main(void)
     LCD_drawString(&hspi1,280,30 + 80*1,mph,3,HX8357_BLACK,3);
     LCD_drawString(&hspi1,306,30 + 80*2,deg,1,HX8357_BLACK,3);
     LCD_drawString(&hspi1,306,30 + 80*3,watt,1,HX8357_BLACK,3);
-
+    int volt_percent = (voltage*10) - 440;
     LCD_updateBattery(&hspi1,volt_percent);
     LCD_drawString(&hspi1,442,50,"%",1,HX8357_BLACK,4);
 
+
+    TIM15->CNT = 1;
+    TIM16->CNT = 1;
     HAL_TIM_Base_Start_IT(&htim15);
     HAL_TIM_Base_Start_IT(&htim16);
   /* USER CODE END 2 */
@@ -427,12 +430,14 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
   }
   /* USER CODE BEGIN Callback 1 */
   if (htim->Instance == TIM15) {
+	  buf[3]+=1;
 	  LCD_updateVals(&hspi1,buf,HX8357_BLACK);
-	  LCD_warnings(&hspi1, (buf[2] << 4) | buf[3],volt_percent,&warning)
   }
   if (htim->Instance == TIM16) {
+	  voltage -= 0.1;
+	  int volt_percent = voltage*10 - 440;
 	  LCD_updateBattery(&hspi1,volt_percent);
-	  LCD_warnings(&hspi1, (buf[2] << 4) | buf[3],volt_percent,&warning)
+	  LCD_warnings(&hspi1, (buf[2] << 4) | buf[3],volt_percent,&warning);
   }
   /* USER CODE END Callback 1 */
 }

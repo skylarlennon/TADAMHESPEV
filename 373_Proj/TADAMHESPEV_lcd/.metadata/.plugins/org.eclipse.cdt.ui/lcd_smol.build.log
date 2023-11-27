@@ -1,4 +1,4 @@
-13:57:03 **** Incremental Build of configuration Debug for project lcd_smol ****
+18:03:24 **** Incremental Build of configuration Debug for project lcd_smol ****
 make -j12 all 
 arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L432xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
 ../Core/Src/main.c: In function 'main':
@@ -80,11 +80,11 @@ Finished building target: lcd_smol.elf
 arm-none-eabi-size   lcd_smol.elf 
 arm-none-eabi-objdump -h -S  lcd_smol.elf  > "lcd_smol.list"
    text	   data	    bss	    dec	    hex	filename
-  21572	    128	   1936	  23636	   5c54	lcd_smol.elf
+  23300	    168	   1936	  25404	   633c	lcd_smol.elf
 Finished building: default.size.stdout
  
 Finished building: lcd_smol.list
  
 
-13:57:04 Build Finished. 0 errors, 8 warnings. (took 1s.830ms)
+18:03:26 Build Finished. 0 errors, 8 warnings. (took 1s.798ms)
 
