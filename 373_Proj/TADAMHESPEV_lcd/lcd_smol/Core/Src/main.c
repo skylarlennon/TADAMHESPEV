@@ -49,9 +49,11 @@ TIM_HandleTypeDef htim15;
 TIM_HandleTypeDef htim16;
 
 /* USER CODE BEGIN PV */
-int buf[10] = {4,3,1,4,5,2};
-int warning = 0;
-int voltage = 54;
+int buf[10] = {4,3,5,9,5,2};
+int Twarning = 0;
+int Vwarning = 0;
+float voltage = 44.5;
+int volt_percent;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -106,8 +108,8 @@ int main(void)
   	LCD_begin(&hspi1);
   	//LCD_fillRect(&hspi1, 0, 0, 480, 320, HX8357_WHITE);
   	LCD_writePixels(&hspi1,HX8357_WHITE,0,0,480,320);
-    LCD_drawBattery(&hspi1,380,120,HX8357_BLACK,8);
-    LCD_drawFrame(&hspi1,HX8357_BLACK);
+    LCD_drawBattery(&hspi1,380,120,8);
+    LCD_drawFrame(&hspi1);
 
 
     char * name = "TADAMHESPEV | UMSM";
@@ -126,7 +128,7 @@ int main(void)
     LCD_drawString(&hspi1,280,30 + 80*1,mph,3,HX8357_BLACK,3);
     LCD_drawString(&hspi1,306,30 + 80*2,deg,1,HX8357_BLACK,3);
     LCD_drawString(&hspi1,306,30 + 80*3,watt,1,HX8357_BLACK,3);
-    int volt_percent = (voltage*10) - 440;
+    volt_percent = (voltage*10) - 440;
     LCD_updateBattery(&hspi1,volt_percent);
     LCD_drawString(&hspi1,442,50,"%",1,HX8357_BLACK,4);
 
@@ -144,6 +146,7 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+
   }
   /* USER CODE END 3 */
 }
@@ -379,7 +382,17 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOB_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1|GPIO_PIN_3, GPIO_PIN_RESET);
+
+  /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOB, GPIO_PIN_4|GPIO_PIN_5|GPIO_PIN_6, GPIO_PIN_RESET);
+
+  /*Configure GPIO pins : PA1 PA3 */
+  GPIO_InitStruct.Pin = GPIO_PIN_1|GPIO_PIN_3;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
   /*Configure GPIO pin : VCP_TX_Pin */
   GPIO_InitStruct.Pin = VCP_TX_Pin;
@@ -401,7 +414,7 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pin = GPIO_PIN_4|GPIO_PIN_5|GPIO_PIN_6;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
 /* USER CODE BEGIN MX_GPIO_Init_2 */
@@ -430,14 +443,20 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
   }
   /* USER CODE BEGIN Callback 1 */
   if (htim->Instance == TIM15) {
-	  buf[3]+=1;
-	  LCD_updateVals(&hspi1,buf,HX8357_BLACK);
+	  buf[3]-=1;
+	  HAL_GPIO_TogglePin(GPIOA,GPIO_PIN_1);
+	  LCD_updateVals(&hspi1,buf);
+	  HAL_GPIO_TogglePin(GPIOA,GPIO_PIN_1);
   }
   if (htim->Instance == TIM16) {
-	  voltage -= 0.1;
-	  int volt_percent = voltage*10 - 440;
+	  voltage += 0.5;
+	  volt_percent = (int)(voltage*10 - 440);
+	  HAL_GPIO_TogglePin(GPIOA,GPIO_PIN_3);
 	  LCD_updateBattery(&hspi1,volt_percent);
-	  LCD_warnings(&hspi1, (buf[2] << 4) | buf[3],volt_percent,&warning);
+	  HAL_GPIO_TogglePin(GPIOA,GPIO_PIN_3);
+	  HAL_GPIO_TogglePin(GPIOA,GPIO_PIN_3);
+	  LCD_warnings(&hspi1, (buf[2] << 4) | buf[3],volt_percent,&Twarning,&Vwarning);
+	  HAL_GPIO_TogglePin(GPIOA,GPIO_PIN_3);
   }
   /* USER CODE END Callback 1 */
 }

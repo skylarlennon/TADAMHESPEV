@@ -28,7 +28,7 @@
 ../Core/Src/lcd_smol.c:752:6:LCD_fillTriangle	14
 ../Core/Src/lcd_smol.c:832:6:LCD_drawBattery	14
 ../Core/Src/lcd_smol.c:862:6:LCD_drawFrame	1
-../Core/Src/lcd_smol.c:873:6:LCD_fillBattery	4
-../Core/Src/lcd_smol.c:889:6:LCD_updateVals	1
-../Core/Src/lcd_smol.c:905:6:LCD_warnings	6
-../Core/Src/lcd_smol.c:928:6:LCD_updateBattery	2
+../Core/Src/lcd_smol.c:875:6:LCD_fillBattery	4
+../Core/Src/lcd_smol.c:898:6:LCD_updateVals	1
+../Core/Src/lcd_smol.c:913:6:LCD_warnings	7
+../Core/Src/lcd_smol.c:943:6:LCD_updateBattery	3

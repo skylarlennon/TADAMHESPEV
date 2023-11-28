@@ -829,37 +829,37 @@ void LCD_fillTriangle(SPI_HandleTypeDef *spi, int16_t x0, int16_t y0, int16_t x1
 }
 
 //homemade functions for TADAMHASPEV, move to different file
-void LCD_drawBattery(SPI_HandleTypeDef* spi, int16_t x, int16_t y, uint16_t color, uint32_t size) {
+void LCD_drawBattery(SPI_HandleTypeDef* spi, int16_t x, int16_t y, uint32_t size) {
 	//make battery thicker?
 	//left
 	if(!LCD_setAddrWindow(spi, x, y + size, 1, 22*size)) return;
-	if (!LCD_pushColorCopy(spi, color, 22*size)) return;
+	if (!LCD_pushColorCopy(spi, HX8357_BLACK, 22*size)) return;
 
 	//right
 	if(!LCD_setAddrWindow(spi, x + 10*size, y + size, 1, 22*size)) return;
-	if (!LCD_pushColorCopy(spi, color, 22*size)) return;
+	if (!LCD_pushColorCopy(spi, HX8357_BLACK, 22*size)) return;
 
 	//top
 	if(!LCD_setAddrWindow(spi, x, y + size, 10*size, 1)) return;
-	if (!LCD_pushColorCopy(spi, color, 10*size)) return;
+	if (!LCD_pushColorCopy(spi, HX8357_BLACK, 10*size)) return;
 
 	//bottom
 	if(!LCD_setAddrWindow(spi, x, y + 23*size, 10*size, 1)) return;
-	if (!LCD_pushColorCopy(spi, color, 10*size)) return;
+	if (!LCD_pushColorCopy(spi, HX8357_BLACK, 10*size)) return;
 
 	//lil cap
 	if(!LCD_setAddrWindow(spi, x + 3*size, y, 4*size, 1)) return;
-	if (!LCD_pushColorCopy(spi, color, 4*size)) return;
+	if (!LCD_pushColorCopy(spi, HX8357_BLACK, 4*size)) return;
 
 	if(!LCD_setAddrWindow(spi, x + 3*size, y, 1, size)) return;
-	if (!LCD_pushColorCopy(spi, color, size)) return;
+	if (!LCD_pushColorCopy(spi, HX8357_BLACK, size)) return;
 
 	if(!LCD_setAddrWindow(spi, x + 3*size + 4*size, y, 1, size)) return;
-	if (!LCD_pushColorCopy(spi, color, size)) return;
+	if (!LCD_pushColorCopy(spi, HX8357_BLACK, size)) return;
 	return;
 }
 
-void LCD_drawFrame(SPI_HandleTypeDef* spi, uint16_t color) {
+void LCD_drawFrame(SPI_HandleTypeDef* spi) {
 	//rows
 	LCD_writeLine(spi,0,80,360,80,HX8357_BLACK);
 	LCD_writeLine(spi,0,160,360,160,HX8357_BLACK);
@@ -870,9 +870,11 @@ void LCD_drawFrame(SPI_HandleTypeDef* spi, uint16_t color) {
 	return;
 }
 
+int offset = 0;
+
 void LCD_fillBattery(SPI_HandleTypeDef* spi, int16_t x, int16_t y, uint32_t size, int level) {
 	LCD_writePixels(spi, HX8357_WHITE, x + 3, ((y + size) + 3), 10*size - 6, (22*size - 6));
-	int offset = 22*size - (22*size)*(level/100.0);
+	offset = 22*size - (22*size)*(level/100.0);
 	if (level > 0) {
 		if (level < 20) {
 			LCD_writePixels(spi, HX8357_RED, x + 3, ((y + size) + 3) + offset, 10*size - 6, (22*size - 6) - offset);
@@ -886,53 +888,64 @@ void LCD_fillBattery(SPI_HandleTypeDef* spi, int16_t x, int16_t y, uint32_t size
 	//level = 0 --> y offset 22*size
 }
 
-void LCD_updateVals(SPI_HandleTypeDef* spi, int buf[], uint16_t color) {
+int accel;
+int temp;
+int power;
+char accelString[3];
+char tempString[3];
+char powerString[3];
+
+void LCD_updateVals(SPI_HandleTypeDef* spi, int buf[]) {
 	//buf[0:1] accel, buf[2:3] temp, buf[4:5] power
-	int accel = (buf[0] << 4) | buf[1];
-	int temp = (buf[2] << 4) | buf[3];
-	int power = (buf[4] << 4) | buf[5];
-	char var1[3];
-	char var2[3];
-	char var3[3];
-	itoa(accel,var1,10);
-	itoa(temp,var2,10);
-	itoa(power,var3,10);
-	LCD_drawString(spi,146,30 + 80*1,var1,3,color,4);
-	LCD_drawString(spi,146,30 + 80*2,var2,3,color,4);
-	LCD_drawString(spi,146,30 + 80*3,var3,3,color,4);
+	accel = (buf[0] << 4) | buf[1];
+	temp = (buf[2] << 4) | buf[3];
+	power = (buf[4] << 4) | buf[5];
+	itoa(accel,accelString,10);
+	itoa(temp,tempString,10);
+	itoa(power,powerString,10);
+	LCD_drawString(spi,146,30 + 80*1,accelString,3,HX8357_BLACK,4);
+	LCD_drawString(spi,146,30 + 80*2,tempString,3,HX8357_BLACK,4);
+	LCD_drawString(spi,146,30 + 80*3,powerString,3,HX8357_BLACK,4);
 }
 
-void LCD_warnings(SPI_HandleTypeDef* spi, int temp, int level, int *warning) {
-	if ((temp > 50 | level < 30) & *warning == 0) {
-			LCD_writePixels(spi,HX8357_WHITE,0,0,359,79);
+int status = 0;
+
+void LCD_warnings(SPI_HandleTypeDef* spi, int temp, int level, int *Twarning, int *Vwarning) {
+	if ((*Twarning == 0 & *Vwarning == 0) & ((temp > 50) | (level < 30))) {
+		LCD_writePixels(spi,HX8357_WHITE,0,0,359,79);
 	}
-	if (temp > 50) {
-		LCD_fillTriangle(spi,15,55,45,55,30,25,HX8357_YELLOW);
-		LCD_drawString(spi,55,30 + 80*0,"HIGH TEMP",9,HX8357_RED,2);
-		*warning = 1;
+	if (temp > 50 & *Twarning == 0) {
+//		LCD_fillTriangle(spi,15,55,45,55,30,25,HX8357_GREEN);
+		LCD_drawString(spi,20,30 + 80*0,"HIGH TEMP",9,HX8357_RED,3);
+		*Twarning = 1;
 	}
-	if (level < 30) {
-		LCD_fillTriangle(spi,180,55,210,55,195,25,HX8357_YELLOW);
-		LCD_drawString(spi,220,30 + 80*0,"LOW VOLT",8,HX8357_RED,2);
-		*warning = 1;
+	if (level < 30 & *Vwarning == 0) {
+//		LCD_fillTriangle(spi,180,55,210,55,195,25,HX8357_GREEN);
+		LCD_drawString(spi,198,30 + 80*0,"LOW VOLT",8,HX8357_RED,3);
+		*Vwarning = 1;
 	}
-	if (*warning == 1) {
-		if (temp < 50 & level > 30) {
-			LCD_writePixels(spi,HX8357_WHITE,0,0,359,79);
-			LCD_drawString(spi,20,30 + 80*0,"TADAMHESPEV | UMSM",18,HX8357_BLACK,3);
-			*warning = 0;
-		}
+	if (*Twarning == 1 & temp <= 50) {
+		LCD_writePixels(spi,HX8357_WHITE,0,0,195,79);
+		*Twarning = 0;
+		status = 1;
+	}
+	if (*Vwarning == 1 & level >= 30) {
+		LCD_writePixels(spi,HX8357_WHITE,196,0,163,79);
+		*Vwarning = 0;
+		status = 1;
+	}
+	if (*Twarning == 0 & *Vwarning == 0 & status == 1) {
+		LCD_drawString(spi,20,30 + 80*0,"TADAMHESPEV | UMSM",18,HX8357_BLACK,3);
+		status = 0;
 	}
 }
 
 void LCD_updateBattery(SPI_HandleTypeDef* spi, int level) {
+	if (level < 0) level = 0;
+	if (level > 100) level = 100;
 	char lev[3];
 	itoa(level,lev,10);
 
 	LCD_fillBattery(spi,380,120,8,level);
-	if (level > 0) {
-		LCD_drawString(spi,370,50,lev,3,HX8357_BLACK,4);
-	} else {
-		LCD_drawString(spi,370,50,"0",1,HX8357_BLACK,4);
-	}
+	LCD_drawString(spi,370,50,lev,3,HX8357_BLACK,4);
 }
