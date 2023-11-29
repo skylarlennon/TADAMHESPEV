@@ -48,11 +48,14 @@ SPI_HandleTypeDef hspi1;
 TIM_HandleTypeDef htim15;
 TIM_HandleTypeDef htim16;
 
+UART_HandleTypeDef huart1;
+
 /* USER CODE BEGIN PV */
-int buf[10] = {4,3,5,9,5,2};
-int Twarning = 0;
-int Vwarning = 0;
-float voltage = 44.5;
+int buf[10] = {4,3,1,9,5,2};
+//int Twarning = 0;
+//int Vwarning = 0;
+int warning = 0;
+float voltage = 54;
 int volt_percent;
 /* USER CODE END PV */
 
@@ -63,6 +66,7 @@ static void MX_RTC_Init(void);
 static void MX_SPI1_Init(void);
 static void MX_TIM15_Init(void);
 static void MX_TIM16_Init(void);
+static void MX_USART1_UART_Init(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -104,6 +108,7 @@ int main(void)
   MX_SPI1_Init();
   MX_TIM15_Init();
   MX_TIM16_Init();
+  MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
   	LCD_begin(&hspi1);
   	//LCD_fillRect(&hspi1, 0, 0, 480, 320, HX8357_WHITE);
@@ -308,7 +313,7 @@ static void MX_TIM15_Init(void)
   htim15.Instance = TIM15;
   htim15.Init.Prescaler = 7999;
   htim15.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim15.Init.Period = 9999;
+  htim15.Init.Period = 4999;
   htim15.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
   htim15.Init.RepetitionCounter = 0;
   htim15.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
@@ -351,7 +356,7 @@ static void MX_TIM16_Init(void)
   htim16.Instance = TIM16;
   htim16.Init.Prescaler = 7999;
   htim16.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim16.Init.Period = 49999;
+  htim16.Init.Period = 14999;
   htim16.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
   htim16.Init.RepetitionCounter = 0;
   htim16.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
@@ -362,6 +367,41 @@ static void MX_TIM16_Init(void)
   /* USER CODE BEGIN TIM16_Init 2 */
 
   /* USER CODE END TIM16_Init 2 */
+
+}
+
+/**
+  * @brief USART1 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_USART1_UART_Init(void)
+{
+
+  /* USER CODE BEGIN USART1_Init 0 */
+
+  /* USER CODE END USART1_Init 0 */
+
+  /* USER CODE BEGIN USART1_Init 1 */
+
+  /* USER CODE END USART1_Init 1 */
+  huart1.Instance = USART1;
+  huart1.Init.BaudRate = 9600;
+  huart1.Init.WordLength = UART_WORDLENGTH_8B;
+  huart1.Init.StopBits = UART_STOPBITS_1;
+  huart1.Init.Parity = UART_PARITY_NONE;
+  huart1.Init.Mode = UART_MODE_TX_RX;
+  huart1.Init.HwFlowCtl = UART_HWCONTROL_NONE;
+  huart1.Init.OverSampling = UART_OVERSAMPLING_16;
+  huart1.Init.OneBitSampling = UART_ONE_BIT_SAMPLE_DISABLE;
+  huart1.AdvancedInit.AdvFeatureInit = UART_ADVFEATURE_NO_INIT;
+  if (HAL_UART_Init(&huart1) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN USART1_Init 2 */
+
+  /* USER CODE END USART1_Init 2 */
 
 }
 
@@ -443,19 +483,20 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
   }
   /* USER CODE BEGIN Callback 1 */
   if (htim->Instance == TIM15) {
-	  buf[3]-=1;
+	  buf[3]+=1;
 	  HAL_GPIO_TogglePin(GPIOA,GPIO_PIN_1);
 	  LCD_updateVals(&hspi1,buf);
 	  HAL_GPIO_TogglePin(GPIOA,GPIO_PIN_1);
   }
   if (htim->Instance == TIM16) {
-	  voltage += 0.5;
+	  voltage -= 0.5;
 	  volt_percent = (int)(voltage*10 - 440);
 	  HAL_GPIO_TogglePin(GPIOA,GPIO_PIN_3);
 	  LCD_updateBattery(&hspi1,volt_percent);
 	  HAL_GPIO_TogglePin(GPIOA,GPIO_PIN_3);
 	  HAL_GPIO_TogglePin(GPIOA,GPIO_PIN_3);
-	  LCD_warnings(&hspi1, (buf[2] << 4) | buf[3],volt_percent,&Twarning,&Vwarning);
+//	  LCD_warnings(&hspi1, (buf[2] << 4) | buf[3],volt_percent,&Twarning,&Vwarning);
+	  LCD_warnings(&hspi1, (buf[2] << 4) | buf[3],volt_percent,&warning);
 	  HAL_GPIO_TogglePin(GPIOA,GPIO_PIN_3);
   }
   /* USER CODE END Callback 1 */
