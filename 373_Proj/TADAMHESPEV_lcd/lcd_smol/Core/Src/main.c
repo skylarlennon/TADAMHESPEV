@@ -43,7 +43,7 @@
 /* Private variables ---------------------------------------------------------*/
 RTC_HandleTypeDef hrtc;
 
-SPI_HandleTypeDef hspi1;
+extern SPI_HandleTypeDef hspi1;
 
 TIM_HandleTypeDef htim15;
 TIM_HandleTypeDef htim16;
@@ -51,12 +51,12 @@ TIM_HandleTypeDef htim16;
 UART_HandleTypeDef huart1;
 
 /* USER CODE BEGIN PV */
-int buf[10] = {4,3,4,9,5,2};
+extern int buf[10];
 //int Twarning = 0;
 //int Vwarning = 0;
-int warning = 0;
-float voltage = 44;
-int volt_percent;
+extern int warning;
+extern float voltage;
+extern int volt_percent;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -137,11 +137,8 @@ int main(void)
     LCD_updateBattery(&hspi1,volt_percent);
     LCD_drawString(&hspi1,442,50,"%",1,HX8357_BLACK,4);
 
-
-    TIM15->CNT = 1;
-    TIM16->CNT = 1;
-    HAL_TIM_Base_Start_IT(&htim15);
-    HAL_TIM_Base_Start_IT(&htim16);
+    if (HAL_TIM_Base_Start_IT(&htim15) != HAL_OK) Error_Handler();
+    if (HAL_TIM_Base_Start_IT(&htim16) != HAL_OK) Error_Handler();
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -482,23 +479,23 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
     HAL_IncTick();
   }
   /* USER CODE BEGIN Callback 1 */
-  if (htim->Instance == TIM15) {
-	  buf[3]-=1;
-	  HAL_GPIO_TogglePin(GPIOA,GPIO_PIN_1);
-	  LCD_updateVals(&hspi1,buf);
-	  HAL_GPIO_TogglePin(GPIOA,GPIO_PIN_1);
-  }
-  if (htim->Instance == TIM16) {
-	  voltage += 0.5;
-	  volt_percent = (int)(voltage*10 - 440);
-	  HAL_GPIO_TogglePin(GPIOA,GPIO_PIN_3);
-	  LCD_updateBattery(&hspi1,volt_percent);
-	  HAL_GPIO_TogglePin(GPIOA,GPIO_PIN_3);
-	  HAL_GPIO_TogglePin(GPIOA,GPIO_PIN_3);
-//	  LCD_warnings(&hspi1, (buf[2] << 4) | buf[3],volt_percent,&Twarning,&Vwarning);
-	  LCD_warnings(&hspi1, (buf[2] << 4) | buf[3],volt_percent,&warning);
-	  HAL_GPIO_TogglePin(GPIOA,GPIO_PIN_3);
-  }
+//  if (htim->Instance == TIM15) {
+//	  buf[3]-=1;
+//	  HAL_GPIO_TogglePin(GPIOA,GPIO_PIN_1);
+//	  LCD_updateVals(&hspi1,buf);
+//	  HAL_GPIO_TogglePin(GPIOA,GPIO_PIN_1);
+//  }
+//  if (htim->Instance == TIM16) {
+//	  voltage += 0.5;
+//	  volt_percent = (int)(voltage*10 - 440);
+//	  HAL_GPIO_TogglePin(GPIOA,GPIO_PIN_3);
+//	  LCD_updateBattery(&hspi1,volt_percent);
+//	  HAL_GPIO_TogglePin(GPIOA,GPIO_PIN_3);
+//	  HAL_GPIO_TogglePin(GPIOA,GPIO_PIN_3);
+////	  LCD_warnings(&hspi1, (buf[2] << 4) | buf[3],volt_percent,&Twarning,&Vwarning);
+//	  LCD_warnings(&hspi1, (buf[2] << 4) | buf[3],volt_percent,&warning);
+//	  HAL_GPIO_TogglePin(GPIOA,GPIO_PIN_3);
+//  }
   /* USER CODE END Callback 1 */
 }
 

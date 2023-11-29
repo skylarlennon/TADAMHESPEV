@@ -1,0 +1,9 @@
+../Core/Src/main.c:65:10:read_Temperature	2
+../Core/Src/main.c:107:5:main	1
+../Core/Src/main.c:168:6:SystemClock_Config	4
+../Core/Src/main.c:213:13:MX_LPUART1_UART_Init	5
+../Core/Src/main.c:261:13:MX_SPI1_Init	2
+../Core/Src/main.c:301:13:MX_TIM3_Init	4
+../Core/Src/main.c:346:13:MX_GPIO_Init	1
+../Core/Src/main.c:576:1:__io_putchar	1
+../Core/Src/main.c:588:6:Error_Handler	1
