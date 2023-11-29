@@ -12,9 +12,9 @@
 #include "stm32l4xx_hal.h"
 #include "stm32l4xx_hal_gpio.h"
 
-#define NUM_LEDS 16
+#define NUM_LEDS 15
 #define NUM_TEST_LEDS 2
-#define NUM_MSG_BYTES 69 //4 + 4*NUM_LEDS + 1 + ceil((NUM_LEDS - 1)/16)
+#define NUM_MSG_BYTES 65 //4 + 4*NUM_LEDS + 1 + ceil((NUM_LEDS - 1)/16)
 #define MAX_ACCEL 2.0
 #define START_FRAME 0x00000000
 //#define LED_FRAME_START_BRIGHT 0xF0 // 0b111 xxxxx (for brightness)
@@ -23,7 +23,7 @@
 //#define BLANK_LED 0xE0000000
 // MAKE SURE THESE SUM TO NUM_LEDS
 #define NUM_GREEN 5
-#define NUM_YELLOW 7
+#define NUM_YELLOW 6
 #define NUM_RED 4
 
 float LED_INDEX_THRESHOLD[NUM_LEDS];
@@ -124,14 +124,14 @@ void makeLEDFrame(uint8_t* frame, uint8_t gr_yel_red){
 	switch(gr_yel_red){
 		case 0:									// green
 			*(frame) = LED_FRAME_START_BRIGHT;
-			*(frame + 1) = 255; 	//green
-			*(frame + 2) = 0; 		//blue
+			*(frame + 1) = 0; 	//green
+			*(frame + 2) = 255; 		//blue
 			*(frame + 3) = 0;		//red
 			break;
 		case 1:					 				// yellow
 			*(frame) = LED_FRAME_START_BRIGHT;
-			*(frame + 1) = 255; 	//green
-			*(frame + 2) = 0; 		//blue
+			*(frame + 1) = 0; 	//green
+			*(frame + 2) = 255; 		//blue
 			*(frame + 3) = 255;		//red
 			break;
 		case 2:					 				// red
@@ -190,4 +190,5 @@ void printLEDs(float accVal){
 	if(ret != HAL_OK){
 		//There is a problem
 	}
+	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_6, 0);
 }

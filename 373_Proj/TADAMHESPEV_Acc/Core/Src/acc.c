@@ -119,6 +119,7 @@ void printAll(uint16_t raw, float acc, uint8_t accBin){
 }
 
 float ReadAccData(){
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_6, 1);
 		uint8_t buf[1]= {OUT_X_L_A | 1 << 7}; //Auto-Increment OUT_X_L_A
 		uint8_t rbuf[2];
 		float accVal = 0;

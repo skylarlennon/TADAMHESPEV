@@ -4,6 +4,6 @@
 ../Core/Src/acc.c:108:6:printBinary	24	static
 ../Core/Src/acc.c:115:6:printAll	24	static
 ../Core/Src/acc.c:121:7:ReadAccData	32	static
-../Core/Src/acc.c:152:6:print_raw_acc_bin	32	static
-../Core/Src/acc.c:183:6:write4BitGPIOs	16	static
-../Core/Src/acc.c:193:6:writeGPIOCountTest	8	static
+../Core/Src/acc.c:153:6:print_raw_acc_bin	32	static
+../Core/Src/acc.c:184:6:write4BitGPIOs	16	static
+../Core/Src/acc.c:194:6:writeGPIOCountTest	8	static
