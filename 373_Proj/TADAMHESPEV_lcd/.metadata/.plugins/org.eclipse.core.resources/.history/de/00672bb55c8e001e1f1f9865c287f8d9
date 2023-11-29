@@ -51,11 +51,11 @@ TIM_HandleTypeDef htim16;
 UART_HandleTypeDef huart1;
 
 /* USER CODE BEGIN PV */
-int buf[10] = {4,3,4,9,5,2};
+int buf[10] = {4,3,1,9,5,2};
 //int Twarning = 0;
 //int Vwarning = 0;
 int warning = 0;
-float voltage = 44;
+float voltage = 54;
 int volt_percent;
 /* USER CODE END PV */
 
@@ -354,9 +354,9 @@ static void MX_TIM16_Init(void)
 
   /* USER CODE END TIM16_Init 1 */
   htim16.Instance = TIM16;
-  htim16.Init.Prescaler = 39999;
+  htim16.Init.Prescaler = 7999;
   htim16.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim16.Init.Period = 29999;
+  htim16.Init.Period = 14999;
   htim16.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
   htim16.Init.RepetitionCounter = 0;
   htim16.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
@@ -483,13 +483,13 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
   }
   /* USER CODE BEGIN Callback 1 */
   if (htim->Instance == TIM15) {
-	  buf[3]-=1;
+	  buf[3]+=1;
 	  HAL_GPIO_TogglePin(GPIOA,GPIO_PIN_1);
 	  LCD_updateVals(&hspi1,buf);
 	  HAL_GPIO_TogglePin(GPIOA,GPIO_PIN_1);
   }
   if (htim->Instance == TIM16) {
-	  voltage += 0.5;
+	  voltage -= 0.5;
 	  volt_percent = (int)(voltage*10 - 440);
 	  HAL_GPIO_TogglePin(GPIOA,GPIO_PIN_3);
 	  LCD_updateBattery(&hspi1,volt_percent);

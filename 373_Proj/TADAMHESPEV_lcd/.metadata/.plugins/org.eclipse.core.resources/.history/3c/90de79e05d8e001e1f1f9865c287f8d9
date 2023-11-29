@@ -944,12 +944,12 @@ void LCD_warnings(SPI_HandleTypeDef* spi, int temp, int level, int *warning) {
 		*warning = 1;
 	}
 	if (temp >= 50 & tempWarn == 0) {
-		LCD_fillTriangle(spi,15,55,45,55,30,25,HX8357_GREEN);
+		LCD_fillTriangle(spi,15,55,45,55,30,25,HX8357_YELLOW);
 		LCD_drawString(spi,55,30 + 80*0,"HIGH TEMP",9,HX8357_RED,2);
 		tempWarn = 1;
 	}
 	if (level <= 30 & voltWarn == 0) {
-		LCD_fillTriangle(spi,180,55,210,55,195,25,HX8357_GREEN);
+		LCD_fillTriangle(spi,180,55,210,55,195,25,HX8357_YELLOW);
 		LCD_drawString(spi,220,30 + 80*0,"LOW VOLT",8,HX8357_RED,2);
 		voltWarn = 1;
 	}
