@@ -9,6 +9,7 @@
 #include "stm32l4xx_hal.h"
 #include <stdlib.h>
 
+
 #ifndef _swap_int16_t
 #define _swap_int16_t(a, b)                                                    \
   {                                                                            \
@@ -17,6 +18,8 @@
     b = t;                                                                     \
   }
 #endif
+
+
 
 // Probably going to move these to a different file, but for now
 void uint16_to_bytes(uint16_t in, uint8_t *out)
@@ -892,15 +895,15 @@ char speedString[4];
 char tempString[6];
 char powerString[6];
 
-void LCD_updateVals(SPI_HandleTypeDef* spi, float buf[]) {
+void LCD_updateVals(SPI_HandleTypeDef* spi, struct TelData data) {
 	//buf[0] accel, buf[1] temp, buf[2] speed, buf[3] voltage, buf[4] current
-	sprintf(tempString,"%f",buf[1]);
+	sprintf(tempString,"%f", data.temp);//buf[1]);
 	LCD_drawString(spi,130,30 + 80*2,tempString,6,HX8357_BLACK,4);
 
-	sprintf(speedString,"%f",buf[2]);
+	sprintf(speedString,"%f", data.speed);//buf[2]);
 	LCD_drawString(spi,130,30 + 80*1,speedString,4,HX8357_BLACK,4);
 
-	sprintf(powerString,"%f",buf[3]*buf[4]);
+	sprintf(powerString,"%f", data.voltage*data.current);//buf[3]*buf[4]);
 	LCD_drawString(spi,130,30 + 80*3,powerString,6,HX8357_BLACK,4);
 }
 
