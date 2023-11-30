@@ -42,6 +42,11 @@
 /* Private variables ---------------------------------------------------------*/
 /* USER CODE BEGIN PV */
 float acc = 0;
+static volatile float current_time = 0;
+static volatile float previous_time = 0;
+static volatile float time_difference = 0;
+static volatile float rate = 0;
+static volatile float dist = 0.00091748328; //circumference of wheel
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -224,8 +229,10 @@ void TIM1_TRG_COM_TIM17_IRQHandler(void)
   /* USER CODE END TIM1_TRG_COM_TIM17_IRQn 0 */
   HAL_TIM_IRQHandler(&htim17);
   /* USER CODE BEGIN TIM1_TRG_COM_TIM17_IRQn 1 */
-  int val = __HAL_TIM_GET_COUNTER(&htim17);
 
+  current_time = TIM17->CCR1; //get current time value
+  current_time /= 3600000000;
+  rate = dist / current_time;
   /* USER CODE END TIM1_TRG_COM_TIM17_IRQn 1 */
 }
 
