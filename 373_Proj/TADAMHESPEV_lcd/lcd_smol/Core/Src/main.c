@@ -52,12 +52,15 @@ TIM_HandleTypeDef htim16;
 UART_HandleTypeDef huart1;
 
 /* USER CODE BEGIN PV */
-extern int buf[10];
+extern float buf[5];
 //int Twarning = 0;
 //int Vwarning = 0;
 extern int warning;
 extern float voltage;
 extern int volt_percent;
+extern int refresh;
+int batRefresh = 0;
+int prevVolt = 0;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -117,6 +120,7 @@ int main(void)
 
     if (HAL_TIM_Base_Start_IT(&htim15) != HAL_OK) Error_Handler();
     if (HAL_TIM_Base_Start_IT(&htim16) != HAL_OK) Error_Handler();
+    HAL_SPI_Receive_IT(&hspi3,(uint8_t*)buf,sizeof(buf));
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -126,6 +130,17 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+	  if (refresh == 1) {
+		  LCD_updateVals(&hspi1,buf);
+		  refresh = 0;
+		  HAL_UART_Transmit(&huart1,(uint8_t*)buf,sizeof(buf),10);
+	  }
+	  if (batRefresh == 1) {
+		  volt_percent = (int)(buf[3]*10 - 440);
+		  LCD_updateBattery(&hspi1,volt_percent);
+		  LCD_warnings(&hspi1,buf[1],volt_percent,&warning);
+		  batRefresh = 0;
+	  }
 
   }
   /* USER CODE END 3 */
@@ -286,7 +301,7 @@ static void MX_SPI3_Init(void)
   hspi3.Instance = SPI3;
   hspi3.Init.Mode = SPI_MODE_SLAVE;
   hspi3.Init.Direction = SPI_DIRECTION_2LINES_RXONLY;
-  hspi3.Init.DataSize = SPI_DATASIZE_4BIT;
+  hspi3.Init.DataSize = SPI_DATASIZE_8BIT;
   hspi3.Init.CLKPolarity = SPI_POLARITY_LOW;
   hspi3.Init.CLKPhase = SPI_PHASE_1EDGE;
   hspi3.Init.NSS = SPI_NSS_SOFT;
@@ -476,6 +491,14 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
+void HAL_SPI_RxCpltCallback(SPI_HandleTypeDef *hspi) {
+	refresh = 1;
+	HAL_SPI_Receive_IT(&hspi3,(uint8_t*)buf,sizeof(buf));
+	if (buf[3] != prevVolt) {
+		batRefresh = 1;
+		prevVolt = buf[3];
+	}
+}
 
 /* USER CODE END 4 */
 

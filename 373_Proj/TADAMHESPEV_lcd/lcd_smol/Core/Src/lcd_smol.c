@@ -888,24 +888,20 @@ void LCD_fillBattery(SPI_HandleTypeDef* spi, int16_t x, int16_t y, uint32_t size
 	//level = 0 --> y offset 22*size
 }
 
-int accel;
-int temp;
-int power;
-char accelString[3];
-char tempString[3];
-char powerString[3];
+char speedString[4];
+char tempString[6];
+char powerString[6];
 
-void LCD_updateVals(SPI_HandleTypeDef* spi, int buf[]) {
-	//buf[0:1] accel, buf[2:3] temp, buf[4:5] power
-	accel = (buf[0] << 4) | buf[1];
-	temp = (buf[2] << 4) | buf[3];
-	power = (buf[4] << 4) | buf[5];
-	itoa(accel,accelString,10);
-	itoa(temp,tempString,10);
-	itoa(power,powerString,10);
-	LCD_drawString(spi,146,30 + 80*1,accelString,3,HX8357_BLACK,4);
-	LCD_drawString(spi,146,30 + 80*2,tempString,3,HX8357_BLACK,4);
-	LCD_drawString(spi,146,30 + 80*3,powerString,3,HX8357_BLACK,4);
+void LCD_updateVals(SPI_HandleTypeDef* spi, float buf[]) {
+	//buf[0] accel, buf[1] temp, buf[2] speed, buf[3] voltage, buf[4] current
+	sprintf(tempString,"%f",buf[1]);
+	LCD_drawString(spi,130,30 + 80*2,tempString,6,HX8357_BLACK,4);
+
+	sprintf(speedString,"%f",buf[2]);
+	LCD_drawString(spi,130,30 + 80*1,speedString,4,HX8357_BLACK,4);
+
+	sprintf(powerString,"%f",buf[3]*buf[4]);
+	LCD_drawString(spi,130,30 + 80*3,powerString,6,HX8357_BLACK,4);
 }
 
 //void LCD_warnings(SPI_HandleTypeDef* spi, int temp, int level, int *Twarning, int *Vwarning) {

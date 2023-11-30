@@ -42,12 +42,12 @@
 
 /* Private variables ---------------------------------------------------------*/
 /* USER CODE BEGIN PV */
-int buf[10] = {0,1,0,1,0,1};
+float buf[5] = {10.5,0,22.56,45.1,10.2};
 //int Twarning = 0;
 //int Vwarning = 0;
 int warning = 0;
-float voltage = 44;
 int volt_percent = 44*10 - 440;
+int refresh = 0;
 extern UART_HandleTypeDef huart1;
 extern SPI_HandleTypeDef hspi1;
 extern SPI_HandleTypeDef hspi3;
@@ -64,6 +64,7 @@ extern SPI_HandleTypeDef hspi3;
 /* USER CODE END 0 */
 
 /* External variables --------------------------------------------------------*/
+extern SPI_HandleTypeDef hspi3;
 extern TIM_HandleTypeDef htim15;
 extern TIM_HandleTypeDef htim16;
 extern TIM_HandleTypeDef htim2;
@@ -222,8 +223,10 @@ void TIM1_BRK_TIM15_IRQHandler(void)
   /* USER CODE BEGIN TIM1_BRK_TIM15_IRQn 1 */
 //  buf[3]+=1;
 //  HAL_GPIO_TogglePin(GPIOA,GPIO_PIN_1);
-  LCD_updateVals(&hspi1,buf);
-  HAL_UART_Transmit(&huart1,buf,10,10);
+//  HAL_SPI_Receive(&hspi3,buf,sizeof(buf),10);
+//  LCD_updateVals(&hspi1,buf);
+//  HAL_UART_Transmit(&huart1,buf,sizeof(buf),10);
+//  refresh = 1;
 //  HAL_GPIO_TogglePin(GPIOA,GPIO_PIN_1);
   /* USER CODE END TIM1_BRK_TIM15_IRQn 1 */
 }
@@ -239,13 +242,14 @@ void TIM1_UP_TIM16_IRQHandler(void)
   HAL_TIM_IRQHandler(&htim16);
   /* USER CODE BEGIN TIM1_UP_TIM16_IRQn 1 */
 //  voltage += 0.5;
-  volt_percent = (int)(voltage*10 - 440);
-//  HAL_GPIO_TogglePin(GPIOA,GPIO_PIN_3);
-  LCD_updateBattery(&hspi1,volt_percent);
-//  HAL_GPIO_TogglePin(GPIOA,GPIO_PIN_3);
-//  HAL_GPIO_TogglePin(GPIOA,GPIO_PIN_3);
-//	  LCD_warnings(&hspi1, (buf[2] << 4) | buf[3],volt_percent,&Twarning,&Vwarning);
-  LCD_warnings(&hspi1, (buf[2] << 4) | buf[3],volt_percent,&warning);
+//  float volt = buf[3];
+//  volt_percent = (int)(buf[3]*10 - 440);
+////  HAL_GPIO_TogglePin(GPIOA,GPIO_PIN_3);
+//  LCD_updateBattery(&hspi1,volt_percent);
+////  HAL_GPIO_TogglePin(GPIOA,GPIO_PIN_3);
+////  HAL_GPIO_TogglePin(GPIOA,GPIO_PIN_3);
+////	  LCD_warnings(&hspi1, (buf[2] << 4) | buf[3],volt_percent,&Twarning,&Vwarning);
+//  LCD_warnings(&hspi1,buf[1],volt_percent,&warning);
 //  HAL_GPIO_TogglePin(GPIOA,GPIO_PIN_3);
   /* USER CODE END TIM1_UP_TIM16_IRQn 1 */
 }
@@ -262,6 +266,22 @@ void TIM2_IRQHandler(void)
   /* USER CODE BEGIN TIM2_IRQn 1 */
 
   /* USER CODE END TIM2_IRQn 1 */
+}
+
+/**
+  * @brief This function handles SPI3 global interrupt.
+  */
+void SPI3_IRQHandler(void)
+{
+  /* USER CODE BEGIN SPI3_IRQn 0 */
+
+  /* USER CODE END SPI3_IRQn 0 */
+  HAL_SPI_IRQHandler(&hspi3);
+  /* USER CODE BEGIN SPI3_IRQn 1 */
+//  HAL_SPI_Receive_IT(&hspi3,buf,sizeof(buf),10);
+//  HAL_UART_Transmit(&huart1,buf,sizeof(buf),10);
+//  refresh = 1;
+  /* USER CODE END SPI3_IRQn 1 */
 }
 
 /* USER CODE BEGIN 1 */

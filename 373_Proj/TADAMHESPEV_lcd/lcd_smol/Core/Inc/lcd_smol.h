@@ -145,7 +145,7 @@ void LCD_writeFastHLine(SPI_HandleTypeDef *spi, int16_t x, int16_t y, int16_t w,
 void LCD_drawBattery(SPI_HandleTypeDef* spi, int16_t x, int16_t y, uint32_t size);
 void LCD_drawFrame(SPI_HandleTypeDef* spi);
 void LCD_fillBattery(SPI_HandleTypeDef* spi, int16_t x, int16_t y, uint32_t size, int level);
-void LCD_updateVals(SPI_HandleTypeDef* spi, int buf[]);
+void LCD_updateVals(SPI_HandleTypeDef* spi, float buf[]);
 //void LCD_warnings(SPI_HandleTypeDef* spi, int temp, int level, int *Twarning, int *Vwarning);
 void LCD_warnings(SPI_HandleTypeDef* spi, int temp, int level, int *warning);
 void LCD_updateBattery(SPI_HandleTypeDef* spi, int level);
