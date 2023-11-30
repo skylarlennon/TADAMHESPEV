@@ -32,3 +32,4 @@
 ../Core/Src/lcd_smol.c:898:6:LCD_updateVals	32	static
 ../Core/Src/lcd_smol.c:941:6:LCD_warnings	40	static
 ../Core/Src/lcd_smol.c:971:6:LCD_updateBattery	40	static
+../Core/Src/lcd_smol.c:981:6:LCD_TADAMHASPEV	64	static

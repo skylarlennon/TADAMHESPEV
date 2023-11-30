@@ -1,4 +1,4 @@
-19:20:05 **** Build of configuration Debug for project lcd ****
+13:09:38 **** Build of configuration Debug for project lcd ****
 make -j12 all 
 arm-none-eabi-gcc "../Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4R5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal.d" -MT"Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal.o"
 arm-none-eabi-gcc "../Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_cortex.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4R5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_cortex.d" -MT"Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_cortex.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_cortex.o"
@@ -24,6 +24,37 @@ arm-none-eabi-gcc "../Core/Src/lcd.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DU
 arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4R5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
 arm-none-eabi-gcc "../Core/Src/stm32l4xx_hal_msp.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4R5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/stm32l4xx_hal_msp.d" -MT"Core/Src/stm32l4xx_hal_msp.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/stm32l4xx_hal_msp.o"
 arm-none-eabi-gcc "../Core/Src/stm32l4xx_hal_timebase_tim.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4R5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/stm32l4xx_hal_timebase_tim.d" -MT"Core/Src/stm32l4xx_hal_timebase_tim.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/stm32l4xx_hal_timebase_tim.o"
+arm-none-eabi-gcc "../Core/Src/stm32l4xx_it.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4R5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/stm32l4xx_it.d" -MT"Core/Src/stm32l4xx_it.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/stm32l4xx_it.o"
+../Core/Src/lcd.c: In function 'LCD_fillRect':
+../Core/Src/lcd.c:739:17: warning: implicit declaration of function 'writeFastVLine'; did you mean 'LCD_writeFastVLine'? [-Wimplicit-function-declaration]
+  739 |                 writeFastVLine(spi, i, y, h, color);
+      |                 ^~~~~~~~~~~~~~
+      |                 LCD_writeFastVLine
+../Core/Src/lcd.c: In function 'LCD_updateVals':
+../Core/Src/lcd.c:897:42: warning: pointer targets in passing argument 4 of 'LCD_drawString' differ in signedness [-Wpointer-sign]
+  897 |         LCD_drawString(spi,146,30 + 80*1,var1,4,color,4);
+      |                                          ^~~~
+      |                                          |
+      |                                          char *
+../Core/Src/lcd.c:629:82: note: expected 'unsigned char *' but argument is of type 'char *'
+  629 | void LCD_drawString(SPI_HandleTypeDef* spi, int16_t x, int16_t y, unsigned char* c, uint32_t length, uint16_t color, uint32_t size)
+      |                                                                   ~~~~~~~~~~~~~~~^
+../Core/Src/lcd.c:898:42: warning: pointer targets in passing argument 4 of 'LCD_drawString' differ in signedness [-Wpointer-sign]
+  898 |         LCD_drawString(spi,146,30 + 80*2,var2,4,color,4);
+      |                                          ^~~~
+      |                                          |
+      |                                          char *
+../Core/Src/lcd.c:629:82: note: expected 'unsigned char *' but argument is of type 'char *'
+  629 | void LCD_drawString(SPI_HandleTypeDef* spi, int16_t x, int16_t y, unsigned char* c, uint32_t length, uint16_t color, uint32_t size)
+      |                                                                   ~~~~~~~~~~~~~~~^
+../Core/Src/lcd.c:899:42: warning: pointer targets in passing argument 4 of 'LCD_drawString' differ in signedness [-Wpointer-sign]
+  899 |         LCD_drawString(spi,146,30 + 80*3,var3,4,color,4);
+      |                                          ^~~~
+      |                                          |
+      |                                          char *
+../Core/Src/lcd.c:629:82: note: expected 'unsigned char *' but argument is of type 'char *'
+  629 | void LCD_drawString(SPI_HandleTypeDef* spi, int16_t x, int16_t y, unsigned char* c, uint32_t length, uint16_t color, uint32_t size)
+      |                                                                   ~~~~~~~~~~~~~~~^
 ../Core/Src/main.c: In function 'main':
 ../Core/Src/main.c:111:38: warning: pointer targets in passing argument 4 of 'LCD_drawString' differ in signedness [-Wpointer-sign]
   111 |   LCD_drawString(&hspi1,20,30 + 80*0,name,18,HX8357_BLACK,3);
@@ -66,36 +97,6 @@ In file included from ../Core/Src/main.c:24:
       |                                       ^~~
       |                                       |
       |                                       char *
-../Core/Src/lcd.c: In function 'LCD_fillRect':
-../Core/Src/lcd.c:739:17: warning: implicit declaration of function 'writeFastVLine'; did you mean 'LCD_writeFastVLine'? [-Wimplicit-function-declaration]
-  739 |                 writeFastVLine(spi, i, y, h, color);
-      |                 ^~~~~~~~~~~~~~
-      |                 LCD_writeFastVLine
-../Core/Src/lcd.c: In function 'LCD_updateVals':
-../Core/Src/lcd.c:897:42: warning: pointer targets in passing argument 4 of 'LCD_drawString' differ in signedness [-Wpointer-sign]
-  897 |         LCD_drawString(spi,146,30 + 80*1,var1,4,color,4);
-      |                                          ^~~~
-      |                                          |
-      |                                          char *
-../Core/Src/lcd.c:629:82: note: expected 'unsigned char *' but argument is of type 'char *'
-  629 | void LCD_drawString(SPI_HandleTypeDef* spi, int16_t x, int16_t y, unsigned char* c, uint32_t length, uint16_t color, uint32_t size)
-      |                                                                   ~~~~~~~~~~~~~~~^
-../Core/Src/lcd.c:898:42: warning: pointer targets in passing argument 4 of 'LCD_drawString' differ in signedness [-Wpointer-sign]
-  898 |         LCD_drawString(spi,146,30 + 80*2,var2,4,color,4);
-      |                                          ^~~~
-      |                                          |
-      |                                          char *
-../Core/Src/lcd.c:629:82: note: expected 'unsigned char *' but argument is of type 'char *'
-  629 | void LCD_drawString(SPI_HandleTypeDef* spi, int16_t x, int16_t y, unsigned char* c, uint32_t length, uint16_t color, uint32_t size)
-      |                                                                   ~~~~~~~~~~~~~~~^
-../Core/Src/lcd.c:899:42: warning: pointer targets in passing argument 4 of 'LCD_drawString' differ in signedness [-Wpointer-sign]
-  899 |         LCD_drawString(spi,146,30 + 80*3,var3,4,color,4);
-      |                                          ^~~~
-      |                                          |
-      |                                          char *
-../Core/Src/lcd.c:629:82: note: expected 'unsigned char *' but argument is of type 'char *'
-  629 | void LCD_drawString(SPI_HandleTypeDef* spi, int16_t x, int16_t y, unsigned char* c, uint32_t length, uint16_t color, uint32_t size)
-      |                                                                   ~~~~~~~~~~~~~~~^
 In file included from ../Core/Src/main.c:24:
 ../Core/Inc/lcd.h:131:82: note: expected 'unsigned char *' but argument is of type 'char *'
   131 | void LCD_drawString(SPI_HandleTypeDef* spi, int16_t x, int16_t y, unsigned char* c, uint32_t length, uint16_t color, uint32_t size);
@@ -106,7 +107,6 @@ In file included from ../Core/Src/main.c:24:
       |                                       |
       |                                       char *
 In file included from ../Core/Src/main.c:24:
-arm-none-eabi-gcc "../Core/Src/stm32l4xx_it.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4R5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/stm32l4xx_it.d" -MT"Core/Src/stm32l4xx_it.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/stm32l4xx_it.o"
 ../Core/Inc/lcd.h:131:82: note: expected 'unsigned char *' but argument is of type 'char *'
   131 | void LCD_drawString(SPI_HandleTypeDef* spi, int16_t x, int16_t y, unsigned char* c, uint32_t length, uint16_t color, uint32_t size);
       |                                                                   ~~~~~~~~~~~~~~~^
@@ -152,5 +152,5 @@ Finished building: default.size.stdout
 Finished building: lcd.list
  
 
-19:20:10 Build Finished. 0 errors, 13 warnings. (took 5s.259ms)
+13:09:43 Build Finished. 0 errors, 13 warnings. (took 5s.113ms)
 

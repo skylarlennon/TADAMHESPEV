@@ -977,3 +977,29 @@ void LCD_updateBattery(SPI_HandleTypeDef* spi, int level) {
 	LCD_fillBattery(spi,380,120,8,level);
 	LCD_drawString(spi,370,50,lev,3,HX8357_BLACK,4);
 }
+
+void LCD_TADAMHASPEV(SPI_HandleTypeDef* spi) {
+	LCD_begin(spi);
+	LCD_writePixels(spi,HX8357_WHITE,0,0,480,320);
+	LCD_drawBattery(spi,380,120,8);
+    LCD_drawFrame(spi);
+
+
+    char * name = "TADAMHESPEV | UMSM";
+    char * speed = "SPEED:";
+    char * temp = "TEMP:";
+    char * power = "POWER:";
+    char * mph = "mph";
+    char * deg = "C";
+    char * watt = "W";
+
+    LCD_drawString(spi,20,30 + 80*0,name,18,HX8357_BLACK,3);
+    LCD_drawString(spi,5,30 + 80*1,speed,6,HX8357_BLACK,3);
+    LCD_drawString(spi,5,30 + 80*2,temp,5,HX8357_BLACK,3);
+    LCD_drawString(spi,5,30 + 80*3,power,6,HX8357_BLACK,3);
+
+    LCD_drawString(spi,280,30 + 80*1,mph,3,HX8357_BLACK,3);
+    LCD_drawString(spi,306,30 + 80*2,deg,1,HX8357_BLACK,3);
+    LCD_drawString(spi,306,30 + 80*3,watt,1,HX8357_BLACK,3);
+    LCD_drawString(spi,442,50,"%",1,HX8357_BLACK,4);
+}
