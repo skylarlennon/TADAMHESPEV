@@ -164,7 +164,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32l4xx_hal.h"
-#include "stdio.h"
+
 /** @addtogroup STM32L4xx_HAL_Driver
   * @{
   */
@@ -2700,7 +2700,6 @@ __weak void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
   /* Prevent unused argument(s) compilation warning */
   UNUSED(huart);
-  printf("HAL RX CALLED!!\n");
 
   /* NOTE : This function should not be modified, when the callback is needed,
             the HAL_UART_RxCpltCallback can be implemented in the user file.
