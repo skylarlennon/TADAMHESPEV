@@ -1,0 +1,10 @@
+16:02:56 **** Incremental Build of configuration Debug for project lcd_bluepill ****
+make -j12 all 
+arm-none-eabi-size   lcd_bluepill.elf 
+   text	   data	    bss	    dec	    hex	filename
+  13124	    124	   1748	  14996	   3a94	lcd_bluepill.elf
+Finished building: default.size.stdout
+ 
+
+16:02:56 Build Finished. 0 errors, 0 warnings. (took 555ms)
+

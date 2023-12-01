@@ -1,0 +1,11 @@
+../Core/Inc/TADAMHESPEVDataTemplate.h:19:13:TADBufferToStruct	1
+../Core/Src/main.c:86:5:main	4
+../Core/Src/main.c:163:6:SystemClock_Config	4
+../Core/Src/main.c:224:13:MX_RTC_Init	2
+../Core/Src/main.c:260:13:MX_SPI1_Init	2
+../Core/Src/main.c:300:13:MX_SPI3_Init	2
+../Core/Src/main.c:340:13:MX_USART1_UART_Init	2
+../Core/Src/main.c:375:13:MX_GPIO_Init	1
+../Core/Src/main.c:427:6:HAL_UART_RxCpltCallback	8
+../Core/Src/main.c:455:6:HAL_TIM_PeriodElapsedCallback	2
+../Core/Src/main.c:471:6:Error_Handler	1

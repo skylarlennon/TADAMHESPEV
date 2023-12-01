@@ -1,0 +1,212 @@
+2023-11-28 14:48:58,044 [INFO] NvicIntPanel:101 - NVIC parent = com.st.microxplorer.plugins.ip.nvic.MultiNvicIntPanel[,0,0,0x0,invalid,layout=javax.swing.BoxLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=,preferredSize=]
+2023-11-28 14:48:58,243 [INFO] NvicIntPanel:101 - NVIC parent = com.st.microxplorer.plugins.ip.nvic.MultiNvicIntPanel[,0,0,0x0,invalid,layout=javax.swing.BoxLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=,preferredSize=]
+2023-11-28 14:49:52,443 [INFO] UtilMem:75 - End SaveConfig() Used Memory: 863913848 Bytes (1073741824)
+2023-11-28 14:49:53,672 [INFO] UtilMem:75 - End SaveConfig() Used Memory: 942394992 Bytes (1073741824)
+2023-11-28 14:49:55,564 [INFO] UtilMem:75 - End SaveConfig() Used Memory: 687519496 Bytes (1073741824)
+2023-11-28 14:49:55,829 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: SPI
+2023-11-28 14:49:55,829 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: SYS
+2023-11-28 14:49:55,829 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: RCC
+2023-11-28 14:49:55,829 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: RTC
+2023-11-28 14:49:55,829 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: NVIC
+2023-11-28 14:49:55,829 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: TIM1_8L4
+2023-11-28 14:49:55,829 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: TIM1_8L4
+2023-11-28 14:49:55,830 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: GPIO
+2023-11-28 14:49:55,832 [INFO] CodeGenerator:799 - code generatio: config db path: C:\ST\STM32CubeIDE_1.13.1\STM32CubeIDE\plugins\com.st.stm32cube.common.mx_6.9.2.202309101412\\db\
+2023-11-28 14:49:56,187 [INFO] CodeEngine:255 - oldGeneratedFile, C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\MXTmpFiles\license.tmp_save
+2023-11-28 14:49:56,394 [INFO] CodeEngine:279 - Generated code: C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\MXTmpFiles\license.tmp
+2023-11-28 14:49:56,509 [INFO] CodeEngine:255 - oldGeneratedFile, C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\MXTmpFiles\gpio.tmp_save
+2023-11-28 14:49:56,721 [INFO] CodeEngine:279 - Generated code: C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\MXTmpFiles\gpio.tmp
+2023-11-28 14:49:57,224 [INFO] CodeEngine:255 - oldGeneratedFile, C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\Core\Src\stm32l4xx_it.c_save
+2023-11-28 14:49:57,688 [INFO] CodeEngine:279 - Generated code: C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\Core\Src\stm32l4xx_it.c
+2023-11-28 14:49:57,727 [INFO] CodeEngine:255 - oldGeneratedFile, C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\Core\Inc\stm32l4xx_it.h_save
+2023-11-28 14:49:57,879 [INFO] CodeEngine:279 - Generated code: C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\Core\Inc\stm32l4xx_it.h
+2023-11-28 14:49:57,940 [INFO] CodeEngine:255 - oldGeneratedFile, C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\Core\Src\stm32l4xx_hal_msp.c_save
+2023-11-28 14:49:58,154 [INFO] CodeEngine:279 - Generated code: C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\Core\Src\stm32l4xx_hal_msp.c
+2023-11-28 14:49:58,172 [INFO] CodeEngine:255 - oldGeneratedFile, C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\MXTmpFiles\system.tmp_save
+2023-11-28 14:49:58,292 [INFO] CodeEngine:279 - Generated code: C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\MXTmpFiles\system.tmp
+2023-11-28 14:49:58,326 [INFO] CodeEngine:255 - oldGeneratedFile, C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\Core\Src\stm32l4xx_hal_timebase_tim.c_save
+2023-11-28 14:49:58,460 [INFO] CodeEngine:279 - Generated code: C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\Core\Src\stm32l4xx_hal_timebase_tim.c
+2023-11-28 14:49:58,509 [INFO] CodeEngine:311 - oldGeneratedFile, C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\Core\Inc\stm32l4xx_hal_conf.h_save
+2023-11-28 14:49:58,674 [INFO] CodeEngine:335 - Generated code: C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\Core\Inc\stm32l4xx_hal_conf.h
+2023-11-28 14:49:58,717 [WARN] IPConfigManager:3431 - IP not found : TIM
+2023-11-28 14:49:58,723 [WARN] CodeGenerator:3764 - IP not found : null
+2023-11-28 14:49:58,768 [INFO] CodeEngine:255 - oldGeneratedFile, C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\Core\Inc\main.h_save
+2023-11-28 14:49:58,982 [INFO] CodeEngine:279 - Generated code: C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\Core\Inc\main.h
+2023-11-28 14:49:59,026 [INFO] CodeEngine:255 - oldGeneratedFile, C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\Core\Src\main.c_save
+2023-11-28 14:49:59,330 [INFO] CodeEngine:279 - Generated code: C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\Core\Src\main.c
+2023-11-28 14:50:00,431 [INFO] ProjectBuilder:3064 - Time for Copy HAL[1] : 478mS.
+2023-11-28 14:50:00,438 [INFO] ProjectBuilder:4404 - Project Generator version: 4.1.0
+2023-11-28 14:50:00,880 [INFO] ConfigFileManager:1457 - The Die is : DIE435
+2023-11-28 14:50:00,901 [INFO] ApiDbMcu:507 - Load IP Config File for FATFS
+2023-11-28 14:50:00,930 [INFO] ApiDbMcu:507 - Load IP Config File for FREERTOS
+2023-11-28 14:50:00,963 [INFO] ApiDbMcu:507 - Load IP Config File for TOUCHSENSING
+2023-11-28 14:50:00,987 [INFO] ApiDbMcu:507 - Load IP Config File for USB_DEVICE
+2023-11-28 14:50:03,843 [INFO] ProjectBuilder:4626 - Time for Generating toolchain IDE Files: 3405mS.
+2023-11-28 14:50:03,844 [INFO] ProjectBuilder:2935 - Time for Copy CMSIS : 1mS.
+2023-11-28 14:50:03,850 [INFO] ProjectBuilder:2935 - Time for Copy CMSIS : 0mS.
+2023-11-28 14:51:38,604 [INFO] NvicIntPanel:101 - NVIC parent = com.st.microxplorer.plugins.ip.nvic.MultiNvicIntPanel[,0,0,0x0,invalid,layout=javax.swing.BoxLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=,preferredSize=]
+2023-11-28 14:51:38,732 [INFO] NvicIntPanel:101 - NVIC parent = com.st.microxplorer.plugins.ip.nvic.MultiNvicIntPanel[,0,0,0x0,invalid,layout=javax.swing.BoxLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=,preferredSize=]
+2023-11-28 14:51:39,517 [INFO] UtilMem:75 - End SaveConfig() Used Memory: 697025656 Bytes (1073741824)
+2023-11-28 14:51:40,138 [INFO] UtilMem:75 - End SaveConfig() Used Memory: 712232056 Bytes (1073741824)
+2023-11-28 14:51:41,332 [INFO] UtilMem:75 - End SaveConfig() Used Memory: 795591800 Bytes (1073741824)
+2023-11-28 14:51:41,615 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: SPI
+2023-11-28 14:51:41,616 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: SYS
+2023-11-28 14:51:41,616 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: RCC
+2023-11-28 14:51:41,616 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: RTC
+2023-11-28 14:51:41,616 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: NVIC
+2023-11-28 14:51:41,616 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: TIM1_8L4
+2023-11-28 14:51:41,616 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: TIM1_8L4
+2023-11-28 14:51:41,616 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: GPIO
+2023-11-28 14:51:41,617 [INFO] CodeGenerator:799 - code generatio: config db path: C:\ST\STM32CubeIDE_1.13.1\STM32CubeIDE\plugins\com.st.stm32cube.common.mx_6.9.2.202309101412\\db\
+2023-11-28 14:51:41,876 [INFO] CodeEngine:255 - oldGeneratedFile, C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\MXTmpFiles\license.tmp_save
+2023-11-28 14:51:42,069 [INFO] CodeEngine:279 - Generated code: C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\MXTmpFiles\license.tmp
+2023-11-28 14:51:42,162 [INFO] CodeEngine:255 - oldGeneratedFile, C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\MXTmpFiles\gpio.tmp_save
+2023-11-28 14:51:42,304 [INFO] CodeEngine:279 - Generated code: C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\MXTmpFiles\gpio.tmp
+2023-11-28 14:51:42,654 [INFO] CodeEngine:255 - oldGeneratedFile, C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\Core\Src\stm32l4xx_it.c_save
+2023-11-28 14:51:42,817 [INFO] CodeEngine:279 - Generated code: C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\Core\Src\stm32l4xx_it.c
+2023-11-28 14:51:42,829 [INFO] CodeEngine:255 - oldGeneratedFile, C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\Core\Inc\stm32l4xx_it.h_save
+2023-11-28 14:51:42,969 [INFO] CodeEngine:279 - Generated code: C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\Core\Inc\stm32l4xx_it.h
+2023-11-28 14:51:43,023 [INFO] CodeEngine:255 - oldGeneratedFile, C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\Core\Src\stm32l4xx_hal_msp.c_save
+2023-11-28 14:51:43,241 [INFO] CodeEngine:279 - Generated code: C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\Core\Src\stm32l4xx_hal_msp.c
+2023-11-28 14:51:43,251 [INFO] CodeEngine:255 - oldGeneratedFile, C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\MXTmpFiles\system.tmp_save
+2023-11-28 14:51:43,348 [INFO] CodeEngine:279 - Generated code: C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\MXTmpFiles\system.tmp
+2023-11-28 14:51:43,371 [INFO] CodeEngine:255 - oldGeneratedFile, C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\Core\Src\stm32l4xx_hal_timebase_tim.c_save
+2023-11-28 14:51:43,507 [INFO] CodeEngine:279 - Generated code: C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\Core\Src\stm32l4xx_hal_timebase_tim.c
+2023-11-28 14:51:43,540 [INFO] CodeEngine:311 - oldGeneratedFile, C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\Core\Inc\stm32l4xx_hal_conf.h_save
+2023-11-28 14:51:43,694 [INFO] CodeEngine:335 - Generated code: C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\Core\Inc\stm32l4xx_hal_conf.h
+2023-11-28 14:51:43,734 [WARN] IPConfigManager:3431 - IP not found : TIM
+2023-11-28 14:51:43,735 [WARN] CodeGenerator:3764 - IP not found : null
+2023-11-28 14:51:43,775 [INFO] CodeEngine:255 - oldGeneratedFile, C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\Core\Inc\main.h_save
+2023-11-28 14:51:43,925 [INFO] CodeEngine:279 - Generated code: C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\Core\Inc\main.h
+2023-11-28 14:51:43,948 [INFO] CodeEngine:255 - oldGeneratedFile, C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\Core\Src\main.c_save
+2023-11-28 14:51:44,159 [INFO] CodeEngine:279 - Generated code: C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\Core\Src\main.c
+2023-11-28 14:51:45,219 [INFO] ProjectBuilder:3064 - Time for Copy HAL[1] : 407mS.
+2023-11-28 14:51:45,227 [INFO] ProjectBuilder:4404 - Project Generator version: 4.1.0
+2023-11-28 14:51:45,621 [INFO] ConfigFileManager:1457 - The Die is : DIE435
+2023-11-28 14:51:47,533 [INFO] ProjectBuilder:4626 - Time for Generating toolchain IDE Files: 2305mS.
+2023-11-28 14:51:47,534 [INFO] ProjectBuilder:2935 - Time for Copy CMSIS : 1mS.
+2023-11-28 14:51:47,540 [INFO] ProjectBuilder:2935 - Time for Copy CMSIS : 0mS.
+2023-11-28 14:55:14,168 [INFO] Gpio:273 - dependency for GPIO [RCC, SPI1]
+2023-11-28 14:55:43,941 [INFO] UtilMem:75 - End SaveConfig() Used Memory: 794349712 Bytes (1073741824)
+2023-11-28 14:55:59,498 [INFO] UtilMem:75 - End SaveConfig() Used Memory: 820675336 Bytes (1073741824)
+2023-11-28 14:56:00,984 [INFO] UtilMem:75 - End SaveConfig() Used Memory: 903923856 Bytes (1073741824)
+2023-11-28 14:56:01,332 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: SPI
+2023-11-28 14:56:01,332 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: SYS
+2023-11-28 14:56:01,332 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: RCC
+2023-11-28 14:56:01,332 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: RTC
+2023-11-28 14:56:01,332 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: NVIC
+2023-11-28 14:56:01,332 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: TIM1_8L4
+2023-11-28 14:56:01,332 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: TIM1_8L4
+2023-11-28 14:56:01,333 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: GPIO
+2023-11-28 14:56:01,335 [INFO] CodeGenerator:799 - code generatio: config db path: C:\ST\STM32CubeIDE_1.13.1\STM32CubeIDE\plugins\com.st.stm32cube.common.mx_6.9.2.202309101412\\db\
+2023-11-28 14:56:01,595 [INFO] CodeEngine:255 - oldGeneratedFile, C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\MXTmpFiles\license.tmp_save
+2023-11-28 14:56:01,754 [INFO] CodeEngine:279 - Generated code: C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\MXTmpFiles\license.tmp
+2023-11-28 14:56:01,902 [INFO] CodeEngine:255 - oldGeneratedFile, C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\MXTmpFiles\gpio.tmp_save
+2023-11-28 14:56:02,071 [INFO] CodeEngine:279 - Generated code: C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\MXTmpFiles\gpio.tmp
+2023-11-28 14:56:02,509 [INFO] CodeEngine:255 - oldGeneratedFile, C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\Core\Src\stm32l4xx_it.c_save
+2023-11-28 14:56:02,657 [INFO] CodeEngine:279 - Generated code: C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\Core\Src\stm32l4xx_it.c
+2023-11-28 14:56:02,668 [INFO] CodeEngine:255 - oldGeneratedFile, C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\Core\Inc\stm32l4xx_it.h_save
+2023-11-28 14:56:02,798 [INFO] CodeEngine:279 - Generated code: C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\Core\Inc\stm32l4xx_it.h
+2023-11-28 14:56:02,841 [INFO] CodeEngine:255 - oldGeneratedFile, C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\Core\Src\stm32l4xx_hal_msp.c_save
+2023-11-28 14:56:02,988 [INFO] CodeEngine:279 - Generated code: C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\Core\Src\stm32l4xx_hal_msp.c
+2023-11-28 14:56:02,997 [INFO] CodeEngine:255 - oldGeneratedFile, C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\MXTmpFiles\system.tmp_save
+2023-11-28 14:56:03,097 [INFO] CodeEngine:279 - Generated code: C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\MXTmpFiles\system.tmp
+2023-11-28 14:56:03,118 [INFO] CodeEngine:255 - oldGeneratedFile, C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\Core\Src\stm32l4xx_hal_timebase_tim.c_save
+2023-11-28 14:56:03,240 [INFO] CodeEngine:279 - Generated code: C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\Core\Src\stm32l4xx_hal_timebase_tim.c
+2023-11-28 14:56:03,275 [INFO] CodeEngine:311 - oldGeneratedFile, C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\Core\Inc\stm32l4xx_hal_conf.h_save
+2023-11-28 14:56:03,439 [INFO] CodeEngine:335 - Generated code: C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\Core\Inc\stm32l4xx_hal_conf.h
+2023-11-28 14:56:03,480 [WARN] IPConfigManager:3431 - IP not found : TIM
+2023-11-28 14:56:03,481 [WARN] CodeGenerator:3764 - IP not found : null
+2023-11-28 14:56:03,509 [INFO] CodeEngine:255 - oldGeneratedFile, C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\Core\Inc\main.h_save
+2023-11-28 14:56:03,638 [INFO] CodeEngine:279 - Generated code: C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\Core\Inc\main.h
+2023-11-28 14:56:03,669 [INFO] CodeEngine:255 - oldGeneratedFile, C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\Core\Src\main.c_save
+2023-11-28 14:56:03,881 [INFO] CodeEngine:279 - Generated code: C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\Core\Src\main.c
+2023-11-28 14:56:04,919 [INFO] ProjectBuilder:3064 - Time for Copy HAL[1] : 411mS.
+2023-11-28 14:56:04,927 [INFO] ProjectBuilder:4404 - Project Generator version: 4.1.0
+2023-11-28 14:56:05,304 [INFO] ConfigFileManager:1457 - The Die is : DIE435
+2023-11-28 14:56:07,559 [INFO] ProjectBuilder:4626 - Time for Generating toolchain IDE Files: 2632mS.
+2023-11-28 14:56:07,559 [INFO] ProjectBuilder:2935 - Time for Copy CMSIS : 0mS.
+2023-11-28 14:56:07,567 [INFO] ProjectBuilder:2935 - Time for Copy CMSIS : 1mS.
+2023-11-28 15:08:38,374 [INFO] NvicIntPanel:101 - NVIC parent = com.st.microxplorer.plugins.ip.nvic.MultiNvicIntPanel[,0,0,0x0,invalid,layout=javax.swing.BoxLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=,preferredSize=]
+2023-11-28 15:08:38,489 [INFO] NvicIntPanel:101 - NVIC parent = com.st.microxplorer.plugins.ip.nvic.MultiNvicIntPanel[,0,0,0x0,invalid,layout=javax.swing.BoxLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=,preferredSize=]
+2023-11-28 15:08:40,309 [INFO] UtilMem:75 - End SaveConfig() Used Memory: 815697328 Bytes (1073741824)
+2023-11-28 15:08:42,231 [INFO] UtilMem:75 - End SaveConfig() Used Memory: 830641512 Bytes (1073741824)
+2023-11-28 15:08:43,383 [INFO] UtilMem:75 - End SaveConfig() Used Memory: 913616752 Bytes (1073741824)
+2023-11-28 15:08:43,688 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: SPI
+2023-11-28 15:08:43,688 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: SYS
+2023-11-28 15:08:43,688 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: RCC
+2023-11-28 15:08:43,689 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: RTC
+2023-11-28 15:08:43,689 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: NVIC
+2023-11-28 15:08:43,689 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: TIM1_8L4
+2023-11-28 15:08:43,689 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: TIM1_8L4
+2023-11-28 15:08:43,689 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: GPIO
+2023-11-28 15:08:43,691 [INFO] CodeGenerator:799 - code generatio: config db path: C:\ST\STM32CubeIDE_1.13.1\STM32CubeIDE\plugins\com.st.stm32cube.common.mx_6.9.2.202309101412\\db\
+2023-11-28 15:08:43,914 [INFO] CodeEngine:255 - oldGeneratedFile, C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\MXTmpFiles\license.tmp_save
+2023-11-28 15:08:44,093 [INFO] CodeEngine:279 - Generated code: C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\MXTmpFiles\license.tmp
+2023-11-28 15:08:44,176 [INFO] CodeEngine:255 - oldGeneratedFile, C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\MXTmpFiles\gpio.tmp_save
+2023-11-28 15:08:44,343 [INFO] CodeEngine:279 - Generated code: C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\MXTmpFiles\gpio.tmp
+2023-11-28 15:08:44,726 [INFO] CodeEngine:255 - oldGeneratedFile, C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\Core\Src\stm32l4xx_it.c_save
+2023-11-28 15:08:45,032 [INFO] CodeEngine:279 - Generated code: C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\Core\Src\stm32l4xx_it.c
+2023-11-28 15:08:45,047 [INFO] CodeEngine:255 - oldGeneratedFile, C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\Core\Inc\stm32l4xx_it.h_save
+2023-11-28 15:08:45,169 [INFO] CodeEngine:279 - Generated code: C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\Core\Inc\stm32l4xx_it.h
+2023-11-28 15:08:45,212 [INFO] CodeEngine:255 - oldGeneratedFile, C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\Core\Src\stm32l4xx_hal_msp.c_save
+2023-11-28 15:08:45,428 [INFO] CodeEngine:279 - Generated code: C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\Core\Src\stm32l4xx_hal_msp.c
+2023-11-28 15:08:45,437 [INFO] CodeEngine:255 - oldGeneratedFile, C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\MXTmpFiles\system.tmp_save
+2023-11-28 15:08:45,548 [INFO] CodeEngine:279 - Generated code: C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\MXTmpFiles\system.tmp
+2023-11-28 15:08:45,573 [INFO] CodeEngine:255 - oldGeneratedFile, C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\Core\Src\stm32l4xx_hal_timebase_tim.c_save
+2023-11-28 15:08:45,696 [INFO] CodeEngine:279 - Generated code: C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\Core\Src\stm32l4xx_hal_timebase_tim.c
+2023-11-28 15:08:45,732 [INFO] CodeEngine:311 - oldGeneratedFile, C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\Core\Inc\stm32l4xx_hal_conf.h_save
+2023-11-28 15:08:45,906 [INFO] CodeEngine:335 - Generated code: C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\Core\Inc\stm32l4xx_hal_conf.h
+2023-11-28 15:08:45,966 [WARN] IPConfigManager:3431 - IP not found : TIM
+2023-11-28 15:08:45,967 [WARN] CodeGenerator:3764 - IP not found : null
+2023-11-28 15:08:45,998 [INFO] CodeEngine:255 - oldGeneratedFile, C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\Core\Inc\main.h_save
+2023-11-28 15:08:46,177 [INFO] CodeEngine:279 - Generated code: C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\Core\Inc\main.h
+2023-11-28 15:08:46,202 [INFO] CodeEngine:255 - oldGeneratedFile, C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\Core\Src\main.c_save
+2023-11-28 15:08:46,417 [INFO] CodeEngine:279 - Generated code: C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\Core\Src\main.c
+2023-11-28 15:08:47,348 [INFO] ProjectBuilder:3064 - Time for Copy HAL[1] : 364mS.
+2023-11-28 15:08:47,354 [INFO] ProjectBuilder:4404 - Project Generator version: 4.1.0
+2023-11-28 15:08:47,718 [INFO] ConfigFileManager:1457 - The Die is : DIE435
+2023-11-28 15:08:49,550 [INFO] ProjectBuilder:4626 - Time for Generating toolchain IDE Files: 2196mS.
+2023-11-28 15:08:49,552 [INFO] ProjectBuilder:2935 - Time for Copy CMSIS : 1mS.
+2023-11-28 15:08:49,559 [INFO] ProjectBuilder:2935 - Time for Copy CMSIS : 1mS.
+2023-11-28 15:15:28,679 [INFO] NvicIntPanel:101 - NVIC parent = com.st.microxplorer.plugins.ip.nvic.MultiNvicIntPanel[,0,0,0x0,invalid,layout=javax.swing.BoxLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=,preferredSize=]
+2023-11-28 15:15:28,809 [INFO] NvicIntPanel:101 - NVIC parent = com.st.microxplorer.plugins.ip.nvic.MultiNvicIntPanel[,0,0,0x0,invalid,layout=javax.swing.BoxLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=,preferredSize=]
+2023-11-28 15:15:44,840 [INFO] UtilMem:75 - End SaveConfig() Used Memory: 870329656 Bytes (1073741824)
+2023-11-28 15:15:47,440 [INFO] UtilMem:75 - End SaveConfig() Used Memory: 969725008 Bytes (1073741824)
+2023-11-28 15:15:47,706 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: SPI
+2023-11-28 15:15:47,706 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: SYS
+2023-11-28 15:15:47,706 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: RCC
+2023-11-28 15:15:47,706 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: RTC
+2023-11-28 15:15:47,706 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: NVIC
+2023-11-28 15:15:47,706 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: TIM1_8L4
+2023-11-28 15:15:47,706 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: TIM1_8L4
+2023-11-28 15:15:47,706 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: GPIO
+2023-11-28 15:15:47,706 [INFO] CodeGenerator:799 - code generatio: config db path: C:\ST\STM32CubeIDE_1.13.1\STM32CubeIDE\plugins\com.st.stm32cube.common.mx_6.9.2.202309101412\\db\
+2023-11-28 15:15:47,918 [INFO] CodeEngine:255 - oldGeneratedFile, C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\MXTmpFiles\license.tmp_save
+2023-11-28 15:15:48,085 [INFO] CodeEngine:279 - Generated code: C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\MXTmpFiles\license.tmp
+2023-11-28 15:15:48,160 [INFO] CodeEngine:255 - oldGeneratedFile, C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\MXTmpFiles\gpio.tmp_save
+2023-11-28 15:15:48,376 [INFO] CodeEngine:279 - Generated code: C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\MXTmpFiles\gpio.tmp
+2023-11-28 15:15:48,738 [INFO] CodeEngine:255 - oldGeneratedFile, C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\Core\Src\stm32l4xx_it.c_save
+2023-11-28 15:15:49,078 [INFO] CodeEngine:279 - Generated code: C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\Core\Src\stm32l4xx_it.c
+2023-11-28 15:15:49,094 [INFO] CodeEngine:255 - oldGeneratedFile, C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\Core\Inc\stm32l4xx_it.h_save
+2023-11-28 15:15:49,220 [INFO] CodeEngine:279 - Generated code: C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\Core\Inc\stm32l4xx_it.h
+2023-11-28 15:15:49,257 [INFO] CodeEngine:255 - oldGeneratedFile, C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\Core\Src\stm32l4xx_hal_msp.c_save
+2023-11-28 15:15:49,437 [INFO] CodeEngine:279 - Generated code: C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\Core\Src\stm32l4xx_hal_msp.c
+2023-11-28 15:15:49,447 [INFO] CodeEngine:255 - oldGeneratedFile, C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\MXTmpFiles\system.tmp_save
+2023-11-28 15:15:49,549 [INFO] CodeEngine:279 - Generated code: C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\MXTmpFiles\system.tmp
+2023-11-28 15:15:49,573 [INFO] CodeEngine:255 - oldGeneratedFile, C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\Core\Src\stm32l4xx_hal_timebase_tim.c_save
+2023-11-28 15:15:49,693 [INFO] CodeEngine:279 - Generated code: C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\Core\Src\stm32l4xx_hal_timebase_tim.c
+2023-11-28 15:15:49,728 [INFO] CodeEngine:311 - oldGeneratedFile, C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\Core\Inc\stm32l4xx_hal_conf.h_save
+2023-11-28 15:15:49,888 [INFO] CodeEngine:335 - Generated code: C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\Core\Inc\stm32l4xx_hal_conf.h
+2023-11-28 15:15:49,926 [WARN] IPConfigManager:3431 - IP not found : TIM
+2023-11-28 15:15:49,927 [WARN] CodeGenerator:3764 - IP not found : null
+2023-11-28 15:15:49,953 [INFO] CodeEngine:255 - oldGeneratedFile, C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\Core\Inc\main.h_save
+2023-11-28 15:15:50,113 [INFO] CodeEngine:279 - Generated code: C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\Core\Inc\main.h
+2023-11-28 15:15:50,139 [INFO] CodeEngine:255 - oldGeneratedFile, C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\Core\Src\main.c_save
+2023-11-28 15:15:50,345 [INFO] CodeEngine:279 - Generated code: C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\Core\Src\main.c
+2023-11-28 15:15:51,325 [INFO] ProjectBuilder:3064 - Time for Copy HAL[1] : 405mS.
+2023-11-28 15:15:51,332 [INFO] ProjectBuilder:4404 - Project Generator version: 4.1.0
+2023-11-28 15:15:51,731 [INFO] ConfigFileManager:1457 - The Die is : DIE435
+2023-11-28 15:15:53,670 [INFO] ProjectBuilder:4626 - Time for Generating toolchain IDE Files: 2338mS.
+2023-11-28 15:15:53,672 [INFO] ProjectBuilder:2935 - Time for Copy CMSIS : 1mS.
+2023-11-28 15:15:53,678 [INFO] ProjectBuilder:2935 - Time for Copy CMSIS : 1mS.
