@@ -1,10 +1,10 @@
-15:07:20 **** Incremental Build of configuration Debug for project lcd_smol ****
+21:43:36 **** Incremental Build of configuration Debug for project lcd_smol ****
 make -j12 all 
 arm-none-eabi-size   lcd_smol.elf 
    text	   data	    bss	    dec	    hex	filename
-  43248	    600	   2560	  46408	   b548	lcd_smol.elf
+  42536	    584	   2344	  45464	   b198	lcd_smol.elf
 Finished building: default.size.stdout
  
 
-15:07:21 Build Finished. 0 errors, 0 warnings. (took 627ms)
+21:43:36 Build Finished. 0 errors, 0 warnings. (took 255ms)
 
