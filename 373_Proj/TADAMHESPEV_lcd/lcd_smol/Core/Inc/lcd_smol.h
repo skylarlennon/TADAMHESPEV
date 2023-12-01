@@ -148,7 +148,7 @@ void LCD_drawFrame(SPI_HandleTypeDef* spi);
 void LCD_fillBattery(SPI_HandleTypeDef* spi, int16_t x, int16_t y, uint32_t size, int level);
 void LCD_updateVals(SPI_HandleTypeDef* spi, struct TelData data);//float buf[]);
 //void LCD_warnings(SPI_HandleTypeDef* spi, int temp, int level, int *Twarning, int *Vwarning);
-void LCD_warnings(SPI_HandleTypeDef* spi, int temp, int level, int *warning);
+void LCD_warnings(SPI_HandleTypeDef* spi, int temp, int level, int *warning, int *tempWarn, int *voltWarn);
 void LCD_updateBattery(SPI_HandleTypeDef* spi, int level);
 void LCD_TADAMHASPEV(SPI_HandleTypeDef* spi);
 

@@ -45,17 +45,13 @@
 RTC_HandleTypeDef hrtc;
 
 SPI_HandleTypeDef hspi1;
+SPI_HandleTypeDef hspi3;
 
 UART_HandleTypeDef huart1;
 
 /* USER CODE BEGIN PV */
 uint8_t buf[20];
-float buf2[5] = {2.0, 4.0, 6.0, 8.0, 10.0};
-int test[5];
-//int Twarning = 0;
-//int Vwarning = 0;
 int warning = 0;
-float voltage = 46;
 int volt_percent = 46*10 - 440;
 int refresh = 0;
 int batRefresh = 0;
@@ -73,13 +69,14 @@ static void MX_GPIO_Init(void);
 static void MX_RTC_Init(void);
 static void MX_SPI1_Init(void);
 static void MX_USART1_UART_Init(void);
+static void MX_SPI3_Init(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-
+int ignoreData = 0;
 /* USER CODE END 0 */
 
 /**
@@ -113,39 +110,46 @@ int main(void)
   MX_RTC_Init();
   MX_SPI1_Init();
   MX_USART1_UART_Init();
+  MX_SPI3_Init();
   /* USER CODE BEGIN 2 */
 	LCD_TADAMHASPEV(&hspi1);
-//	spiRecieveCode = HAL_UART_Transmit(&huart1, (uint8_t*) &buf2, sizeof(buf2),0xFFFF);
+	int tempWarn = 0;
+	int voltWarn = 0;
+//	HAL_Delay(3500);
 	spiRecieveCode = HAL_UART_Receive_IT(&huart1, (uint8_t*) &buf, sizeof(buf));
-//	spiRecieveCode = HAL_UART_Receive_IT(&huart1, (uint8_t*) &test, sizeof(test));
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
 	while (1) {
-		//HAL_SPI_Receive(&hspi3, (uint8_t*) &buf, sizeof(buf), 10);
-//		if ( //check if values changed
-//			buf[0] != data.accel || buf[1] != data.temp || buf[2] != data.speed
-//					|| buf[3] != data.voltage || buf[4] != data.current) {
-//				TADBufferToStruct(buf, &data);
-//				refresh = 1;
-//				if (buf[3] != data.voltage)
-//					batRefresh = 1; //only refresh battery when voltage changes
-//			}
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
 		//buf[0] accel, buf[1] temp, buf[2] speed, buf[3] voltage, buf[4] current
+//		int delay = 0;
+		if (huart1.ErrorCode == 8) {
+			HAL_UART_Receive_IT(&huart1, (uint8_t*) &buf,
+								sizeof(buf));
+			ignoreData = 1;
+
+		}
 		if (refresh == 1) {
 			LCD_updateVals(&hspi1, data);
 			refresh = 0;
-//			HAL_UART_Transmit(&huart1, (uint8_t*) &buf, sizeof(buf), 10);
-		}
-		if (batRefresh == 1) {
-			volt_percent = (int) (data.voltage * 10 - 440);
-			LCD_updateBattery(&hspi1, volt_percent);
-			LCD_warnings(&hspi1, buf[1], volt_percent, &warning);
-			batRefresh = 0;
+
+			if (batRefresh == 1) {
+				volt_percent = (int) (data.voltage * 10 - 440);
+				LCD_updateBattery(&hspi1, volt_percent);
+				LCD_warnings(&hspi1, data.temp, volt_percent, &warning, &tempWarn, &voltWarn);
+				batRefresh = 0;
+//				delay = 1;
+			}
+//			if(delay ==1) {
+//				HAL_Delay(500);
+//				delay = 0;
+//			}
+			spiRecieveCode = HAL_UART_Receive_IT(&huart1, (uint8_t*) &buf,
+					sizeof(buf));
 		}
 
 	}
@@ -289,6 +293,46 @@ static void MX_SPI1_Init(void)
 }
 
 /**
+  * @brief SPI3 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_SPI3_Init(void)
+{
+
+  /* USER CODE BEGIN SPI3_Init 0 */
+
+  /* USER CODE END SPI3_Init 0 */
+
+  /* USER CODE BEGIN SPI3_Init 1 */
+
+  /* USER CODE END SPI3_Init 1 */
+  /* SPI3 parameter configuration*/
+  hspi3.Instance = SPI3;
+  hspi3.Init.Mode = SPI_MODE_MASTER;
+  hspi3.Init.Direction = SPI_DIRECTION_2LINES;
+  hspi3.Init.DataSize = SPI_DATASIZE_8BIT;
+  hspi3.Init.CLKPolarity = SPI_POLARITY_LOW;
+  hspi3.Init.CLKPhase = SPI_PHASE_1EDGE;
+  hspi3.Init.NSS = SPI_NSS_SOFT;
+  hspi3.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_4;
+  hspi3.Init.FirstBit = SPI_FIRSTBIT_MSB;
+  hspi3.Init.TIMode = SPI_TIMODE_DISABLE;
+  hspi3.Init.CRCCalculation = SPI_CRCCALCULATION_DISABLE;
+  hspi3.Init.CRCPolynomial = 7;
+  hspi3.Init.CRCLength = SPI_CRC_LENGTH_DATASIZE;
+  hspi3.Init.NSSPMode = SPI_NSS_PULSE_ENABLE;
+  if (HAL_SPI_Init(&hspi3) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN SPI3_Init 2 */
+
+  /* USER CODE END SPI3_Init 2 */
+
+}
+
+/**
   * @brief USART1 Initialization Function
   * @param None
   * @retval None
@@ -304,7 +348,7 @@ static void MX_USART1_UART_Init(void)
 
   /* USER CODE END USART1_Init 1 */
   huart1.Instance = USART1;
-  huart1.Init.BaudRate = 2400;
+  huart1.Init.BaudRate = 9600;
   huart1.Init.WordLength = UART_WORDLENGTH_8B;
   huart1.Init.StopBits = UART_STOPBITS_1;
   huart1.Init.Parity = UART_PARITY_NONE;
@@ -381,28 +425,21 @@ static void MX_GPIO_Init(void)
 
 /* USER CODE BEGIN 4 */
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
-	//refresh = 1;
+	float* fbuf = buf;
 	if ( //check if values changed
-	buf[0] != data.accel || buf[1] != data.temp || buf[2] != data.speed
-			|| buf[3] != data.voltage || buf[4] != data.current) {
-//		data.accel = buf[0];
-//		data.temp = buf[1];
-//		data.speed = buf[2];
-//		data.voltage = buf[3];
-//		data.current = buf[4];
+	ignoreData == 0 && (fbuf[0] != data.accel || fbuf[1] != data.temp || fbuf[2] != data.speed
+			|| fbuf[3] != data.voltage || fbuf[4] != data.current)  ) {
+		if (data.voltage != fbuf[3]) batRefresh = 1; //only refresh battery when voltage changes
 		TADBufferToStruct((float*)buf, &data);
 		refresh = 1;
-		if (numRefresh % 10 == 0)
-			batRefresh = 1; //only refresh battery when voltage changes
 	}
-//	HAL_UART_Transmit(&huart1, (uint8_t*) &buf, sizeof(buf),10);
-	spiRecieveCode = HAL_UART_Receive_IT(&huart1, (uint8_t*) &buf, sizeof(buf));
+	else{
+		ignoreData = 0;
+		spiRecieveCode = HAL_UART_Receive_IT(&huart1, (uint8_t*) &buf, sizeof(buf));
+
+	}
+	//spiRecieveCode = HAL_UART_Receive_IT(&huart1, (uint8_t*) &buf, sizeof(buf));
 	numRefresh++;
-//	float test;
-//	for(float* f= buf; f<f+5;++f){
-//		 test = *f;
-//	}
-//	spiRecieveCode = HAL_UART_Receive_IT(&huart1, (uint8_t*) &test, sizeof(test));
 }
 
 /* USER CODE END 4 */
@@ -424,23 +461,6 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
     HAL_IncTick();
   }
   /* USER CODE BEGIN Callback 1 */
-//  if (htim->Instance == TIM15) {
-//	  buf[3]-=1;
-//	  HAL_GPIO_TogglePin(GPIOA,GPIO_PIN_1);
-//	  LCD_updateVals(&hspi1,buf);
-//	  HAL_GPIO_TogglePin(GPIOA,GPIO_PIN_1);
-//  }
-//  if (htim->Instance == TIM16) {
-//	  voltage += 0.5;
-//	  volt_percent = (int)(voltage*10 - 440);
-//	  HAL_GPIO_TogglePin(GPIOA,GPIO_PIN_3);
-//	  LCD_updateBattery(&hspi1,volt_percent);
-//	  HAL_GPIO_TogglePin(GPIOA,GPIO_PIN_3);
-//	  HAL_GPIO_TogglePin(GPIOA,GPIO_PIN_3);
-////	  LCD_warnings(&hspi1, (buf[2] << 4) | buf[3],volt_percent,&Twarning,&Vwarning);
-//	  LCD_warnings(&hspi1, (buf[2] << 4) | buf[3],volt_percent,&warning);
-//	  HAL_GPIO_TogglePin(GPIOA,GPIO_PIN_3);
-//  }
   /* USER CODE END Callback 1 */
 }
 
