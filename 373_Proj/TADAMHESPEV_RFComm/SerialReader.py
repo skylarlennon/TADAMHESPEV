@@ -31,7 +31,7 @@ class SerialReader:
         if self._port == SerialReader.SIM_PORT:
             self.ser = FakeSerial(timeout=self.messageTimeDelta/1000)
         else:
-            self.ser = serial.Serial(port, baud, timeout=self.messageTimeDelta/1000)
+            self.ser = serial.Serial(self._port, self._baud, timeout=self.messageTimeDelta/1000)
         
     def AddRecieveCallback(self, callback):
         self._recieveCallbacks.append(callback)

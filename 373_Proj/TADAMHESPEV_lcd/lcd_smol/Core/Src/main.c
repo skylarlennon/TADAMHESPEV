@@ -18,12 +18,17 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "fatfs.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "lcd_smol.h"
 #include <stdlib.h>
 #include "TADAMHESPEVDataTemplate.h"
+
+#include "fatfs_sd.h"
+#include "string.h"
+#include "stdio.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -60,6 +65,16 @@ HAL_StatusTypeDef spiRecieveCode;
 
 struct TelData data; //global data struct
 void TADBufferToStruct(float*, struct TelData*);
+
+//SD STUFF
+SPI_HandleTypeDef hspi3;
+FATFS fs;
+FATFS *pfs;
+FIL fil;
+FRESULT fres;
+DWORD fre_clust;
+uint32_t totalSpace, freeSpace;
+char buffer[100];
 
 /* USER CODE END PV */
 
@@ -111,12 +126,122 @@ int main(void)
   MX_SPI1_Init();
   MX_USART1_UART_Init();
   MX_SPI3_Init();
+  MX_FATFS_Init();
   /* USER CODE BEGIN 2 */
 	LCD_TADAMHASPEV(&hspi1);
 	int tempWarn = 0;
 	int voltWarn = 0;
 //	HAL_Delay(3500);
 	spiRecieveCode = HAL_UART_Receive_IT(&huart1, (uint8_t*) &buf, sizeof(buf));
+
+	HAL_Delay(500);
+	//BEGIN SD TEST
+//	fres = f_mount(&fs, "", 1);
+//	if (fres == FR_OK) {
+//		printf("Micro SD card is mounted successfully!\n");
+//	} else if (fres != FR_OK) {
+//		printf("Micro SD card's mount error!\n");
+//	}
+//
+//	// FA_OPEN_APPEND opens file if it exists and if not then creates it,
+//	// the pointer is set at the end of the file for appending
+//	fres = f_open(&fil, "log-file.txt", FA_OPEN_APPEND | FA_WRITE | FA_READ);
+//	if (fres == FR_OK) {
+//		printf("File opened for reading and checking the free space.\n");
+//	} else if (fres != FR_OK) {
+//		printf(
+//				"File was not opened for reading and checking the free space!\n");
+//	}
+//
+//	fres = f_getfree("", &fre_clust, &pfs);
+//	totalSpace = (uint32_t) ((pfs->n_fatent - 2) * pfs->csize * 0.5);
+//	freeSpace = (uint32_t) (fre_clust * pfs->csize * 0.5);
+//	char mSz[12];
+//	sprintf(mSz, "%lu", freeSpace);
+//	if (fres == FR_OK) {
+//		printf("The free space is: ");
+//		printf(mSz);
+//		printf("\n");
+//	} else if (fres != FR_OK) {
+//		printf("The free space could not be determined!\n");
+//	}
+//	printf("writing to file\n");
+//	for (uint8_t i = 0; i < 10; i++) {
+//		f_puts("This text is written in the file.\n", &fil);
+//	}
+//
+//	fres = f_close(&fil);
+//	if (fres == FR_OK) {
+//		printf("The file is closed.\n");
+//	} else if (fres != FR_OK) {
+//		printf("The file was not closed.\n");
+//	}
+//
+//	/* Open file to read */
+//	fres = f_open(&fil, "log-file.txt", FA_READ);
+//	if (fres == FR_OK) {
+//		printf("File opened for reading.\n");
+//	} else if (fres != FR_OK) {
+//		printf("File was not opened for reading!\n");
+//	}
+//
+//	while (f_gets(buffer, sizeof(buffer), &fil)) {
+//		char mRd[100];
+//		sprintf(mRd, "%s", buffer);
+//		printf(mRd);
+//
+//	}
+//
+//	/* Close file */
+//	fres = f_close(&fil);
+//	if (fres == FR_OK) {
+//		printf("The file is closed.\n");
+//	} else if (fres != FR_OK) {
+//		printf("The file was not closed.\n");
+//	}
+//
+//	f_mount(NULL, "", 1);
+//	if (fres == FR_OK) {
+//		printf("The Micro SD card is unmounted!\n");
+//	} else if (fres != FR_OK) {
+//		printf("The Micro SD was not unmounted!");
+//	}
+
+	fres = f_mount(&fs, "", 1);
+	if (fres == FR_OK) {
+		printf("Micro SD card is mounted successfully!\n");
+	} else if (fres != FR_OK) {
+		printf("Micro SD card's mount error!\n");
+	}
+
+	fres = f_open(&fil, "BEN-file.txt", FA_OPEN_APPEND | FA_WRITE | FA_READ);
+	if (fres == FR_OK) {
+		printf("File opened for reading and checking the free space.\n");
+	} else if (fres != FR_OK) {
+		printf(
+				"File was not opened for reading and checking the free space!\n");
+	}
+
+	printf("writing to file\n");
+	for (uint8_t i = 0; i < 10; i++) {
+		f_puts(" OH YEAH This text is written in the file.\n", &fil);
+	}
+	/* Close file */
+	fres = f_close(&fil);
+	if (fres == FR_OK) {
+		printf("The file is closed.\n");
+	} else if (fres != FR_OK) {
+		printf("The file was not closed.\n");
+	}
+	f_mount(NULL, "", 1);
+	if (fres == FR_OK) {
+		printf("The Micro SD card is unmounted!\n");
+	} else if (fres != FR_OK) {
+		printf("The Micro SD was not unmounted!");
+	}
+	//END SD TEST
+
+	while(1);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -315,7 +440,7 @@ static void MX_SPI3_Init(void)
   hspi3.Init.CLKPolarity = SPI_POLARITY_LOW;
   hspi3.Init.CLKPhase = SPI_PHASE_1EDGE;
   hspi3.Init.NSS = SPI_NSS_SOFT;
-  hspi3.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_4;
+  hspi3.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_32;
   hspi3.Init.FirstBit = SPI_FIRSTBIT_MSB;
   hspi3.Init.TIMode = SPI_TIMODE_DISABLE;
   hspi3.Init.CRCCalculation = SPI_CRCCALCULATION_DISABLE;
@@ -387,6 +512,9 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1|GPIO_PIN_3, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_8, GPIO_PIN_SET);
+
+  /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOB, GPIO_PIN_6, GPIO_PIN_RESET);
 
   /*Configure GPIO pins : PA1 PA3 */
@@ -403,6 +531,13 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
   GPIO_InitStruct.Alternate = GPIO_AF7_USART2;
   HAL_GPIO_Init(VCP_TX_GPIO_Port, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : PA8 */
+  GPIO_InitStruct.Pin = GPIO_PIN_8;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_MEDIUM;
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
   /*Configure GPIO pin : VCP_RX_Pin */
   GPIO_InitStruct.Pin = VCP_RX_Pin;

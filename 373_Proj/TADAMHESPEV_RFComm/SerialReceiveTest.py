@@ -1,7 +1,8 @@
 import serial, time
 from datetime import datetime, timedelta
-import argparse
+import argparse, struct
 from SerialReader import SerialReader
+from TADAMHESPEVPacket import TADAMHESPEVPacket
 parser = argparse.ArgumentParser(description="Serial Test")
 parser.add_argument("-p", "--port")
 
@@ -24,8 +25,14 @@ while True:
     message.extend(s)
 """
 
-def MessageRecieved(message):
+
+    
+
+
+def MessageRecieved(message: bytearray):
     print("MESSAGE RECIEVED: {}".format(message))
+    packet = TADAMHESPEVPacket(message)
+    print("in other words", str(packet), '\n\n')
 
 reader = SerialReader(args.port)
 reader.AddRecieveCallback(MessageRecieved)

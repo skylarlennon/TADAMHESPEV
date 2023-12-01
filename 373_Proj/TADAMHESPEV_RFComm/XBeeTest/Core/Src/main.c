@@ -22,6 +22,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "stdio.h"
+#include "TADAMHESPEVDataTemplate.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -96,22 +97,32 @@ int main(void)
   printf("setting up recieve\n");
   HAL_UART_Receive_IT(&huart4, Rx_data, 4);
   //HAL_UART_Receive_IT(&huart4, Rx_data+(index++ % 15), 1);
+  int index = 0;
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  uint8_t Test[] = "Hello World !!!\r\n"; //Data to send
-	  //printf("sending message\n");
-	  HAL_UART_Transmit(&huart4,Test,sizeof(Test),10);// Sending in normal mode
-	  /*HAL_UART_Receive(&huart4, Rx_data, sizeof(Rx_data), 10);*/
-	  printf("data buffer: ");
-	  for(int i = 0; i < 15; ++i){
-	    			printf("%d ", Rx_data[i]);
-	    			//Rx_data[i] = 0; //reset for debug
-	    		}
-	   printf("\n");
+//	  uint8_t Test[] = "Hello World !!!\r\n"; //Data to send
+//	  //printf("sending message\n");
+//	  HAL_UART_Transmit(&huart4,Test,sizeof(Test),10);// Sending in normal mode
+//	  /*HAL_UART_Receive(&huart4, Rx_data, sizeof(Rx_data), 10);*/
+//	  printf("data buffer: ");
+//	  for(int i = 0; i < 15; ++i){
+//	    			printf("%d ", Rx_data[i]);
+//	    			//Rx_data[i] = 0; //reset for debug
+//	    		}
+//	   printf("\n");
+	  float buff[3][5] = {
+	  	  			{ 2.5, 52.7897, 6.12314, 46.352542, 6.0 }, //no warning
+				{ 1, 65.7897, 43.7897, 45.1232, 5 }, //BOTH
+				{ 2.5, 43.7897, 6.12314, 51.241, 6.0 } //temp warning
+		};
+		//HAL_Delay();
+		//HAL_UART_Transmit(&huart4, (uint8_t*) &(buff[++index%3]), 20, 100);
+	  HAL_UART_Transmit(&huart4, (uint8_t*) &(buff[0]), 20, 100);
+
 	  HAL_Delay(1000);
     /* USER CODE END WHILE */
 
