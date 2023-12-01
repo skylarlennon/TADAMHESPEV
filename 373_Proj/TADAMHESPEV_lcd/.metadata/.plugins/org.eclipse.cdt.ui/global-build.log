@@ -42466,3 +42466,1326 @@ arm-none-eabi-size   lcd_smol.elf
   42536	    584	   2344	  45464	   b198	lcd_smol.elf
 Finished building: default.size.stdout
  
+13:21:22 **** Incremental Build of configuration Debug for project lcd_smol ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/lcd_smol.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L432xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/lcd_smol.d" -MT"Core/Src/lcd_smol.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/lcd_smol.o"
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L432xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/stm32l4xx_hal_msp.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L432xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/stm32l4xx_hal_msp.d" -MT"Core/Src/stm32l4xx_hal_msp.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/stm32l4xx_hal_msp.o"
+../Core/Src/lcd_smol.c: In function 'LCD_updateVals':
+../Core/Src/lcd_smol.c:900:9: warning: implicit declaration of function 'sprintf' [-Wimplicit-function-declaration]
+  900 |         sprintf(tempString,"%f", data.temp);//buf[1]);
+      |         ^~~~~~~
+../Core/Src/lcd_smol.c:11:1: note: include '<stdio.h>' or provide a declaration of 'sprintf'
+   10 | #include <stdlib.h>
+  +++ |+#include <stdio.h>
+   11 | 
+../Core/Src/lcd_smol.c:900:9: warning: incompatible implicit declaration of built-in function 'sprintf' [-Wbuiltin-declaration-mismatch]
+  900 |         sprintf(tempString,"%f", data.temp);//buf[1]);
+      |         ^~~~~~~
+../Core/Src/lcd_smol.c:900:9: note: include '<stdio.h>' or provide a declaration of 'sprintf'
+../Core/Src/lcd_smol.c:901:42: warning: pointer targets in passing argument 4 of 'LCD_drawString' differ in signedness [-Wpointer-sign]
+  901 |         LCD_drawString(spi,130,30 + 80*2,tempString,6,HX8357_BLACK,4);
+      |                                          ^~~~~~~~~~
+      |                                          |
+      |                                          char *
+../Core/Src/lcd_smol.c:632:82: note: expected 'unsigned char *' but argument is of type 'char *'
+  632 | void LCD_drawString(SPI_HandleTypeDef* spi, int16_t x, int16_t y, unsigned char* c, uint32_t length, uint16_t color, uint32_t size)
+      |                                                                   ~~~~~~~~~~~~~~~^
+../Core/Src/lcd_smol.c:904:42: warning: pointer targets in passing argument 4 of 'LCD_drawString' differ in signedness [-Wpointer-sign]
+  904 |         LCD_drawString(spi,130,30 + 80*1,speedString,4,HX8357_BLACK,4);
+      |                                          ^~~~~~~~~~~
+      |                                          |
+      |                                          char *
+../Core/Src/lcd_smol.c:632:82: note: expected 'unsigned char *' but argument is of type 'char *'
+  632 | void LCD_drawString(SPI_HandleTypeDef* spi, int16_t x, int16_t y, unsigned char* c, uint32_t length, uint16_t color, uint32_t size)
+      |                                                                   ~~~~~~~~~~~~~~~^
+../Core/Src/lcd_smol.c:907:42: warning: pointer targets in passing argument 4 of 'LCD_drawString' differ in signedness [-Wpointer-sign]
+  907 |         LCD_drawString(spi,130,30 + 80*3,powerString,6,HX8357_BLACK,4);
+      |                                          ^~~~~~~~~~~
+      |                                          |
+      |                                          char *
+../Core/Src/lcd_smol.c:632:82: note: expected 'unsigned char *' but argument is of type 'char *'
+  632 | void LCD_drawString(SPI_HandleTypeDef* spi, int16_t x, int16_t y, unsigned char* c, uint32_t length, uint16_t color, uint32_t size)
+      |                                                                   ~~~~~~~~~~~~~~~^
+../Core/Src/lcd_smol.c: In function 'LCD_warnings':
+../Core/Src/lcd_smol.c:914:19: warning: suggest parentheses around comparison in operand of '|' [-Wparentheses]
+  914 |         if ((temp >= 50 | level <= 30) & *warning == 0) {
+      |              ~~~~~^~~~~
+../Core/Src/lcd_smol.c:914:51: warning: suggest parentheses around comparison in operand of '&' [-Wparentheses]
+  914 |         if ((temp >= 50 | level <= 30) & *warning == 0) {
+      |                                          ~~~~~~~~~^~~~
+../Core/Src/lcd_smol.c:918:18: warning: suggest parentheses around comparison in operand of '&' [-Wparentheses]
+  918 |         if (temp >= 50 & tempWarn == 0) {
+      |             ~~~~~^~~~~
+../Core/Src/lcd_smol.c:920:49: warning: pointer targets in passing argument 4 of 'LCD_drawString' differ in signedness [-Wpointer-sign]
+  920 |                 LCD_drawString(spi,55,30 + 80*0,"HIGH TEMP",9,HX8357_RED,2);
+      |                                                 ^~~~~~~~~~~
+      |                                                 |
+      |                                                 char *
+../Core/Src/lcd_smol.c:632:82: note: expected 'unsigned char *' but argument is of type 'char *'
+  632 | void LCD_drawString(SPI_HandleTypeDef* spi, int16_t x, int16_t y, unsigned char* c, uint32_t length, uint16_t color, uint32_t size)
+      |                                                                   ~~~~~~~~~~~~~~~^
+../Core/Src/lcd_smol.c:923:19: warning: suggest parentheses around comparison in operand of '&' [-Wparentheses]
+  923 |         if (level <= 30 & voltWarn == 0) {
+      |             ~~~~~~^~~~~
+../Core/Src/lcd_smol.c:925:50: warning: pointer targets in passing argument 4 of 'LCD_drawString' differ in signedness [-Wpointer-sign]
+  925 |                 LCD_drawString(spi,220,30 + 80*0,"LOW VOLT",8,HX8357_RED,2);
+      |                                                  ^~~~~~~~~~
+      |                                                  |
+      |                                                  char *
+../Core/Src/lcd_smol.c:632:82: note: expected 'unsigned char *' but argument is of type 'char *'
+  632 | void LCD_drawString(SPI_HandleTypeDef* spi, int16_t x, int16_t y, unsigned char* c, uint32_t length, uint16_t color, uint32_t size)
+      |                                                                   ~~~~~~~~~~~~~~~^
+../Core/Src/lcd_smol.c:928:18: warning: suggest parentheses around comparison in operand of '&' [-Wparentheses]
+  928 |         if (temp < 50 & tempWarn == 1) {
+      |             ~~~~~^~~~
+../Core/Src/lcd_smol.c:932:19: warning: suggest parentheses around comparison in operand of '&' [-Wparentheses]
+  932 |         if (level > 30 & voltWarn == 1) {
+      |             ~~~~~~^~~~
+../Core/Src/lcd_smol.c:936:22: warning: suggest parentheses around comparison in operand of '&' [-Wparentheses]
+  936 |         if (*warning == 1 & voltWarn == 0 & tempWarn == 0) {
+      |             ~~~~~~~~~^~~~
+../Core/Src/lcd_smol.c:936:54: warning: suggest parentheses around comparison in operand of '&' [-Wparentheses]
+  936 |         if (*warning == 1 & voltWarn == 0 & tempWarn == 0) {
+      |                                             ~~~~~~~~~^~~~
+../Core/Src/lcd_smol.c:938:49: warning: pointer targets in passing argument 4 of 'LCD_drawString' differ in signedness [-Wpointer-sign]
+  938 |                 LCD_drawString(spi,20,30 + 80*0,"TADAMHESPEV | UMSM",18,HX8357_BLACK,3);
+      |                                                 ^~~~~~~~~~~~~~~~~~~~
+      |                                                 |
+      |                                                 char *
+../Core/Src/lcd_smol.c:632:82: note: expected 'unsigned char *' but argument is of type 'char *'
+  632 | void LCD_drawString(SPI_HandleTypeDef* spi, int16_t x, int16_t y, unsigned char* c, uint32_t length, uint16_t color, uint32_t size)
+      |                                                                   ~~~~~~~~~~~~~~~^
+../Core/Src/lcd_smol.c: In function 'LCD_updateBattery':
+../Core/Src/lcd_smol.c:950:35: warning: pointer targets in passing argument 4 of 'LCD_drawString' differ in signedness [-Wpointer-sign]
+  950 |         LCD_drawString(spi,370,50,lev,3,HX8357_BLACK,4);
+      |                                   ^~~
+      |                                   |
+      |                                   char *
+../Core/Src/lcd_smol.c:632:82: note: expected 'unsigned char *' but argument is of type 'char *'
+  632 | void LCD_drawString(SPI_HandleTypeDef* spi, int16_t x, int16_t y, unsigned char* c, uint32_t length, uint16_t color, uint32_t size)
+      |                                                                   ~~~~~~~~~~~~~~~^
+../Core/Src/lcd_smol.c: In function 'LCD_TADAMHASPEV':
+../Core/Src/lcd_smol.c:968:37: warning: pointer targets in passing argument 4 of 'LCD_drawString' differ in signedness [-Wpointer-sign]
+  968 |     LCD_drawString(spi,20,30 + 80*0,name,18,HX8357_BLACK,3);
+      |                                     ^~~~
+      |                                     |
+      |                                     char *
+../Core/Src/lcd_smol.c:632:82: note: expected 'unsigned char *' but argument is of type 'char *'
+  632 | void LCD_drawString(SPI_HandleTypeDef* spi, int16_t x, int16_t y, unsigned char* c, uint32_t length, uint16_t color, uint32_t size)
+      |                                                                   ~~~~~~~~~~~~~~~^
+../Core/Src/lcd_smol.c:969:36: warning: pointer targets in passing argument 4 of 'LCD_drawString' differ in signedness [-Wpointer-sign]
+  969 |     LCD_drawString(spi,5,30 + 80*1,speed,6,HX8357_BLACK,3);
+      |                                    ^~~~~
+      |                                    |
+      |                                    char *
+../Core/Src/lcd_smol.c:632:82: note: expected 'unsigned char *' but argument is of type 'char *'
+  632 | void LCD_drawString(SPI_HandleTypeDef* spi, int16_t x, int16_t y, unsigned char* c, uint32_t length, uint16_t color, uint32_t size)
+      |                                                                   ~~~~~~~~~~~~~~~^
+../Core/Src/lcd_smol.c:970:36: warning: pointer targets in passing argument 4 of 'LCD_drawString' differ in signedness [-Wpointer-sign]
+  970 |     LCD_drawString(spi,5,30 + 80*2,temp,5,HX8357_BLACK,3);
+      |                                    ^~~~
+      |                                    |
+      |                                    char *
+../Core/Src/lcd_smol.c:632:82: note: expected 'unsigned char *' but argument is of type 'char *'
+  632 | void LCD_drawString(SPI_HandleTypeDef* spi, int16_t x, int16_t y, unsigned char* c, uint32_t length, uint16_t color, uint32_t size)
+      |                                                                   ~~~~~~~~~~~~~~~^
+../Core/Src/lcd_smol.c:971:36: warning: pointer targets in passing argument 4 of 'LCD_drawString' differ in signedness [-Wpointer-sign]
+  971 |     LCD_drawString(spi,5,30 + 80*3,power,6,HX8357_BLACK,3);
+      |                                    ^~~~~
+      |                                    |
+      |                                    char *
+../Core/Src/lcd_smol.c:632:82: note: expected 'unsigned char *' but argument is of type 'char *'
+  632 | void LCD_drawString(SPI_HandleTypeDef* spi, int16_t x, int16_t y, unsigned char* c, uint32_t length, uint16_t color, uint32_t size)
+      |                                                                   ~~~~~~~~~~~~~~~^
+../Core/Src/lcd_smol.c:973:38: warning: pointer targets in passing argument 4 of 'LCD_drawString' differ in signedness [-Wpointer-sign]
+  973 |     LCD_drawString(spi,280,30 + 80*1,mph,3,HX8357_BLACK,3);
+      |                                      ^~~
+      |                                      |
+      |                                      char *
+../Core/Src/lcd_smol.c:632:82: note: expected 'unsigned char *' but argument is of type 'char *'
+  632 | void LCD_drawString(SPI_HandleTypeDef* spi, int16_t x, int16_t y, unsigned char* c, uint32_t length, uint16_t color, uint32_t size)
+      |                                                                   ~~~~~~~~~~~~~~~^
+../Core/Src/lcd_smol.c:974:38: warning: pointer targets in passing argument 4 of 'LCD_drawString' differ in signedness [-Wpointer-sign]
+  974 |     LCD_drawString(spi,306,30 + 80*2,deg,1,HX8357_BLACK,3);
+      |                                      ^~~
+      |                                      |
+      |                                      char *
+../Core/Src/lcd_smol.c:632:82: note: expected 'unsigned char *' but argument is of type 'char *'
+  632 | void LCD_drawString(SPI_HandleTypeDef* spi, int16_t x, int16_t y, unsigned char* c, uint32_t length, uint16_t color, uint32_t size)
+      |                                                                   ~~~~~~~~~~~~~~~^
+../Core/Src/lcd_smol.c:975:38: warning: pointer targets in passing argument 4 of 'LCD_drawString' differ in signedness [-Wpointer-sign]
+  975 |     LCD_drawString(spi,306,30 + 80*3,watt,1,HX8357_BLACK,3);
+      |                                      ^~~~
+      |                                      |
+      |                                      char *
+../Core/Src/lcd_smol.c:632:82: note: expected 'unsigned char *' but argument is of type 'char *'
+  632 | void LCD_drawString(SPI_HandleTypeDef* spi, int16_t x, int16_t y, unsigned char* c, uint32_t length, uint16_t color, uint32_t size)
+      |                                                                   ~~~~~~~~~~~~~~~^
+../Core/Src/lcd_smol.c:976:31: warning: pointer targets in passing argument 4 of 'LCD_drawString' differ in signedness [-Wpointer-sign]
+  976 |     LCD_drawString(spi,442,50,"%",1,HX8357_BLACK,4);
+      |                               ^~~
+      |                               |
+      |                               char *
+../Core/Src/lcd_smol.c:632:82: note: expected 'unsigned char *' but argument is of type 'char *'
+  632 | void LCD_drawString(SPI_HandleTypeDef* spi, int16_t x, int16_t y, unsigned char* c, uint32_t length, uint16_t color, uint32_t size)
+      |                                                                   ~~~~~~~~~~~~~~~^
+../Core/Src/lcd_smol.c: In function 'LCD_updateVals':
+../Core/Src/lcd_smol.c:900:29: warning: '%f' directive writing between 3 and 317 bytes into a region of size 6 [-Wformat-overflow=]
+  900 |         sprintf(tempString,"%f", data.temp);//buf[1]);
+      |                             ^~
+../Core/Src/lcd_smol.c:900:28: note: assuming directive output of 8 bytes
+  900 |         sprintf(tempString,"%f", data.temp);//buf[1]);
+      |                            ^~~~
+../Core/Src/lcd_smol.c:900:9: note: 'sprintf' output between 4 and 318 bytes into a destination of size 6
+  900 |         sprintf(tempString,"%f", data.temp);//buf[1]);
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/lcd_smol.c:903:30: warning: '%f' directive writing between 3 and 317 bytes into a region of size 4 [-Wformat-overflow=]
+  903 |         sprintf(speedString,"%f", data.speed);//buf[2]);
+      |                              ^~
+../Core/Src/lcd_smol.c:903:29: note: assuming directive output of 8 bytes
+  903 |         sprintf(speedString,"%f", data.speed);//buf[2]);
+      |                             ^~~~
+../Core/Src/lcd_smol.c:903:9: note: 'sprintf' output between 4 and 318 bytes into a destination of size 4
+  903 |         sprintf(speedString,"%f", data.speed);//buf[2]);
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/lcd_smol.c:906:30: warning: '%f' directive writing between 3 and 317 bytes into a region of size 6 [-Wformat-overflow=]
+  906 |         sprintf(powerString,"%f", data.voltage*data.current);//buf[3]*buf[4]);
+      |                              ^~
+../Core/Src/lcd_smol.c:906:29: note: assuming directive output of 8 bytes
+  906 |         sprintf(powerString,"%f", data.voltage*data.current);//buf[3]*buf[4]);
+      |                             ^~~~
+../Core/Src/lcd_smol.c:906:9: note: 'sprintf' output between 4 and 318 bytes into a destination of size 6
+  906 |         sprintf(powerString,"%f", data.voltage*data.current);//buf[3]*buf[4]);
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+arm-none-eabi-gcc -o "lcd_smol.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\STM32L432KCUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="lcd_smol.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: lcd_smol.elf
+ 
+arm-none-eabi-size   lcd_smol.elf 
+arm-none-eabi-objdump -h -S  lcd_smol.elf  > "lcd_smol.list"
+   text	   data	    bss	    dec	    hex	filename
+  42760	    584	   2448	  45792	   b2e0	lcd_smol.elf
+Finished building: default.size.stdout
+ 
+Finished building: lcd_smol.list
+ 
+13:23:59 **** Incremental Build of configuration Debug for project lcd_smol ****
+make -j12 all 
+arm-none-eabi-size   lcd_smol.elf 
+   text	   data	    bss	    dec	    hex	filename
+  42760	    584	   2448	  45792	   b2e0	lcd_smol.elf
+Finished building: default.size.stdout
+ 
+13:31:13 **** Incremental Build of configuration Debug for project lcd_smol ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L432xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "lcd_smol.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\STM32L432KCUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="lcd_smol.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: lcd_smol.elf
+ 
+arm-none-eabi-size   lcd_smol.elf 
+arm-none-eabi-objdump -h -S  lcd_smol.elf  > "lcd_smol.list"
+   text	   data	    bss	    dec	    hex	filename
+  42760	    584	   2448	  45792	   b2e0	lcd_smol.elf
+Finished building: default.size.stdout
+ 
+Finished building: lcd_smol.list
+ 
+13:35:29 **** Incremental Build of configuration Debug for project lcd_smol ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L432xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "lcd_smol.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\STM32L432KCUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="lcd_smol.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: lcd_smol.elf
+ 
+arm-none-eabi-size   lcd_smol.elf 
+arm-none-eabi-objdump -h -S  lcd_smol.elf  > "lcd_smol.list"
+   text	   data	    bss	    dec	    hex	filename
+  42768	    584	   2448	  45800	   b2e8	lcd_smol.elf
+Finished building: default.size.stdout
+ 
+Finished building: lcd_smol.list
+ 
+13:37:14 **** Incremental Build of configuration Debug for project lcd_smol ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L432xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "lcd_smol.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\STM32L432KCUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="lcd_smol.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: lcd_smol.elf
+ 
+arm-none-eabi-size   lcd_smol.elf 
+arm-none-eabi-objdump -h -S  lcd_smol.elf  > "lcd_smol.list"
+   text	   data	    bss	    dec	    hex	filename
+  42768	    584	   2448	  45800	   b2e8	lcd_smol.elf
+Finished building: default.size.stdout
+ 
+Finished building: lcd_smol.list
+ 
+13:50:55 **** Incremental Build of configuration Debug for project lcd_smol ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L432xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "lcd_smol.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\STM32L432KCUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="lcd_smol.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: lcd_smol.elf
+ 
+arm-none-eabi-size   lcd_smol.elf 
+arm-none-eabi-objdump -h -S  lcd_smol.elf  > "lcd_smol.list"
+   text	   data	    bss	    dec	    hex	filename
+  40432	    580	   2428	  43440	   a9b0	lcd_smol.elf
+Finished building: default.size.stdout
+ 
+Finished building: lcd_smol.list
+ 
+13:53:17 **** Incremental Build of configuration Debug for project lcd_smol ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L432xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "lcd_smol.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\STM32L432KCUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="lcd_smol.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: lcd_smol.elf
+ 
+arm-none-eabi-size   lcd_smol.elf 
+arm-none-eabi-objdump -h -S  lcd_smol.elf  > "lcd_smol.list"
+   text	   data	    bss	    dec	    hex	filename
+  40424	    580	   2428	  43432	   a9a8	lcd_smol.elf
+Finished building: default.size.stdout
+ 
+Finished building: lcd_smol.list
+ 
+13:58:47 **** Incremental Build of configuration Debug for project lcd_smol ****
+make -j12 all 
+arm-none-eabi-size   lcd_smol.elf 
+   text	   data	    bss	    dec	    hex	filename
+  40424	    580	   2428	  43432	   a9a8	lcd_smol.elf
+Finished building: default.size.stdout
+ 
+14:08:03 **** Incremental Build of configuration Debug for project lcd_smol ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L432xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "lcd_smol.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\STM32L432KCUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="lcd_smol.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: lcd_smol.elf
+ 
+arm-none-eabi-size   lcd_smol.elf 
+arm-none-eabi-objdump -h -S  lcd_smol.elf  > "lcd_smol.list"
+   text	   data	    bss	    dec	    hex	filename
+  40456	    580	   2428	  43464	   a9c8	lcd_smol.elf
+Finished building: default.size.stdout
+ 
+Finished building: lcd_smol.list
+ 
+14:10:32 **** Incremental Build of configuration Debug for project lcd_smol ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L432xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "lcd_smol.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\STM32L432KCUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="lcd_smol.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: lcd_smol.elf
+ 
+arm-none-eabi-size   lcd_smol.elf 
+arm-none-eabi-objdump -h -S  lcd_smol.elf  > "lcd_smol.list"
+   text	   data	    bss	    dec	    hex	filename
+  42784	    584	   2448	  45816	   b2f8	lcd_smol.elf
+Finished building: default.size.stdout
+ 
+Finished building: lcd_smol.list
+ 
+14:17:36 **** Incremental Build of configuration Debug for project lcd_smol ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L432xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:132:32: warning: suggest parentheses around comparison in operand of '&' [-Wparentheses]
+  132 |                 if (batRefresh == 1 & 1==0) {
+      |                     ~~~~~~~~~~~^~~~
+arm-none-eabi-gcc -o "lcd_smol.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\STM32L432KCUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="lcd_smol.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: lcd_smol.elf
+ 
+arm-none-eabi-size   lcd_smol.elf 
+arm-none-eabi-objdump -h -S  lcd_smol.elf  > "lcd_smol.list"
+   text	   data	    bss	    dec	    hex	filename
+  40456	    580	   2428	  43464	   a9c8	lcd_smol.elf
+Finished building: default.size.stdout
+ 
+Finished building: lcd_smol.list
+ 
+14:18:26 **** Incremental Build of configuration Debug for project lcd_smol ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L432xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:131:40: warning: suggest parentheses around comparison in operand of '&' [-Wparentheses]
+  131 |                         if (batRefresh == 1 & 1 == 0) {
+      |                             ~~~~~~~~~~~^~~~
+arm-none-eabi-gcc -o "lcd_smol.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\STM32L432KCUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="lcd_smol.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: lcd_smol.elf
+ 
+arm-none-eabi-size   lcd_smol.elf 
+arm-none-eabi-objdump -h -S  lcd_smol.elf  > "lcd_smol.list"
+   text	   data	    bss	    dec	    hex	filename
+  40456	    580	   2428	  43464	   a9c8	lcd_smol.elf
+Finished building: default.size.stdout
+ 
+Finished building: lcd_smol.list
+ 
+14:20:09 **** Incremental Build of configuration Debug for project lcd_smol ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L432xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "lcd_smol.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\STM32L432KCUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="lcd_smol.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: lcd_smol.elf
+ 
+arm-none-eabi-size   lcd_smol.elf 
+arm-none-eabi-objdump -h -S  lcd_smol.elf  > "lcd_smol.list"
+   text	   data	    bss	    dec	    hex	filename
+  42784	    584	   2448	  45816	   b2f8	lcd_smol.elf
+Finished building: default.size.stdout
+ 
+Finished building: lcd_smol.list
+ 
+14:22:26 **** Incremental Build of configuration Debug for project lcd_smol ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L432xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "lcd_smol.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\STM32L432KCUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="lcd_smol.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: lcd_smol.elf
+ 
+arm-none-eabi-size   lcd_smol.elf 
+arm-none-eabi-objdump -h -S  lcd_smol.elf  > "lcd_smol.list"
+   text	   data	    bss	    dec	    hex	filename
+  42792	    584	   2448	  45824	   b300	lcd_smol.elf
+Finished building: default.size.stdout
+ 
+Finished building: lcd_smol.list
+ 
+14:28:11 **** Incremental Build of configuration Debug for project lcd_smol ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L432xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "lcd_smol.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\STM32L432KCUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="lcd_smol.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: lcd_smol.elf
+ 
+arm-none-eabi-size   lcd_smol.elf 
+arm-none-eabi-objdump -h -S  lcd_smol.elf  > "lcd_smol.list"
+   text	   data	    bss	    dec	    hex	filename
+  42808	    584	   2448	  45840	   b310	lcd_smol.elf
+Finished building: default.size.stdout
+ 
+Finished building: lcd_smol.list
+ 
+14:30:34 **** Incremental Build of configuration Debug for project lcd_smol ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L432xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "lcd_smol.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\STM32L432KCUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="lcd_smol.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: lcd_smol.elf
+ 
+arm-none-eabi-size   lcd_smol.elf 
+arm-none-eabi-objdump -h -S  lcd_smol.elf  > "lcd_smol.list"
+   text	   data	    bss	    dec	    hex	filename
+  42824	    584	   2448	  45856	   b320	lcd_smol.elf
+Finished building: default.size.stdout
+ 
+Finished building: lcd_smol.list
+ 
+14:34:05 **** Incremental Build of configuration Debug for project lcd_smol ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/lcd_smol.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L432xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/lcd_smol.d" -MT"Core/Src/lcd_smol.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/lcd_smol.o"
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L432xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/stm32l4xx_it.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L432xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/stm32l4xx_it.d" -MT"Core/Src/stm32l4xx_it.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/stm32l4xx_it.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:144:21: error: invalid type argument of unary '*' (have 'int')
+  144 |                 if (*tempWarn != 0) {
+      |                     ^~~~~~~~~
+../Core/Src/main.c:145:25: error: invalid type argument of unary '*' (have 'int')
+  145 |                         *tempWarn = 0;
+      |                         ^~~~~~~~~
+../Core/Src/lcd_smol.c: In function 'LCD_updateVals':
+../Core/Src/lcd_smol.c:900:9: warning: implicit declaration of function 'sprintf' [-Wimplicit-function-declaration]
+  900 |         sprintf(tempString,"%f", data.temp);//buf[1]);
+      |         ^~~~~~~
+../Core/Src/lcd_smol.c:11:1: note: include '<stdio.h>' or provide a declaration of 'sprintf'
+   10 | #include <stdlib.h>
+  +++ |+#include <stdio.h>
+   11 | 
+../Core/Src/lcd_smol.c:900:9: warning: incompatible implicit declaration of built-in function 'sprintf' [-Wbuiltin-declaration-mismatch]
+  900 |         sprintf(tempString,"%f", data.temp);//buf[1]);
+      |         ^~~~~~~
+../Core/Src/lcd_smol.c:900:9: note: include '<stdio.h>' or provide a declaration of 'sprintf'
+../Core/Src/lcd_smol.c:901:42: warning: pointer targets in passing argument 4 of 'LCD_drawString' differ in signedness [-Wpointer-sign]
+  901 |         LCD_drawString(spi,130,30 + 80*2,tempString,6,HX8357_BLACK,4);
+      |                                          ^~~~~~~~~~
+      |                                          |
+      |                                          char *
+../Core/Src/lcd_smol.c:632:82: note: expected 'unsigned char *' but argument is of type 'char *'
+  632 | void LCD_drawString(SPI_HandleTypeDef* spi, int16_t x, int16_t y, unsigned char* c, uint32_t length, uint16_t color, uint32_t size)
+      |                                                                   ~~~~~~~~~~~~~~~^
+../Core/Src/lcd_smol.c:904:42: warning: pointer targets in passing argument 4 of 'LCD_drawString' differ in signedness [-Wpointer-sign]
+  904 |         LCD_drawString(spi,130,30 + 80*1,speedString,4,HX8357_BLACK,4);
+      |                                          ^~~~~~~~~~~
+      |                                          |
+      |                                          char *
+../Core/Src/lcd_smol.c:632:82: note: expected 'unsigned char *' but argument is of type 'char *'
+  632 | void LCD_drawString(SPI_HandleTypeDef* spi, int16_t x, int16_t y, unsigned char* c, uint32_t length, uint16_t color, uint32_t size)
+      |                                                                   ~~~~~~~~~~~~~~~^
+../Core/Src/lcd_smol.c:907:42: warning: pointer targets in passing argument 4 of 'LCD_drawString' differ in signedness [-Wpointer-sign]
+  907 |         LCD_drawString(spi,130,30 + 80*3,powerString,6,HX8357_BLACK,4);
+      |                                          ^~~~~~~~~~~
+      |                                          |
+      |                                          char *
+../Core/Src/lcd_smol.c:632:82: note: expected 'unsigned char *' but argument is of type 'char *'
+  632 | void LCD_drawString(SPI_HandleTypeDef* spi, int16_t x, int16_t y, unsigned char* c, uint32_t length, uint16_t color, uint32_t size)
+      |                                                                   ~~~~~~~~~~~~~~~^
+../Core/Src/lcd_smol.c: In function 'LCD_warnings':
+../Core/Src/lcd_smol.c:911:19: warning: suggest parentheses around comparison in operand of '|' [-Wparentheses]
+  911 |         if ((temp >= 50 | level <= 30) & *warning == 0) {
+      |              ~~~~~^~~~~
+../Core/Src/lcd_smol.c:911:51: warning: suggest parentheses around comparison in operand of '&' [-Wparentheses]
+  911 |         if ((temp >= 50 | level <= 30) & *warning == 0) {
+      |                                          ~~~~~~~~~^~~~
+../Core/Src/lcd_smol.c:915:18: warning: suggest parentheses around comparison in operand of '&' [-Wparentheses]
+  915 |         if (temp >= 50 & *tempWarn == 0) {
+      |             ~~~~~^~~~~
+make: *** [Core/Src/subdir.mk:40: Core/Src/main.o] Error 1
+../Core/Src/lcd_smol.c:917:49: warning: pointer targets in passing argument 4 of 'LCD_drawString' differ in signedness [-Wpointer-sign]
+  917 |                 LCD_drawString(spi,55,30 + 80*0,"HIGH TEMP",9,HX8357_RED,2);
+      |                                                 ^~~~~~~~~~~
+      |                                                 |
+      |                                                 char *
+make: *** Waiting for unfinished jobs....
+../Core/Src/lcd_smol.c:632:82: note: expected 'unsigned char *' but argument is of type 'char *'
+  632 | void LCD_drawString(SPI_HandleTypeDef* spi, int16_t x, int16_t y, unsigned char* c, uint32_t length, uint16_t color, uint32_t size)
+      |                                                                   ~~~~~~~~~~~~~~~^
+../Core/Src/lcd_smol.c:920:19: warning: suggest parentheses around comparison in operand of '&' [-Wparentheses]
+  920 |         if (level <= 30 & *voltWarn == 0) {
+      |             ~~~~~~^~~~~
+../Core/Src/lcd_smol.c:922:50: warning: pointer targets in passing argument 4 of 'LCD_drawString' differ in signedness [-Wpointer-sign]
+  922 |                 LCD_drawString(spi,220,30 + 80*0,"LOW VOLT",8,HX8357_RED,2);
+      |                                                  ^~~~~~~~~~
+      |                                                  |
+      |                                                  char *
+../Core/Src/lcd_smol.c:632:82: note: expected 'unsigned char *' but argument is of type 'char *'
+  632 | void LCD_drawString(SPI_HandleTypeDef* spi, int16_t x, int16_t y, unsigned char* c, uint32_t length, uint16_t color, uint32_t size)
+      |                                                                   ~~~~~~~~~~~~~~~^
+../Core/Src/lcd_smol.c:925:18: warning: suggest parentheses around comparison in operand of '&' [-Wparentheses]
+  925 |         if (temp < 50 & *tempWarn == 1) {
+      |             ~~~~~^~~~
+../Core/Src/lcd_smol.c:929:19: warning: suggest parentheses around comparison in operand of '&' [-Wparentheses]
+  929 |         if (level > 30 & *voltWarn == 1) {
+      |             ~~~~~~^~~~
+../Core/Src/lcd_smol.c:933:22: warning: suggest parentheses around comparison in operand of '&' [-Wparentheses]
+  933 |         if (*warning == 1 & *voltWarn == 0 & *tempWarn == 0) {
+      |             ~~~~~~~~~^~~~
+../Core/Src/lcd_smol.c:933:56: warning: suggest parentheses around comparison in operand of '&' [-Wparentheses]
+  933 |         if (*warning == 1 & *voltWarn == 0 & *tempWarn == 0) {
+      |                                              ~~~~~~~~~~^~~~
+../Core/Src/lcd_smol.c:935:49: warning: pointer targets in passing argument 4 of 'LCD_drawString' differ in signedness [-Wpointer-sign]
+  935 |                 LCD_drawString(spi,20,30 + 80*0,"TADAMHESPEV | UMSM",18,HX8357_BLACK,3);
+      |                                                 ^~~~~~~~~~~~~~~~~~~~
+      |                                                 |
+      |                                                 char *
+../Core/Src/lcd_smol.c:632:82: note: expected 'unsigned char *' but argument is of type 'char *'
+  632 | void LCD_drawString(SPI_HandleTypeDef* spi, int16_t x, int16_t y, unsigned char* c, uint32_t length, uint16_t color, uint32_t size)
+      |                                                                   ~~~~~~~~~~~~~~~^
+../Core/Src/lcd_smol.c: In function 'LCD_updateBattery':
+../Core/Src/lcd_smol.c:947:35: warning: pointer targets in passing argument 4 of 'LCD_drawString' differ in signedness [-Wpointer-sign]
+  947 |         LCD_drawString(spi,370,50,lev,3,HX8357_BLACK,4);
+      |                                   ^~~
+      |                                   |
+      |                                   char *
+../Core/Src/lcd_smol.c:632:82: note: expected 'unsigned char *' but argument is of type 'char *'
+  632 | void LCD_drawString(SPI_HandleTypeDef* spi, int16_t x, int16_t y, unsigned char* c, uint32_t length, uint16_t color, uint32_t size)
+      |                                                                   ~~~~~~~~~~~~~~~^
+../Core/Src/lcd_smol.c: In function 'LCD_TADAMHASPEV':
+../Core/Src/lcd_smol.c:965:37: warning: pointer targets in passing argument 4 of 'LCD_drawString' differ in signedness [-Wpointer-sign]
+  965 |     LCD_drawString(spi,20,30 + 80*0,name,18,HX8357_BLACK,3);
+      |                                     ^~~~
+      |                                     |
+      |                                     char *
+../Core/Src/lcd_smol.c:632:82: note: expected 'unsigned char *' but argument is of type 'char *'
+  632 | void LCD_drawString(SPI_HandleTypeDef* spi, int16_t x, int16_t y, unsigned char* c, uint32_t length, uint16_t color, uint32_t size)
+      |                                                                   ~~~~~~~~~~~~~~~^
+../Core/Src/lcd_smol.c:966:36: warning: pointer targets in passing argument 4 of 'LCD_drawString' differ in signedness [-Wpointer-sign]
+  966 |     LCD_drawString(spi,5,30 + 80*1,speed,6,HX8357_BLACK,3);
+      |                                    ^~~~~
+      |                                    |
+      |                                    char *
+../Core/Src/lcd_smol.c:632:82: note: expected 'unsigned char *' but argument is of type 'char *'
+  632 | void LCD_drawString(SPI_HandleTypeDef* spi, int16_t x, int16_t y, unsigned char* c, uint32_t length, uint16_t color, uint32_t size)
+      |                                                                   ~~~~~~~~~~~~~~~^
+../Core/Src/lcd_smol.c:967:36: warning: pointer targets in passing argument 4 of 'LCD_drawString' differ in signedness [-Wpointer-sign]
+  967 |     LCD_drawString(spi,5,30 + 80*2,temp,5,HX8357_BLACK,3);
+      |                                    ^~~~
+      |                                    |
+      |                                    char *
+../Core/Src/lcd_smol.c:632:82: note: expected 'unsigned char *' but argument is of type 'char *'
+  632 | void LCD_drawString(SPI_HandleTypeDef* spi, int16_t x, int16_t y, unsigned char* c, uint32_t length, uint16_t color, uint32_t size)
+      |                                                                   ~~~~~~~~~~~~~~~^
+../Core/Src/lcd_smol.c:968:36: warning: pointer targets in passing argument 4 of 'LCD_drawString' differ in signedness [-Wpointer-sign]
+  968 |     LCD_drawString(spi,5,30 + 80*3,power,6,HX8357_BLACK,3);
+      |                                    ^~~~~
+      |                                    |
+      |                                    char *
+../Core/Src/lcd_smol.c:632:82: note: expected 'unsigned char *' but argument is of type 'char *'
+  632 | void LCD_drawString(SPI_HandleTypeDef* spi, int16_t x, int16_t y, unsigned char* c, uint32_t length, uint16_t color, uint32_t size)
+      |                                                                   ~~~~~~~~~~~~~~~^
+../Core/Src/lcd_smol.c:970:38: warning: pointer targets in passing argument 4 of 'LCD_drawString' differ in signedness [-Wpointer-sign]
+  970 |     LCD_drawString(spi,280,30 + 80*1,mph,3,HX8357_BLACK,3);
+      |                                      ^~~
+      |                                      |
+      |                                      char *
+../Core/Src/lcd_smol.c:632:82: note: expected 'unsigned char *' but argument is of type 'char *'
+  632 | void LCD_drawString(SPI_HandleTypeDef* spi, int16_t x, int16_t y, unsigned char* c, uint32_t length, uint16_t color, uint32_t size)
+      |                                                                   ~~~~~~~~~~~~~~~^
+../Core/Src/lcd_smol.c:971:38: warning: pointer targets in passing argument 4 of 'LCD_drawString' differ in signedness [-Wpointer-sign]
+  971 |     LCD_drawString(spi,306,30 + 80*2,deg,1,HX8357_BLACK,3);
+      |                                      ^~~
+      |                                      |
+      |                                      char *
+../Core/Src/lcd_smol.c:632:82: note: expected 'unsigned char *' but argument is of type 'char *'
+  632 | void LCD_drawString(SPI_HandleTypeDef* spi, int16_t x, int16_t y, unsigned char* c, uint32_t length, uint16_t color, uint32_t size)
+      |                                                                   ~~~~~~~~~~~~~~~^
+../Core/Src/lcd_smol.c:972:38: warning: pointer targets in passing argument 4 of 'LCD_drawString' differ in signedness [-Wpointer-sign]
+  972 |     LCD_drawString(spi,306,30 + 80*3,watt,1,HX8357_BLACK,3);
+      |                                      ^~~~
+      |                                      |
+      |                                      char *
+../Core/Src/lcd_smol.c:632:82: note: expected 'unsigned char *' but argument is of type 'char *'
+  632 | void LCD_drawString(SPI_HandleTypeDef* spi, int16_t x, int16_t y, unsigned char* c, uint32_t length, uint16_t color, uint32_t size)
+      |                                                                   ~~~~~~~~~~~~~~~^
+../Core/Src/lcd_smol.c:973:31: warning: pointer targets in passing argument 4 of 'LCD_drawString' differ in signedness [-Wpointer-sign]
+  973 |     LCD_drawString(spi,442,50,"%",1,HX8357_BLACK,4);
+      |                               ^~~
+      |                               |
+      |                               char *
+../Core/Src/lcd_smol.c:632:82: note: expected 'unsigned char *' but argument is of type 'char *'
+  632 | void LCD_drawString(SPI_HandleTypeDef* spi, int16_t x, int16_t y, unsigned char* c, uint32_t length, uint16_t color, uint32_t size)
+      |                                                                   ~~~~~~~~~~~~~~~^
+../Core/Src/lcd_smol.c: In function 'LCD_updateVals':
+../Core/Src/lcd_smol.c:900:29: warning: '%f' directive writing between 3 and 317 bytes into a region of size 6 [-Wformat-overflow=]
+  900 |         sprintf(tempString,"%f", data.temp);//buf[1]);
+      |                             ^~
+../Core/Src/lcd_smol.c:900:28: note: assuming directive output of 8 bytes
+  900 |         sprintf(tempString,"%f", data.temp);//buf[1]);
+      |                            ^~~~
+../Core/Src/lcd_smol.c:900:9: note: 'sprintf' output between 4 and 318 bytes into a destination of size 6
+  900 |         sprintf(tempString,"%f", data.temp);//buf[1]);
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/lcd_smol.c:903:30: warning: '%f' directive writing between 3 and 317 bytes into a region of size 4 [-Wformat-overflow=]
+  903 |         sprintf(speedString,"%f", data.speed);//buf[2]);
+      |                              ^~
+../Core/Src/lcd_smol.c:903:29: note: assuming directive output of 8 bytes
+  903 |         sprintf(speedString,"%f", data.speed);//buf[2]);
+      |                             ^~~~
+../Core/Src/lcd_smol.c:903:9: note: 'sprintf' output between 4 and 318 bytes into a destination of size 4
+  903 |         sprintf(speedString,"%f", data.speed);//buf[2]);
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/lcd_smol.c:906:30: warning: '%f' directive writing between 3 and 317 bytes into a region of size 6 [-Wformat-overflow=]
+  906 |         sprintf(powerString,"%f", data.voltage*data.current);//buf[3]*buf[4]);
+      |                              ^~
+../Core/Src/lcd_smol.c:906:29: note: assuming directive output of 8 bytes
+  906 |         sprintf(powerString,"%f", data.voltage*data.current);//buf[3]*buf[4]);
+      |                             ^~~~
+../Core/Src/lcd_smol.c:906:9: note: 'sprintf' output between 4 and 318 bytes into a destination of size 6
+  906 |         sprintf(powerString,"%f", data.voltage*data.current);//buf[3]*buf[4]);
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+14:34:28 **** Incremental Build of configuration Debug for project lcd_smol ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L432xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "lcd_smol.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\STM32L432KCUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="lcd_smol.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -Wl,--end-group
+C:/ST/STM32CubeIDE_1.13.1/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.11.3.rel1.win32_1.1.1.202309131626/tools/bin/../lib/gcc/arm-none-eabi/11.3.1/../../../../arm-none-eabi/bin/ld.exe: ./Core/Src/main.o: in function `main':
+C:/Users/ndib8/Desktop/TADAMHESPEV/TADAMHESPEV/373_Proj/TADAMHESPEV_lcd/lcd_smol/Debug/../Core/Src/main.c:131: undefined reference to `tempWarn'
+C:/ST/STM32CubeIDE_1.13.1/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.11.3.rel1.win32_1.1.1.202309131626/tools/bin/../lib/gcc/arm-none-eabi/11.3.1/../../../../arm-none-eabi/bin/ld.exe: C:/Users/ndib8/Desktop/TADAMHESPEV/TADAMHESPEV/373_Proj/TADAMHESPEV_lcd/lcd_smol/Debug/../Core/Src/main.c:131: undefined reference to `voltWarn'
+collect2.exe: error: ld returned 1 exit status
+make: *** [makefile:64: lcd_smol.elf] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+14:34:53 **** Incremental Build of configuration Debug for project lcd_smol ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L432xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "lcd_smol.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\STM32L432KCUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="lcd_smol.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: lcd_smol.elf
+ 
+arm-none-eabi-size   lcd_smol.elf 
+arm-none-eabi-objdump -h -S  lcd_smol.elf  > "lcd_smol.list"
+   text	   data	    bss	    dec	    hex	filename
+  42808	    584	   2440	  45832	   b308	lcd_smol.elf
+Finished building: default.size.stdout
+ 
+Finished building: lcd_smol.list
+ 
+14:35:38 **** Incremental Build of configuration Debug for project lcd_smol ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L432xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "lcd_smol.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\STM32L432KCUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="lcd_smol.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: lcd_smol.elf
+ 
+arm-none-eabi-size   lcd_smol.elf 
+arm-none-eabi-objdump -h -S  lcd_smol.elf  > "lcd_smol.list"
+   text	   data	    bss	    dec	    hex	filename
+  42800	    584	   2440	  45824	   b300	lcd_smol.elf
+Finished building: default.size.stdout
+ 
+Finished building: lcd_smol.list
+ 
+14:37:17 **** Incremental Build of configuration Debug for project lcd_smol ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/lcd_smol.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L432xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/lcd_smol.d" -MT"Core/Src/lcd_smol.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/lcd_smol.o"
+../Core/Src/lcd_smol.c: In function 'LCD_updateVals':
+../Core/Src/lcd_smol.c:900:9: warning: implicit declaration of function 'sprintf' [-Wimplicit-function-declaration]
+  900 |         sprintf(tempString,"%f", data.temp);//buf[1]);
+      |         ^~~~~~~
+../Core/Src/lcd_smol.c:11:1: note: include '<stdio.h>' or provide a declaration of 'sprintf'
+   10 | #include <stdlib.h>
+  +++ |+#include <stdio.h>
+   11 | 
+../Core/Src/lcd_smol.c:900:9: warning: incompatible implicit declaration of built-in function 'sprintf' [-Wbuiltin-declaration-mismatch]
+  900 |         sprintf(tempString,"%f", data.temp);//buf[1]);
+      |         ^~~~~~~
+../Core/Src/lcd_smol.c:900:9: note: include '<stdio.h>' or provide a declaration of 'sprintf'
+../Core/Src/lcd_smol.c:901:42: warning: pointer targets in passing argument 4 of 'LCD_drawString' differ in signedness [-Wpointer-sign]
+  901 |         LCD_drawString(spi,130,30 + 80*2,tempString,6,HX8357_BLACK,4);
+      |                                          ^~~~~~~~~~
+      |                                          |
+      |                                          char *
+../Core/Src/lcd_smol.c:632:82: note: expected 'unsigned char *' but argument is of type 'char *'
+  632 | void LCD_drawString(SPI_HandleTypeDef* spi, int16_t x, int16_t y, unsigned char* c, uint32_t length, uint16_t color, uint32_t size)
+      |                                                                   ~~~~~~~~~~~~~~~^
+../Core/Src/lcd_smol.c:904:42: warning: pointer targets in passing argument 4 of 'LCD_drawString' differ in signedness [-Wpointer-sign]
+  904 |         LCD_drawString(spi,130,30 + 80*1,speedString,4,HX8357_BLACK,4);
+      |                                          ^~~~~~~~~~~
+      |                                          |
+      |                                          char *
+../Core/Src/lcd_smol.c:632:82: note: expected 'unsigned char *' but argument is of type 'char *'
+  632 | void LCD_drawString(SPI_HandleTypeDef* spi, int16_t x, int16_t y, unsigned char* c, uint32_t length, uint16_t color, uint32_t size)
+      |                                                                   ~~~~~~~~~~~~~~~^
+../Core/Src/lcd_smol.c:907:42: warning: pointer targets in passing argument 4 of 'LCD_drawString' differ in signedness [-Wpointer-sign]
+  907 |         LCD_drawString(spi,130,30 + 80*3,powerString,6,HX8357_BLACK,4);
+      |                                          ^~~~~~~~~~~
+      |                                          |
+      |                                          char *
+../Core/Src/lcd_smol.c:632:82: note: expected 'unsigned char *' but argument is of type 'char *'
+  632 | void LCD_drawString(SPI_HandleTypeDef* spi, int16_t x, int16_t y, unsigned char* c, uint32_t length, uint16_t color, uint32_t size)
+      |                                                                   ~~~~~~~~~~~~~~~^
+../Core/Src/lcd_smol.c: In function 'LCD_warnings':
+../Core/Src/lcd_smol.c:911:19: warning: suggest parentheses around comparison in operand of '|' [-Wparentheses]
+  911 |         if ((temp >= 50 | level <= 30) & *warning == 0) {
+      |              ~~~~~^~~~~
+../Core/Src/lcd_smol.c:911:51: warning: suggest parentheses around comparison in operand of '&' [-Wparentheses]
+  911 |         if ((temp >= 50 | level <= 30) & *warning == 0) {
+      |                                          ~~~~~~~~~^~~~
+../Core/Src/lcd_smol.c:915:18: warning: suggest parentheses around comparison in operand of '&' [-Wparentheses]
+  915 |         if (temp >= 50 & *tempWarn == 0) {
+      |             ~~~~~^~~~~
+../Core/Src/lcd_smol.c:917:49: warning: pointer targets in passing argument 4 of 'LCD_drawString' differ in signedness [-Wpointer-sign]
+  917 |                 LCD_drawString(spi,55,30 + 80*0,"HIGH TEMP",9,HX8357_RED,2);
+      |                                                 ^~~~~~~~~~~
+      |                                                 |
+      |                                                 char *
+../Core/Src/lcd_smol.c:632:82: note: expected 'unsigned char *' but argument is of type 'char *'
+  632 | void LCD_drawString(SPI_HandleTypeDef* spi, int16_t x, int16_t y, unsigned char* c, uint32_t length, uint16_t color, uint32_t size)
+      |                                                                   ~~~~~~~~~~~~~~~^
+../Core/Src/lcd_smol.c:920:19: warning: suggest parentheses around comparison in operand of '&' [-Wparentheses]
+  920 |         if (level <= 30 & *voltWarn == 0) {
+      |             ~~~~~~^~~~~
+../Core/Src/lcd_smol.c:922:50: warning: pointer targets in passing argument 4 of 'LCD_drawString' differ in signedness [-Wpointer-sign]
+  922 |                 LCD_drawString(spi,220,30 + 80*0,"LOW VOLT",8,HX8357_RED,2);
+      |                                                  ^~~~~~~~~~
+      |                                                  |
+      |                                                  char *
+../Core/Src/lcd_smol.c:632:82: note: expected 'unsigned char *' but argument is of type 'char *'
+  632 | void LCD_drawString(SPI_HandleTypeDef* spi, int16_t x, int16_t y, unsigned char* c, uint32_t length, uint16_t color, uint32_t size)
+      |                                                                   ~~~~~~~~~~~~~~~^
+../Core/Src/lcd_smol.c:925:18: warning: suggest parentheses around comparison in operand of '&' [-Wparentheses]
+  925 |         if (temp < 50 & *tempWarn == 1) {
+      |             ~~~~~^~~~
+../Core/Src/lcd_smol.c:929:19: warning: suggest parentheses around comparison in operand of '&' [-Wparentheses]
+  929 |         if (level > 30 & *voltWarn == 1) {
+      |             ~~~~~~^~~~
+../Core/Src/lcd_smol.c:933:22: warning: suggest parentheses around comparison in operand of '&' [-Wparentheses]
+  933 |         if (*warning == 1 & *voltWarn == 0 & *tempWarn == 0) {
+      |             ~~~~~~~~~^~~~
+../Core/Src/lcd_smol.c:933:56: warning: suggest parentheses around comparison in operand of '&' [-Wparentheses]
+  933 |         if (*warning == 1 & *voltWarn == 0 & *tempWarn == 0) {
+      |                                              ~~~~~~~~~~^~~~
+../Core/Src/lcd_smol.c:935:49: warning: pointer targets in passing argument 4 of 'LCD_drawString' differ in signedness [-Wpointer-sign]
+  935 |                 LCD_drawString(spi,20,30 + 80*0,"TADAMHESPEV | UMSM",18,HX8357_BLACK,3);
+      |                                                 ^~~~~~~~~~~~~~~~~~~~
+      |                                                 |
+      |                                                 char *
+../Core/Src/lcd_smol.c:632:82: note: expected 'unsigned char *' but argument is of type 'char *'
+  632 | void LCD_drawString(SPI_HandleTypeDef* spi, int16_t x, int16_t y, unsigned char* c, uint32_t length, uint16_t color, uint32_t size)
+      |                                                                   ~~~~~~~~~~~~~~~^
+../Core/Src/lcd_smol.c: In function 'LCD_updateBattery':
+../Core/Src/lcd_smol.c:947:35: warning: pointer targets in passing argument 4 of 'LCD_drawString' differ in signedness [-Wpointer-sign]
+  947 |         LCD_drawString(spi,370,50,lev,3,HX8357_BLACK,4);
+      |                                   ^~~
+      |                                   |
+      |                                   char *
+../Core/Src/lcd_smol.c:632:82: note: expected 'unsigned char *' but argument is of type 'char *'
+  632 | void LCD_drawString(SPI_HandleTypeDef* spi, int16_t x, int16_t y, unsigned char* c, uint32_t length, uint16_t color, uint32_t size)
+      |                                                                   ~~~~~~~~~~~~~~~^
+../Core/Src/lcd_smol.c: In function 'LCD_TADAMHASPEV':
+../Core/Src/lcd_smol.c:965:37: warning: pointer targets in passing argument 4 of 'LCD_drawString' differ in signedness [-Wpointer-sign]
+  965 |     LCD_drawString(spi,20,30 + 80*0,name,18,HX8357_BLACK,3);
+      |                                     ^~~~
+      |                                     |
+      |                                     char *
+../Core/Src/lcd_smol.c:632:82: note: expected 'unsigned char *' but argument is of type 'char *'
+  632 | void LCD_drawString(SPI_HandleTypeDef* spi, int16_t x, int16_t y, unsigned char* c, uint32_t length, uint16_t color, uint32_t size)
+      |                                                                   ~~~~~~~~~~~~~~~^
+../Core/Src/lcd_smol.c:966:36: warning: pointer targets in passing argument 4 of 'LCD_drawString' differ in signedness [-Wpointer-sign]
+  966 |     LCD_drawString(spi,5,30 + 80*1,speed,6,HX8357_BLACK,3);
+      |                                    ^~~~~
+      |                                    |
+      |                                    char *
+../Core/Src/lcd_smol.c:632:82: note: expected 'unsigned char *' but argument is of type 'char *'
+  632 | void LCD_drawString(SPI_HandleTypeDef* spi, int16_t x, int16_t y, unsigned char* c, uint32_t length, uint16_t color, uint32_t size)
+      |                                                                   ~~~~~~~~~~~~~~~^
+../Core/Src/lcd_smol.c:967:36: warning: pointer targets in passing argument 4 of 'LCD_drawString' differ in signedness [-Wpointer-sign]
+  967 |     LCD_drawString(spi,5,30 + 80*2,temp,5,HX8357_BLACK,3);
+      |                                    ^~~~
+      |                                    |
+      |                                    char *
+../Core/Src/lcd_smol.c:632:82: note: expected 'unsigned char *' but argument is of type 'char *'
+  632 | void LCD_drawString(SPI_HandleTypeDef* spi, int16_t x, int16_t y, unsigned char* c, uint32_t length, uint16_t color, uint32_t size)
+      |                                                                   ~~~~~~~~~~~~~~~^
+../Core/Src/lcd_smol.c:968:36: warning: pointer targets in passing argument 4 of 'LCD_drawString' differ in signedness [-Wpointer-sign]
+  968 |     LCD_drawString(spi,5,30 + 80*3,power,6,HX8357_BLACK,3);
+      |                                    ^~~~~
+      |                                    |
+      |                                    char *
+../Core/Src/lcd_smol.c:632:82: note: expected 'unsigned char *' but argument is of type 'char *'
+  632 | void LCD_drawString(SPI_HandleTypeDef* spi, int16_t x, int16_t y, unsigned char* c, uint32_t length, uint16_t color, uint32_t size)
+      |                                                                   ~~~~~~~~~~~~~~~^
+../Core/Src/lcd_smol.c:970:38: warning: pointer targets in passing argument 4 of 'LCD_drawString' differ in signedness [-Wpointer-sign]
+  970 |     LCD_drawString(spi,280,30 + 80*1,mph,3,HX8357_BLACK,3);
+      |                                      ^~~
+      |                                      |
+      |                                      char *
+../Core/Src/lcd_smol.c:632:82: note: expected 'unsigned char *' but argument is of type 'char *'
+  632 | void LCD_drawString(SPI_HandleTypeDef* spi, int16_t x, int16_t y, unsigned char* c, uint32_t length, uint16_t color, uint32_t size)
+      |                                                                   ~~~~~~~~~~~~~~~^
+../Core/Src/lcd_smol.c:971:38: warning: pointer targets in passing argument 4 of 'LCD_drawString' differ in signedness [-Wpointer-sign]
+  971 |     LCD_drawString(spi,306,30 + 80*2,deg,1,HX8357_BLACK,3);
+      |                                      ^~~
+      |                                      |
+      |                                      char *
+../Core/Src/lcd_smol.c:632:82: note: expected 'unsigned char *' but argument is of type 'char *'
+  632 | void LCD_drawString(SPI_HandleTypeDef* spi, int16_t x, int16_t y, unsigned char* c, uint32_t length, uint16_t color, uint32_t size)
+      |                                                                   ~~~~~~~~~~~~~~~^
+../Core/Src/lcd_smol.c:972:38: warning: pointer targets in passing argument 4 of 'LCD_drawString' differ in signedness [-Wpointer-sign]
+  972 |     LCD_drawString(spi,306,30 + 80*3,watt,1,HX8357_BLACK,3);
+      |                                      ^~~~
+      |                                      |
+      |                                      char *
+../Core/Src/lcd_smol.c:632:82: note: expected 'unsigned char *' but argument is of type 'char *'
+  632 | void LCD_drawString(SPI_HandleTypeDef* spi, int16_t x, int16_t y, unsigned char* c, uint32_t length, uint16_t color, uint32_t size)
+      |                                                                   ~~~~~~~~~~~~~~~^
+../Core/Src/lcd_smol.c:973:31: warning: pointer targets in passing argument 4 of 'LCD_drawString' differ in signedness [-Wpointer-sign]
+  973 |     LCD_drawString(spi,442,50,"%",1,HX8357_BLACK,4);
+      |                               ^~~
+      |                               |
+      |                               char *
+../Core/Src/lcd_smol.c:632:82: note: expected 'unsigned char *' but argument is of type 'char *'
+  632 | void LCD_drawString(SPI_HandleTypeDef* spi, int16_t x, int16_t y, unsigned char* c, uint32_t length, uint16_t color, uint32_t size)
+      |                                                                   ~~~~~~~~~~~~~~~^
+../Core/Src/lcd_smol.c: In function 'LCD_updateVals':
+../Core/Src/lcd_smol.c:900:29: warning: '%f' directive writing between 3 and 317 bytes into a region of size 6 [-Wformat-overflow=]
+  900 |         sprintf(tempString,"%f", data.temp);//buf[1]);
+      |                             ^~
+../Core/Src/lcd_smol.c:900:28: note: assuming directive output of 8 bytes
+  900 |         sprintf(tempString,"%f", data.temp);//buf[1]);
+      |                            ^~~~
+../Core/Src/lcd_smol.c:900:9: note: 'sprintf' output between 4 and 318 bytes into a destination of size 6
+  900 |         sprintf(tempString,"%f", data.temp);//buf[1]);
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/lcd_smol.c:903:30: warning: '%f' directive writing between 3 and 317 bytes into a region of size 4 [-Wformat-overflow=]
+  903 |         sprintf(speedString,"%f", data.speed);//buf[2]);
+      |                              ^~
+../Core/Src/lcd_smol.c:903:29: note: assuming directive output of 8 bytes
+  903 |         sprintf(speedString,"%f", data.speed);//buf[2]);
+      |                             ^~~~
+../Core/Src/lcd_smol.c:903:9: note: 'sprintf' output between 4 and 318 bytes into a destination of size 4
+  903 |         sprintf(speedString,"%f", data.speed);//buf[2]);
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/lcd_smol.c:906:30: warning: '%f' directive writing between 3 and 317 bytes into a region of size 6 [-Wformat-overflow=]
+  906 |         sprintf(powerString,"%f", data.voltage*data.current);//buf[3]*buf[4]);
+      |                              ^~
+../Core/Src/lcd_smol.c:906:29: note: assuming directive output of 8 bytes
+  906 |         sprintf(powerString,"%f", data.voltage*data.current);//buf[3]*buf[4]);
+      |                             ^~~~
+../Core/Src/lcd_smol.c:906:9: note: 'sprintf' output between 4 and 318 bytes into a destination of size 6
+  906 |         sprintf(powerString,"%f", data.voltage*data.current);//buf[3]*buf[4]);
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+arm-none-eabi-gcc -o "lcd_smol.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\STM32L432KCUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="lcd_smol.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: lcd_smol.elf
+ 
+arm-none-eabi-size   lcd_smol.elf 
+arm-none-eabi-objdump -h -S  lcd_smol.elf  > "lcd_smol.list"
+   text	   data	    bss	    dec	    hex	filename
+  41928	    584	   2440	  44952	   af98	lcd_smol.elf
+Finished building: default.size.stdout
+ 
+Finished building: lcd_smol.list
+ 
+14:39:53 **** Incremental Build of configuration Debug for project lcd_smol ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/lcd_smol.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L432xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/lcd_smol.d" -MT"Core/Src/lcd_smol.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/lcd_smol.o"
+../Core/Src/lcd_smol.c: In function 'LCD_updateVals':
+../Core/Src/lcd_smol.c:900:9: warning: implicit declaration of function 'sprintf' [-Wimplicit-function-declaration]
+  900 |         sprintf(tempString,"%f", data.temp);//buf[1]);
+      |         ^~~~~~~
+../Core/Src/lcd_smol.c:11:1: note: include '<stdio.h>' or provide a declaration of 'sprintf'
+   10 | #include <stdlib.h>
+  +++ |+#include <stdio.h>
+   11 | 
+../Core/Src/lcd_smol.c:900:9: warning: incompatible implicit declaration of built-in function 'sprintf' [-Wbuiltin-declaration-mismatch]
+  900 |         sprintf(tempString,"%f", data.temp);//buf[1]);
+      |         ^~~~~~~
+../Core/Src/lcd_smol.c:900:9: note: include '<stdio.h>' or provide a declaration of 'sprintf'
+../Core/Src/lcd_smol.c:901:42: warning: pointer targets in passing argument 4 of 'LCD_drawString' differ in signedness [-Wpointer-sign]
+  901 |         LCD_drawString(spi,130,30 + 80*2,tempString,6,HX8357_BLACK,4);
+      |                                          ^~~~~~~~~~
+      |                                          |
+      |                                          char *
+../Core/Src/lcd_smol.c:632:82: note: expected 'unsigned char *' but argument is of type 'char *'
+  632 | void LCD_drawString(SPI_HandleTypeDef* spi, int16_t x, int16_t y, unsigned char* c, uint32_t length, uint16_t color, uint32_t size)
+      |                                                                   ~~~~~~~~~~~~~~~^
+../Core/Src/lcd_smol.c:904:42: warning: pointer targets in passing argument 4 of 'LCD_drawString' differ in signedness [-Wpointer-sign]
+  904 |         LCD_drawString(spi,130,30 + 80*1,speedString,4,HX8357_BLACK,4);
+      |                                          ^~~~~~~~~~~
+      |                                          |
+      |                                          char *
+../Core/Src/lcd_smol.c:632:82: note: expected 'unsigned char *' but argument is of type 'char *'
+  632 | void LCD_drawString(SPI_HandleTypeDef* spi, int16_t x, int16_t y, unsigned char* c, uint32_t length, uint16_t color, uint32_t size)
+      |                                                                   ~~~~~~~~~~~~~~~^
+../Core/Src/lcd_smol.c:907:42: warning: pointer targets in passing argument 4 of 'LCD_drawString' differ in signedness [-Wpointer-sign]
+  907 |         LCD_drawString(spi,130,30 + 80*3,powerString,6,HX8357_BLACK,4);
+      |                                          ^~~~~~~~~~~
+      |                                          |
+      |                                          char *
+../Core/Src/lcd_smol.c:632:82: note: expected 'unsigned char *' but argument is of type 'char *'
+  632 | void LCD_drawString(SPI_HandleTypeDef* spi, int16_t x, int16_t y, unsigned char* c, uint32_t length, uint16_t color, uint32_t size)
+      |                                                                   ~~~~~~~~~~~~~~~^
+../Core/Src/lcd_smol.c: In function 'LCD_warnings':
+../Core/Src/lcd_smol.c:911:19: warning: suggest parentheses around comparison in operand of '|' [-Wparentheses]
+  911 |         if ((temp >= 50 | level <= 30) & *warning == 0) {
+      |              ~~~~~^~~~~
+../Core/Src/lcd_smol.c:911:51: warning: suggest parentheses around comparison in operand of '&' [-Wparentheses]
+  911 |         if ((temp >= 50 | level <= 30) & *warning == 0) {
+      |                                          ~~~~~~~~~^~~~
+../Core/Src/lcd_smol.c:915:18: warning: suggest parentheses around comparison in operand of '&' [-Wparentheses]
+  915 |         if (temp >= 50 & *tempWarn == 0) {
+      |             ~~~~~^~~~~
+../Core/Src/lcd_smol.c:917:49: warning: pointer targets in passing argument 4 of 'LCD_drawString' differ in signedness [-Wpointer-sign]
+  917 |                 LCD_drawString(spi,55,30 + 80*0,"HIGH TEMP",9,HX8357_RED,2);
+      |                                                 ^~~~~~~~~~~
+      |                                                 |
+      |                                                 char *
+../Core/Src/lcd_smol.c:632:82: note: expected 'unsigned char *' but argument is of type 'char *'
+  632 | void LCD_drawString(SPI_HandleTypeDef* spi, int16_t x, int16_t y, unsigned char* c, uint32_t length, uint16_t color, uint32_t size)
+      |                                                                   ~~~~~~~~~~~~~~~^
+../Core/Src/lcd_smol.c:920:19: warning: suggest parentheses around comparison in operand of '&' [-Wparentheses]
+  920 |         if (level <= 30 & *voltWarn == 0) {
+      |             ~~~~~~^~~~~
+../Core/Src/lcd_smol.c:922:50: warning: pointer targets in passing argument 4 of 'LCD_drawString' differ in signedness [-Wpointer-sign]
+  922 |                 LCD_drawString(spi,220,30 + 80*0,"LOW VOLT",8,HX8357_RED,2);
+      |                                                  ^~~~~~~~~~
+      |                                                  |
+      |                                                  char *
+../Core/Src/lcd_smol.c:632:82: note: expected 'unsigned char *' but argument is of type 'char *'
+  632 | void LCD_drawString(SPI_HandleTypeDef* spi, int16_t x, int16_t y, unsigned char* c, uint32_t length, uint16_t color, uint32_t size)
+      |                                                                   ~~~~~~~~~~~~~~~^
+../Core/Src/lcd_smol.c:925:18: warning: suggest parentheses around comparison in operand of '&' [-Wparentheses]
+  925 |         if (temp < 50 & *tempWarn == 1) {
+      |             ~~~~~^~~~
+../Core/Src/lcd_smol.c:929:19: warning: suggest parentheses around comparison in operand of '&' [-Wparentheses]
+  929 |         if (level > 30 & *voltWarn == 1) {
+      |             ~~~~~~^~~~
+../Core/Src/lcd_smol.c:933:22: warning: suggest parentheses around comparison in operand of '&' [-Wparentheses]
+  933 |         if (*warning == 1 & *voltWarn == 0 & *tempWarn == 0) {
+      |             ~~~~~~~~~^~~~
+../Core/Src/lcd_smol.c:933:56: warning: suggest parentheses around comparison in operand of '&' [-Wparentheses]
+  933 |         if (*warning == 1 & *voltWarn == 0 & *tempWarn == 0) {
+      |                                              ~~~~~~~~~~^~~~
+../Core/Src/lcd_smol.c:935:49: warning: pointer targets in passing argument 4 of 'LCD_drawString' differ in signedness [-Wpointer-sign]
+  935 |                 LCD_drawString(spi,20,30 + 80*0,"TADAMHESPEV | UMSM",18,HX8357_BLACK,3);
+      |                                                 ^~~~~~~~~~~~~~~~~~~~
+      |                                                 |
+      |                                                 char *
+../Core/Src/lcd_smol.c:632:82: note: expected 'unsigned char *' but argument is of type 'char *'
+  632 | void LCD_drawString(SPI_HandleTypeDef* spi, int16_t x, int16_t y, unsigned char* c, uint32_t length, uint16_t color, uint32_t size)
+      |                                                                   ~~~~~~~~~~~~~~~^
+../Core/Src/lcd_smol.c: In function 'LCD_updateBattery':
+../Core/Src/lcd_smol.c:947:35: warning: pointer targets in passing argument 4 of 'LCD_drawString' differ in signedness [-Wpointer-sign]
+  947 |         LCD_drawString(spi,370,50,lev,3,HX8357_BLACK,4);
+      |                                   ^~~
+      |                                   |
+      |                                   char *
+../Core/Src/lcd_smol.c:632:82: note: expected 'unsigned char *' but argument is of type 'char *'
+  632 | void LCD_drawString(SPI_HandleTypeDef* spi, int16_t x, int16_t y, unsigned char* c, uint32_t length, uint16_t color, uint32_t size)
+      |                                                                   ~~~~~~~~~~~~~~~^
+../Core/Src/lcd_smol.c: In function 'LCD_TADAMHASPEV':
+../Core/Src/lcd_smol.c:965:37: warning: pointer targets in passing argument 4 of 'LCD_drawString' differ in signedness [-Wpointer-sign]
+  965 |     LCD_drawString(spi,20,30 + 80*0,name,18,HX8357_BLACK,3);
+      |                                     ^~~~
+      |                                     |
+      |                                     char *
+../Core/Src/lcd_smol.c:632:82: note: expected 'unsigned char *' but argument is of type 'char *'
+  632 | void LCD_drawString(SPI_HandleTypeDef* spi, int16_t x, int16_t y, unsigned char* c, uint32_t length, uint16_t color, uint32_t size)
+      |                                                                   ~~~~~~~~~~~~~~~^
+../Core/Src/lcd_smol.c:966:36: warning: pointer targets in passing argument 4 of 'LCD_drawString' differ in signedness [-Wpointer-sign]
+  966 |     LCD_drawString(spi,5,30 + 80*1,speed,6,HX8357_BLACK,3);
+      |                                    ^~~~~
+      |                                    |
+      |                                    char *
+../Core/Src/lcd_smol.c:632:82: note: expected 'unsigned char *' but argument is of type 'char *'
+  632 | void LCD_drawString(SPI_HandleTypeDef* spi, int16_t x, int16_t y, unsigned char* c, uint32_t length, uint16_t color, uint32_t size)
+      |                                                                   ~~~~~~~~~~~~~~~^
+../Core/Src/lcd_smol.c:967:36: warning: pointer targets in passing argument 4 of 'LCD_drawString' differ in signedness [-Wpointer-sign]
+  967 |     LCD_drawString(spi,5,30 + 80*2,temp,5,HX8357_BLACK,3);
+      |                                    ^~~~
+      |                                    |
+      |                                    char *
+../Core/Src/lcd_smol.c:632:82: note: expected 'unsigned char *' but argument is of type 'char *'
+  632 | void LCD_drawString(SPI_HandleTypeDef* spi, int16_t x, int16_t y, unsigned char* c, uint32_t length, uint16_t color, uint32_t size)
+      |                                                                   ~~~~~~~~~~~~~~~^
+../Core/Src/lcd_smol.c:968:36: warning: pointer targets in passing argument 4 of 'LCD_drawString' differ in signedness [-Wpointer-sign]
+  968 |     LCD_drawString(spi,5,30 + 80*3,power,6,HX8357_BLACK,3);
+      |                                    ^~~~~
+      |                                    |
+      |                                    char *
+../Core/Src/lcd_smol.c:632:82: note: expected 'unsigned char *' but argument is of type 'char *'
+  632 | void LCD_drawString(SPI_HandleTypeDef* spi, int16_t x, int16_t y, unsigned char* c, uint32_t length, uint16_t color, uint32_t size)
+      |                                                                   ~~~~~~~~~~~~~~~^
+../Core/Src/lcd_smol.c:970:38: warning: pointer targets in passing argument 4 of 'LCD_drawString' differ in signedness [-Wpointer-sign]
+  970 |     LCD_drawString(spi,280,30 + 80*1,mph,3,HX8357_BLACK,3);
+      |                                      ^~~
+      |                                      |
+      |                                      char *
+../Core/Src/lcd_smol.c:632:82: note: expected 'unsigned char *' but argument is of type 'char *'
+  632 | void LCD_drawString(SPI_HandleTypeDef* spi, int16_t x, int16_t y, unsigned char* c, uint32_t length, uint16_t color, uint32_t size)
+      |                                                                   ~~~~~~~~~~~~~~~^
+../Core/Src/lcd_smol.c:971:38: warning: pointer targets in passing argument 4 of 'LCD_drawString' differ in signedness [-Wpointer-sign]
+  971 |     LCD_drawString(spi,306,30 + 80*2,deg,1,HX8357_BLACK,3);
+      |                                      ^~~
+      |                                      |
+      |                                      char *
+../Core/Src/lcd_smol.c:632:82: note: expected 'unsigned char *' but argument is of type 'char *'
+  632 | void LCD_drawString(SPI_HandleTypeDef* spi, int16_t x, int16_t y, unsigned char* c, uint32_t length, uint16_t color, uint32_t size)
+      |                                                                   ~~~~~~~~~~~~~~~^
+../Core/Src/lcd_smol.c:972:38: warning: pointer targets in passing argument 4 of 'LCD_drawString' differ in signedness [-Wpointer-sign]
+  972 |     LCD_drawString(spi,306,30 + 80*3,watt,1,HX8357_BLACK,3);
+      |                                      ^~~~
+      |                                      |
+      |                                      char *
+../Core/Src/lcd_smol.c:632:82: note: expected 'unsigned char *' but argument is of type 'char *'
+  632 | void LCD_drawString(SPI_HandleTypeDef* spi, int16_t x, int16_t y, unsigned char* c, uint32_t length, uint16_t color, uint32_t size)
+      |                                                                   ~~~~~~~~~~~~~~~^
+../Core/Src/lcd_smol.c:973:31: warning: pointer targets in passing argument 4 of 'LCD_drawString' differ in signedness [-Wpointer-sign]
+  973 |     LCD_drawString(spi,442,50,"%",1,HX8357_BLACK,4);
+      |                               ^~~
+      |                               |
+      |                               char *
+../Core/Src/lcd_smol.c:632:82: note: expected 'unsigned char *' but argument is of type 'char *'
+  632 | void LCD_drawString(SPI_HandleTypeDef* spi, int16_t x, int16_t y, unsigned char* c, uint32_t length, uint16_t color, uint32_t size)
+      |                                                                   ~~~~~~~~~~~~~~~^
+arm-none-eabi-gcc -o "lcd_smol.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\STM32L432KCUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="lcd_smol.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: lcd_smol.elf
+ 
+arm-none-eabi-size   lcd_smol.elf 
+arm-none-eabi-objdump -h -S  lcd_smol.elf  > "lcd_smol.list"
+   text	   data	    bss	    dec	    hex	filename
+  41904	    584	   2480	  44968	   afa8	lcd_smol.elf
+Finished building: default.size.stdout
+ 
+Finished building: lcd_smol.list
+ 
+14:42:55 **** Incremental Build of configuration Debug for project lcd_smol ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L432xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "lcd_smol.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\STM32L432KCUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="lcd_smol.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: lcd_smol.elf
+ 
+arm-none-eabi-size   lcd_smol.elf 
+arm-none-eabi-objdump -h -S  lcd_smol.elf  > "lcd_smol.list"
+   text	   data	    bss	    dec	    hex	filename
+  41936	    584	   2480	  45000	   afc8	lcd_smol.elf
+Finished building: default.size.stdout
+ 
+Finished building: lcd_smol.list
+ 
+14:56:09 **** Incremental Build of configuration Debug for project lcd_smol ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L432xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:130:27: error: invalid type argument of '->' (have 'UART_HandleTypeDef' {aka 'struct __UART_HandleTypeDef'})
+  130 |                 if (huart1->ErrorCode == 8) {
+      |                           ^~
+make: *** [Core/Src/subdir.mk:40: Core/Src/main.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+14:56:57 **** Incremental Build of configuration Debug for project lcd_smol ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L432xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "lcd_smol.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\STM32L432KCUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="lcd_smol.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: lcd_smol.elf
+ 
+arm-none-eabi-size   lcd_smol.elf 
+arm-none-eabi-objdump -h -S  lcd_smol.elf  > "lcd_smol.list"
+   text	   data	    bss	    dec	    hex	filename
+  41928	    584	   2480	  44992	   afc0	lcd_smol.elf
+Finished building: default.size.stdout
+ 
+Finished building: lcd_smol.list
+ 
+15:03:24 **** Incremental Build of configuration Debug for project lcd_smol ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L432xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "lcd_smol.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\STM32L432KCUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="lcd_smol.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: lcd_smol.elf
+ 
+arm-none-eabi-size   lcd_smol.elf 
+arm-none-eabi-objdump -h -S  lcd_smol.elf  > "lcd_smol.list"
+   text	   data	    bss	    dec	    hex	filename
+  41952	    584	   2480	  45016	   afd8	lcd_smol.elf
+Finished building: default.size.stdout
+ 
+Finished building: lcd_smol.list
+ 
+15:07:52 **** Incremental Build of configuration Debug for project lcd_smol ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/lcd_smol.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L432xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/lcd_smol.d" -MT"Core/Src/lcd_smol.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/lcd_smol.o"
+../Core/Src/lcd_smol.c: In function 'LCD_updateVals':
+../Core/Src/lcd_smol.c:900:9: warning: implicit declaration of function 'sprintf' [-Wimplicit-function-declaration]
+  900 |         sprintf(tempString,"%f", data.temp);//buf[1]);
+      |         ^~~~~~~
+../Core/Src/lcd_smol.c:11:1: note: include '<stdio.h>' or provide a declaration of 'sprintf'
+   10 | #include <stdlib.h>
+  +++ |+#include <stdio.h>
+   11 | 
+../Core/Src/lcd_smol.c:900:9: warning: incompatible implicit declaration of built-in function 'sprintf' [-Wbuiltin-declaration-mismatch]
+  900 |         sprintf(tempString,"%f", data.temp);//buf[1]);
+      |         ^~~~~~~
+../Core/Src/lcd_smol.c:900:9: note: include '<stdio.h>' or provide a declaration of 'sprintf'
+../Core/Src/lcd_smol.c:901:42: warning: pointer targets in passing argument 4 of 'LCD_drawString' differ in signedness [-Wpointer-sign]
+  901 |         LCD_drawString(spi,130,30 + 80*2,tempString,6,HX8357_BLACK,4);
+      |                                          ^~~~~~~~~~
+      |                                          |
+      |                                          char *
+../Core/Src/lcd_smol.c:632:82: note: expected 'unsigned char *' but argument is of type 'char *'
+  632 | void LCD_drawString(SPI_HandleTypeDef* spi, int16_t x, int16_t y, unsigned char* c, uint32_t length, uint16_t color, uint32_t size)
+      |                                                                   ~~~~~~~~~~~~~~~^
+../Core/Src/lcd_smol.c:904:42: warning: pointer targets in passing argument 4 of 'LCD_drawString' differ in signedness [-Wpointer-sign]
+  904 |         LCD_drawString(spi,130,30 + 80*1,speedString,4,HX8357_BLACK,4);
+      |                                          ^~~~~~~~~~~
+      |                                          |
+      |                                          char *
+../Core/Src/lcd_smol.c:632:82: note: expected 'unsigned char *' but argument is of type 'char *'
+  632 | void LCD_drawString(SPI_HandleTypeDef* spi, int16_t x, int16_t y, unsigned char* c, uint32_t length, uint16_t color, uint32_t size)
+      |                                                                   ~~~~~~~~~~~~~~~^
+../Core/Src/lcd_smol.c:907:42: warning: pointer targets in passing argument 4 of 'LCD_drawString' differ in signedness [-Wpointer-sign]
+  907 |         LCD_drawString(spi,130,30 + 80*3,powerString,6,HX8357_BLACK,4);
+      |                                          ^~~~~~~~~~~
+      |                                          |
+      |                                          char *
+../Core/Src/lcd_smol.c:632:82: note: expected 'unsigned char *' but argument is of type 'char *'
+  632 | void LCD_drawString(SPI_HandleTypeDef* spi, int16_t x, int16_t y, unsigned char* c, uint32_t length, uint16_t color, uint32_t size)
+      |                                                                   ~~~~~~~~~~~~~~~^
+../Core/Src/lcd_smol.c: In function 'LCD_warnings':
+../Core/Src/lcd_smol.c:911:19: warning: suggest parentheses around comparison in operand of '|' [-Wparentheses]
+  911 |         if ((temp >= 50 | level <= 30) & *warning == 0) {
+      |              ~~~~~^~~~~
+../Core/Src/lcd_smol.c:911:51: warning: suggest parentheses around comparison in operand of '&' [-Wparentheses]
+  911 |         if ((temp >= 50 | level <= 30) & *warning == 0) {
+      |                                          ~~~~~~~~~^~~~
+../Core/Src/lcd_smol.c:912:49: warning: pointer targets in passing argument 4 of 'LCD_drawString' differ in signedness [-Wpointer-sign]
+  912 |                 LCD_drawString(spi,20,30 + 80*0,"TADAMHESPEV | UMSM",18,HX8357_WHITE,3);
+      |                                                 ^~~~~~~~~~~~~~~~~~~~
+      |                                                 |
+      |                                                 char *
+../Core/Src/lcd_smol.c:632:82: note: expected 'unsigned char *' but argument is of type 'char *'
+  632 | void LCD_drawString(SPI_HandleTypeDef* spi, int16_t x, int16_t y, unsigned char* c, uint32_t length, uint16_t color, uint32_t size)
+      |                                                                   ~~~~~~~~~~~~~~~^
+../Core/Src/lcd_smol.c:915:18: warning: suggest parentheses around comparison in operand of '&' [-Wparentheses]
+  915 |         if (temp >= 50 & *tempWarn == 0) {
+      |             ~~~~~^~~~~
+../Core/Src/lcd_smol.c:917:49: warning: pointer targets in passing argument 4 of 'LCD_drawString' differ in signedness [-Wpointer-sign]
+  917 |                 LCD_drawString(spi,55,30 + 80*0,"HIGH TEMP",9,HX8357_RED,2);
+      |                                                 ^~~~~~~~~~~
+      |                                                 |
+      |                                                 char *
+../Core/Src/lcd_smol.c:632:82: note: expected 'unsigned char *' but argument is of type 'char *'
+  632 | void LCD_drawString(SPI_HandleTypeDef* spi, int16_t x, int16_t y, unsigned char* c, uint32_t length, uint16_t color, uint32_t size)
+      |                                                                   ~~~~~~~~~~~~~~~^
+../Core/Src/lcd_smol.c:920:19: warning: suggest parentheses around comparison in operand of '&' [-Wparentheses]
+  920 |         if (level <= 30 & *voltWarn == 0) {
+      |             ~~~~~~^~~~~
+../Core/Src/lcd_smol.c:922:50: warning: pointer targets in passing argument 4 of 'LCD_drawString' differ in signedness [-Wpointer-sign]
+  922 |                 LCD_drawString(spi,220,30 + 80*0,"LOW VOLT",8,HX8357_RED,2);
+      |                                                  ^~~~~~~~~~
+      |                                                  |
+      |                                                  char *
+../Core/Src/lcd_smol.c:632:82: note: expected 'unsigned char *' but argument is of type 'char *'
+  632 | void LCD_drawString(SPI_HandleTypeDef* spi, int16_t x, int16_t y, unsigned char* c, uint32_t length, uint16_t color, uint32_t size)
+      |                                                                   ~~~~~~~~~~~~~~~^
+../Core/Src/lcd_smol.c:925:18: warning: suggest parentheses around comparison in operand of '&' [-Wparentheses]
+  925 |         if (temp < 50 & *tempWarn == 1) {
+      |             ~~~~~^~~~
+../Core/Src/lcd_smol.c:926:49: warning: pointer targets in passing argument 4 of 'LCD_drawString' differ in signedness [-Wpointer-sign]
+  926 |                 LCD_drawString(spi,55,30 + 80*0,"HIGH TEMP",9,HX8357_WHITE,2);
+      |                                                 ^~~~~~~~~~~
+      |                                                 |
+      |                                                 char *
+../Core/Src/lcd_smol.c:632:82: note: expected 'unsigned char *' but argument is of type 'char *'
+  632 | void LCD_drawString(SPI_HandleTypeDef* spi, int16_t x, int16_t y, unsigned char* c, uint32_t length, uint16_t color, uint32_t size)
+      |                                                                   ~~~~~~~~~~~~~~~^
+../Core/Src/lcd_smol.c:929:19: warning: suggest parentheses around comparison in operand of '&' [-Wparentheses]
+  929 |         if (level > 30 & *voltWarn == 1) {
+      |             ~~~~~~^~~~
+../Core/Src/lcd_smol.c:930:50: warning: pointer targets in passing argument 4 of 'LCD_drawString' differ in signedness [-Wpointer-sign]
+  930 |                 LCD_drawString(spi,220,30 + 80*0,"LOW VOLT",8,HX8357_WHITE,2);
+      |                                                  ^~~~~~~~~~
+      |                                                  |
+      |                                                  char *
+../Core/Src/lcd_smol.c:632:82: note: expected 'unsigned char *' but argument is of type 'char *'
+  632 | void LCD_drawString(SPI_HandleTypeDef* spi, int16_t x, int16_t y, unsigned char* c, uint32_t length, uint16_t color, uint32_t size)
+      |                                                                   ~~~~~~~~~~~~~~~^
+../Core/Src/lcd_smol.c:933:22: warning: suggest parentheses around comparison in operand of '&' [-Wparentheses]
+  933 |         if (*warning == 1 & *voltWarn == 0 & *tempWarn == 0) {
+      |             ~~~~~~~~~^~~~
+../Core/Src/lcd_smol.c:933:56: warning: suggest parentheses around comparison in operand of '&' [-Wparentheses]
+  933 |         if (*warning == 1 & *voltWarn == 0 & *tempWarn == 0) {
+      |                                              ~~~~~~~~~~^~~~
+../Core/Src/lcd_smol.c:935:49: warning: pointer targets in passing argument 4 of 'LCD_drawString' differ in signedness [-Wpointer-sign]
+  935 |                 LCD_drawString(spi,20,30 + 80*0,"TADAMHESPEV | UMSM",18,HX8357_BLACK,3);
+      |                                                 ^~~~~~~~~~~~~~~~~~~~
+      |                                                 |
+      |                                                 char *
+../Core/Src/lcd_smol.c:632:82: note: expected 'unsigned char *' but argument is of type 'char *'
+  632 | void LCD_drawString(SPI_HandleTypeDef* spi, int16_t x, int16_t y, unsigned char* c, uint32_t length, uint16_t color, uint32_t size)
+      |                                                                   ~~~~~~~~~~~~~~~^
+../Core/Src/lcd_smol.c: In function 'LCD_updateBattery':
+../Core/Src/lcd_smol.c:947:35: warning: pointer targets in passing argument 4 of 'LCD_drawString' differ in signedness [-Wpointer-sign]
+  947 |         LCD_drawString(spi,370,50,lev,3,HX8357_BLACK,4);
+      |                                   ^~~
+      |                                   |
+      |                                   char *
+../Core/Src/lcd_smol.c:632:82: note: expected 'unsigned char *' but argument is of type 'char *'
+  632 | void LCD_drawString(SPI_HandleTypeDef* spi, int16_t x, int16_t y, unsigned char* c, uint32_t length, uint16_t color, uint32_t size)
+      |                                                                   ~~~~~~~~~~~~~~~^
+../Core/Src/lcd_smol.c: In function 'LCD_TADAMHASPEV':
+../Core/Src/lcd_smol.c:965:37: warning: pointer targets in passing argument 4 of 'LCD_drawString' differ in signedness [-Wpointer-sign]
+  965 |     LCD_drawString(spi,20,30 + 80*0,name,18,HX8357_BLACK,3);
+      |                                     ^~~~
+      |                                     |
+      |                                     char *
+../Core/Src/lcd_smol.c:632:82: note: expected 'unsigned char *' but argument is of type 'char *'
+  632 | void LCD_drawString(SPI_HandleTypeDef* spi, int16_t x, int16_t y, unsigned char* c, uint32_t length, uint16_t color, uint32_t size)
+      |                                                                   ~~~~~~~~~~~~~~~^
+../Core/Src/lcd_smol.c:966:36: warning: pointer targets in passing argument 4 of 'LCD_drawString' differ in signedness [-Wpointer-sign]
+  966 |     LCD_drawString(spi,5,30 + 80*1,speed,6,HX8357_BLACK,3);
+      |                                    ^~~~~
+      |                                    |
+      |                                    char *
+../Core/Src/lcd_smol.c:632:82: note: expected 'unsigned char *' but argument is of type 'char *'
+  632 | void LCD_drawString(SPI_HandleTypeDef* spi, int16_t x, int16_t y, unsigned char* c, uint32_t length, uint16_t color, uint32_t size)
+      |                                                                   ~~~~~~~~~~~~~~~^
+../Core/Src/lcd_smol.c:967:36: warning: pointer targets in passing argument 4 of 'LCD_drawString' differ in signedness [-Wpointer-sign]
+  967 |     LCD_drawString(spi,5,30 + 80*2,temp,5,HX8357_BLACK,3);
+      |                                    ^~~~
+      |                                    |
+      |                                    char *
+../Core/Src/lcd_smol.c:632:82: note: expected 'unsigned char *' but argument is of type 'char *'
+  632 | void LCD_drawString(SPI_HandleTypeDef* spi, int16_t x, int16_t y, unsigned char* c, uint32_t length, uint16_t color, uint32_t size)
+      |                                                                   ~~~~~~~~~~~~~~~^
+../Core/Src/lcd_smol.c:968:36: warning: pointer targets in passing argument 4 of 'LCD_drawString' differ in signedness [-Wpointer-sign]
+  968 |     LCD_drawString(spi,5,30 + 80*3,power,6,HX8357_BLACK,3);
+      |                                    ^~~~~
+      |                                    |
+      |                                    char *
+../Core/Src/lcd_smol.c:632:82: note: expected 'unsigned char *' but argument is of type 'char *'
+  632 | void LCD_drawString(SPI_HandleTypeDef* spi, int16_t x, int16_t y, unsigned char* c, uint32_t length, uint16_t color, uint32_t size)
+      |                                                                   ~~~~~~~~~~~~~~~^
+../Core/Src/lcd_smol.c:970:38: warning: pointer targets in passing argument 4 of 'LCD_drawString' differ in signedness [-Wpointer-sign]
+  970 |     LCD_drawString(spi,280,30 + 80*1,mph,3,HX8357_BLACK,3);
+      |                                      ^~~
+      |                                      |
+      |                                      char *
+../Core/Src/lcd_smol.c:632:82: note: expected 'unsigned char *' but argument is of type 'char *'
+  632 | void LCD_drawString(SPI_HandleTypeDef* spi, int16_t x, int16_t y, unsigned char* c, uint32_t length, uint16_t color, uint32_t size)
+      |                                                                   ~~~~~~~~~~~~~~~^
+../Core/Src/lcd_smol.c:971:38: warning: pointer targets in passing argument 4 of 'LCD_drawString' differ in signedness [-Wpointer-sign]
+  971 |     LCD_drawString(spi,306,30 + 80*2,deg,1,HX8357_BLACK,3);
+      |                                      ^~~
+      |                                      |
+      |                                      char *
+../Core/Src/lcd_smol.c:632:82: note: expected 'unsigned char *' but argument is of type 'char *'
+  632 | void LCD_drawString(SPI_HandleTypeDef* spi, int16_t x, int16_t y, unsigned char* c, uint32_t length, uint16_t color, uint32_t size)
+      |                                                                   ~~~~~~~~~~~~~~~^
+../Core/Src/lcd_smol.c:972:38: warning: pointer targets in passing argument 4 of 'LCD_drawString' differ in signedness [-Wpointer-sign]
+  972 |     LCD_drawString(spi,306,30 + 80*3,watt,1,HX8357_BLACK,3);
+      |                                      ^~~~
+      |                                      |
+      |                                      char *
+../Core/Src/lcd_smol.c:632:82: note: expected 'unsigned char *' but argument is of type 'char *'
+  632 | void LCD_drawString(SPI_HandleTypeDef* spi, int16_t x, int16_t y, unsigned char* c, uint32_t length, uint16_t color, uint32_t size)
+      |                                                                   ~~~~~~~~~~~~~~~^
+../Core/Src/lcd_smol.c:973:31: warning: pointer targets in passing argument 4 of 'LCD_drawString' differ in signedness [-Wpointer-sign]
+  973 |     LCD_drawString(spi,442,50,"%",1,HX8357_BLACK,4);
+      |                               ^~~
+      |                               |
+      |                               char *
+../Core/Src/lcd_smol.c:632:82: note: expected 'unsigned char *' but argument is of type 'char *'
+  632 | void LCD_drawString(SPI_HandleTypeDef* spi, int16_t x, int16_t y, unsigned char* c, uint32_t length, uint16_t color, uint32_t size)
+      |                                                                   ~~~~~~~~~~~~~~~^
+arm-none-eabi-gcc -o "lcd_smol.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\STM32L432KCUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="lcd_smol.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: lcd_smol.elf
+ 
+arm-none-eabi-size   lcd_smol.elf 
+arm-none-eabi-objdump -h -S  lcd_smol.elf  > "lcd_smol.list"
+   text	   data	    bss	    dec	    hex	filename
+  41960	    584	   2480	  45024	   afe0	lcd_smol.elf
+Finished building: default.size.stdout
+ 
+Finished building: lcd_smol.list
+ 
+15:18:21 **** Incremental Build of configuration Debug for project lcd_smol ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L432xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'HAL_UART_RxCpltCallback':
+../Core/Src/main.c:419:23: warning: initialization of 'float *' from incompatible pointer type 'uint8_t *' {aka 'unsigned char *'} [-Wincompatible-pointer-types]
+  419 |         float* fbuf = buf;
+      |                       ^~~
+arm-none-eabi-gcc -o "lcd_smol.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\STM32L432KCUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="lcd_smol.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: lcd_smol.elf
+ 
+arm-none-eabi-size   lcd_smol.elf 
+arm-none-eabi-objdump -h -S  lcd_smol.elf  > "lcd_smol.list"
+   text	   data	    bss	    dec	    hex	filename
+  41816	    584	   2480	  44880	   af50	lcd_smol.elf
+Finished building: default.size.stdout
+ 
+Finished building: lcd_smol.list
+ 
+15:19:40 **** Incremental Build of configuration Debug for project lcd_smol ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L432xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'HAL_UART_RxCpltCallback':
+../Core/Src/main.c:428:23: warning: initialization of 'float *' from incompatible pointer type 'uint8_t *' {aka 'unsigned char *'} [-Wincompatible-pointer-types]
+  428 |         float* fbuf = buf;
+      |                       ^~~
+arm-none-eabi-gcc -o "lcd_smol.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\STM32L432KCUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="lcd_smol.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: lcd_smol.elf
+ 
+arm-none-eabi-size   lcd_smol.elf 
+arm-none-eabi-objdump -h -S  lcd_smol.elf  > "lcd_smol.list"
+   text	   data	    bss	    dec	    hex	filename
+  41936	    584	   2480	  45000	   afc8	lcd_smol.elf
+Finished building: default.size.stdout
+ 
+Finished building: lcd_smol.list
+ 
+15:20:55 **** Incremental Build of configuration Debug for project lcd_smol ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L432xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'HAL_UART_RxCpltCallback':
+../Core/Src/main.c:428:23: warning: initialization of 'float *' from incompatible pointer type 'uint8_t *' {aka 'unsigned char *'} [-Wincompatible-pointer-types]
+  428 |         float* fbuf = buf;
+      |                       ^~~
+arm-none-eabi-gcc -o "lcd_smol.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\lcd_smol\STM32L432KCUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="lcd_smol.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: lcd_smol.elf
+ 
+arm-none-eabi-size   lcd_smol.elf 
+arm-none-eabi-objdump -h -S  lcd_smol.elf  > "lcd_smol.list"
+   text	   data	    bss	    dec	    hex	filename
+  41936	    584	   2480	  45000	   afc8	lcd_smol.elf
+Finished building: default.size.stdout
+ 
+Finished building: lcd_smol.list
+ 

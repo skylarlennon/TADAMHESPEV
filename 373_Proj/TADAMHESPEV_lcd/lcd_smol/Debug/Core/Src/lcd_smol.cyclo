@@ -30,6 +30,6 @@
 ../Core/Src/lcd_smol.c:865:6:LCD_drawFrame	1
 ../Core/Src/lcd_smol.c:878:6:LCD_fillBattery	4
 ../Core/Src/lcd_smol.c:898:6:LCD_updateVals	1
-../Core/Src/lcd_smol.c:940:6:LCD_warnings	7
-../Core/Src/lcd_smol.c:970:6:LCD_updateBattery	3
-../Core/Src/lcd_smol.c:980:6:LCD_TADAMHASPEV	1
+../Core/Src/lcd_smol.c:910:6:LCD_warnings	7
+../Core/Src/lcd_smol.c:940:6:LCD_updateBattery	3
+../Core/Src/lcd_smol.c:950:6:LCD_TADAMHASPEV	1
