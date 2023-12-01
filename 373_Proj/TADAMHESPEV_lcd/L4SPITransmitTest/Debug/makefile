@@ -60,8 +60,8 @@ all: main-build
 main-build: L4SPITransmitTest.elf secondary-outputs
 
 # Tool invocations
-L4SPITransmitTest.elf L4SPITransmitTest.map: $(OBJS) $(USER_OBJS) C:\Users\benwo\STM32CubeIDE\workspace_1.13.1\L4SPITransmitTest\STM32L4R5ZITXP_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "L4SPITransmitTest.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\benwo\STM32CubeIDE\workspace_1.13.1\L4SPITransmitTest\STM32L4R5ZITXP_FLASH.ld" --specs=nosys.specs -Wl,-Map="L4SPITransmitTest.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -Wl,--end-group
+L4SPITransmitTest.elf L4SPITransmitTest.map: $(OBJS) $(USER_OBJS) C:\Users\benwo\Documents\eecs373\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\L4SPITransmitTest\STM32L4R5ZITXP_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "L4SPITransmitTest.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\benwo\Documents\eecs373\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\L4SPITransmitTest\STM32L4R5ZITXP_FLASH.ld" --specs=nosys.specs -Wl,-Map="L4SPITransmitTest.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
