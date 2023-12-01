@@ -1,0 +1,36 @@
+/*
+ * TADAMHESPEVDataTemplate.h
+ *
+ *  Created on: Nov 30, 2023
+ *      Author: benwo
+ */
+
+#ifndef INC_TADAMHESPEVDATATEMPLATE_H_
+#define INC_TADAMHESPEVDATATEMPLATE_H_
+
+struct TelData {
+	float accel;
+	float temp;
+	float speed;
+	float voltage;
+	float current;
+};
+inline void TADBufferToStruct(float*, struct TelData*);
+inline void TADBufferToStruct(float buf[], struct TelData *data){
+	//buf[0] accel, buf[1] temp, buf[2] speed, buf[3] voltage, buf[4] current
+	data->accel = buf[0]/(2^8);
+	data->temp = buf[1]/(2^8);
+	data->speed = buf[2]/(2^8);
+	data->voltage = buf[3]/(2^8);
+	data->current = buf[4]/(2^8);
+}
+
+inline void TADStructToBuffer(float buf[], struct TelData *data){
+	buf[0] = data->accel;
+	buf[1] = data->temp;
+	buf[2] = data->speed;
+	buf[3] = data->voltage;
+	buf[4] = data->current;
+}
+
+#endif /* INC_TADAMHESPEVDATATEMPLATE_H_ */
