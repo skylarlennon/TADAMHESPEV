@@ -79,7 +79,6 @@ static void MX_SPI2_Init(void);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 volatile struct TelData teldata;
-uint8_t buf[20];
 
 uint16_t read_Temperature(uint16_t GPIO_PIN) {
 	uint16_t spi_buf[2];
@@ -176,9 +175,7 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-	  TADStructToBuffer(buf,data);
-	  HAL_UART_Transmit(&huart1,&buf,sizeof(buf),10);
-	  HAL_Delay(1000);
+
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */

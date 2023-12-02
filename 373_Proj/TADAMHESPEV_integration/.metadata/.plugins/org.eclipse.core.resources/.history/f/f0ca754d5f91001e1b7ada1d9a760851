@@ -178,7 +178,6 @@ int main(void)
     /* USER CODE END WHILE */
 	  TADStructToBuffer(buf,data);
 	  HAL_UART_Transmit(&huart1,&buf,sizeof(buf),10);
-	  HAL_Delay(1000);
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
