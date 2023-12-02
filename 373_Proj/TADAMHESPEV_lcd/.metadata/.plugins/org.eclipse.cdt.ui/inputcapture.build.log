@@ -1,0 +1,17 @@
+17:32:15 **** Incremental Build of configuration Debug for project inputcapture ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4R5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "inputcapture.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\inputcapture\STM32L4R5ZITXP_FLASH.ld" --specs=nosys.specs -Wl,-Map="inputcapture.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: inputcapture.elf
+ 
+arm-none-eabi-size   inputcapture.elf 
+arm-none-eabi-objdump -h -S  inputcapture.elf  > "inputcapture.list"
+   text	   data	    bss	    dec	    hex	filename
+  13312	     24	   1656	  14992	   3a90	inputcapture.elf
+Finished building: default.size.stdout
+ 
+Finished building: inputcapture.list
+ 
+
+17:32:18 Build Finished. 0 errors, 0 warnings. (took 2s.169ms)
+

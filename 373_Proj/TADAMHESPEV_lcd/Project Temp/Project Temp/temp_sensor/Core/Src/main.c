@@ -85,7 +85,7 @@ uint16_t read_Temperature(uint16_t GPIO_PIN) {
 	external_temp |= (spi_buf[0] >> 2) & 0xFFFF; // keep all data values
 	internal_temp |= (spi_buf[1] >> 4) & 0xFFFF; // keep all data values
 	fault |= spi_buf[0] & 0x01; // only want the LSB
-//	printf("External Temperature of %d: %d \n\r", GPIO_PIN, (external_temp/4));
+	printf("External Temperature of %d: %d \n\r", GPIO_PIN, (external_temp/4));
 //	printf("Internal Temperature of %d: %d \n\r", GPIO_PIN, (internal_temp/16));
 	if(fault) {
 		printf("ERROR \n\r");
