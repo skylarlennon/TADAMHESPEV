@@ -2,7 +2,7 @@ import serial, time
 from datetime import datetime, timedelta
 import argparse, struct
 from SerialReader import SerialReader
-from TADAMHESPEVPacket import TADAMHESPEVPacket
+from TADAMHESPEVPacket import TADAMHESPEVPacket, LoadTADAMHESPEVLogFile
 parser = argparse.ArgumentParser(description="Serial Test")
 parser.add_argument("-p", "--port")
 

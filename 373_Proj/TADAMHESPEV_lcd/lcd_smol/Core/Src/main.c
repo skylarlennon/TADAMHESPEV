@@ -77,7 +77,7 @@ uint32_t totalSpace, freeSpace;
 //char buffer[100];
 
 #define LOG_FILE_NAME "TADLOG.txt"
-#define NUM_ENTRIES_PER_WRITE 4
+#define NUM_ENTRIES_PER_WRITE 10
 float sdwritebuffer[1000]; //fill buffer before sd write, make big enough to prevent overflow
 float* sdbufindex = sdwritebuffer; //current index of sd write buffer
 
@@ -110,7 +110,7 @@ FRESULT LogToSD(){
 	printf("writing data to file\n");
 	char dataStr[100];
 	for(float* start = sdwritebuffer; start < sdbufindex; start += 5){
-		sprintf(dataStr, "%08X, %08X, %08X, %08X, %08X\n" ,
+		sprintf(dataStr, "%08X,%08X,%08X,%08X,%08X\n" ,
 					*(unsigned int*)&(*start),
 					*(unsigned int*)&(*(start+1)),
 					*(unsigned int*)&(*(start+2)),
@@ -165,7 +165,7 @@ FRESULT InitializeSD(){
 	}
 	printf("writing file header\n");
 	//buf[0] accel, buf[1] temp, buf[2] speed, buf[3] voltage, buf[4] current
-	f_puts("Acceleration, Temperature, Speed, Voltage, Current\n", &fil);
+	f_puts("Acceleration,Temperature,Speed,Voltage,Current\n", &fil);
 	/* Close file */
 	fres = f_close(&fil);
 	return fres;

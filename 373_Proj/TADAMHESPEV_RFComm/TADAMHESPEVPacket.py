@@ -1,8 +1,9 @@
-import struct
+import struct, pandas #pip install pandas
 from datetime import datetime
 class TADAMHESPEVPacket:
     #buf[0] accel, buf[1] temp, buf[2] speed, buf[3] voltage, buf[4] current
     def __init__(self, bytepacket: bytearray, timeRecieved = None):
+        self.bytepacket = bytepacket
         self.packet = self.ByteArrayToFloatArray(bytepacket)
         self.accel = self.packet[0]
         self.temp = self.packet[1]
@@ -21,9 +22,37 @@ class TADAMHESPEVPacket:
             i = i+4
         return floatArr
     
+    
+    def CSVString(self):
+        strArr = []
+        i = 0
+        while i < len(self.bytepacket): 
+            strArr.append( self.bytepacket[i:i+4][::-1].hex() ) #reverse for endianness
+            i = i+4
+        return ", ".join(strArr)
+    
     def __str__(self):
         return ", ".join(map(str, self.packet))
 
-class TADAMHESPEVDatabase:
-    def __init__(self):
-        self.packets = []
+
+def HexStrToFloat(hexstr): #https://stackoverflow.com/questions/1592158/convert-hex-to-float
+    return struct.unpack('!f', bytes.fromhex(hexstr))[0]
+
+COLUMNS = ['Acceleration', 'Temperature', 'Speed', 'Voltage', 'Current']
+def LoadTADAMHESPEVLogFile(fileName = "TADAMHESPEVLog.csv"):
+    db = pandas.read_csv(fileName)#, usecols=['Acceleration', 'Temperature', 'Speed', 'Voltage', 'Current'])
+    print(db)
+    accVals = db["Speed"]
+    print(accVals)
+    print(list(accVals))
+    print(list(map(HexStrToFloat, list(accVals))))
+    """
+    with open(fileName, 'r') as csvfile:
+        csvreader = csv.reader(csvfile)
+        print(csvreader.__dict__)
+    """
+    return {
+        colname: list(map(HexStrToFloat, list(db[colname]))) for colname in COLUMNS
+    }
+
+#print(LoadTADAMHESPEVLogFile())
