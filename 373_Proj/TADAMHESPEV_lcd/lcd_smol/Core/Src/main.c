@@ -61,7 +61,7 @@ int volt_percent = 46*10 - 440;
 int refresh = 0;
 int batRefresh = 0;
 int numRefresh = 0;
-HAL_StatusTypeDef spiRecieveCode;
+HAL_StatusTypeDef uartRecieveCode;
 
 struct TelData data; //global data struct
 void TADBufferToStruct(float*, struct TelData*);
@@ -74,7 +74,11 @@ FIL fil;
 FRESULT fres;
 DWORD fre_clust;
 uint32_t totalSpace, freeSpace;
-char buffer[100];
+//char buffer[100];
+
+ int NUM_ENTRIES_PER_WRITE = 4;
+float sdwritebuffer[5 * 4]; //fill buffer before sd write
+float* sdbufindex = sdwritebuffer; //current index of sd write buffer
 
 /* USER CODE END PV */
 
@@ -92,6 +96,81 @@ static void MX_SPI3_Init(void);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 int ignoreData = 0;
+
+FRESULT LogToSD(){
+	fres = f_open(&fil, "BEN-file.txt", FA_OPEN_APPEND | FA_WRITE | FA_READ);
+	if (fres == FR_OK) {
+		printf("File opened for reading and checking the free space.\n");
+	} else if (fres != FR_OK) {
+		printf(
+				"File was not opened for reading and checking the free space!\n");
+	}
+
+	printf("writing data to file\n");
+	char dataStr[100];
+	for(float* start = sdwritebuffer; start < sdbufindex; start += 5){
+		sprintf(dataStr, "%08X, %08X, %08X, %08X, %08X\n" ,
+					*(unsigned int*)&(*start),
+					*(unsigned int*)&(*(start+1)),
+					*(unsigned int*)&(*(start+2)),
+					*(unsigned int*)&(*(start+3)),
+					*(unsigned int*)&(*(start+4)));
+		f_puts(dataStr, &fil);
+
+	}
+	fres = f_close(&fil);
+	sdbufindex = sdwritebuffer;
+//	sprintf(dataStr, "%08X, %08X, %08X, %08X, %08X" ,
+//			*(unsigned int*)&data.accel,
+//			*(unsigned int*)&data.temp,
+//			*(unsigned int*)&data.speed,
+//			*(unsigned int*)&data.voltage,
+//			*(unsigned int*)&data.current);
+	/* Close file */
+
+	if (fres == FR_OK) {
+		printf("The file is closed.\n");
+	} else if (fres != FR_OK) {
+		printf("The file was not closed.\n");
+	}
+	return fres;
+
+}
+
+FRESULT InitializeSD(){
+	HAL_Delay(500);
+	//BEGIN SD TEST
+	fres = f_mount(&fs, "", 1);
+	if (fres == FR_OK) {
+		printf("Micro SD card is mounted successfully!\n");
+	} else if (fres != FR_OK) {
+		printf("Micro SD card's mount error!\n");
+	}
+
+	fres = f_open(&fil, "TESTLOG.csv", FA_OPEN_APPEND | FA_WRITE | FA_READ);
+	if (fres == FR_OK) {
+		printf("File opened for reading and checking the free space.\n");
+	} else if (fres != FR_OK) {
+		printf(
+				"File was not opened for reading and checking the free space!\n");
+	}
+
+	fres = f_open(&fil, "BEN-file.txt", FA_OPEN_APPEND | FA_WRITE | FA_READ);
+	if (fres == FR_OK) {
+		printf("File opened for reading and checking the free space.\n");
+	} else if (fres != FR_OK) {
+		printf(
+				"File was not opened for reading and checking the free space!\n");
+	}
+	printf("writing file header\n");
+	//buf[0] accel, buf[1] temp, buf[2] speed, buf[3] voltage, buf[4] current
+	f_puts("Acceleration, Temperature, Speed, Voltage, Current\n", &fil);
+	/* Close file */
+	fres = f_close(&fil);
+	return fres;
+}
+
+
 /* USER CODE END 0 */
 
 /**
@@ -132,116 +211,12 @@ int main(void)
 	int tempWarn = 0;
 	int voltWarn = 0;
 //	HAL_Delay(3500);
-	spiRecieveCode = HAL_UART_Receive_IT(&huart1, (uint8_t*) &buf, sizeof(buf));
-
+	InitializeSD();
 	HAL_Delay(500);
-	//BEGIN SD TEST
-//	fres = f_mount(&fs, "", 1);
-//	if (fres == FR_OK) {
-//		printf("Micro SD card is mounted successfully!\n");
-//	} else if (fres != FR_OK) {
-//		printf("Micro SD card's mount error!\n");
-//	}
-//
-//	// FA_OPEN_APPEND opens file if it exists and if not then creates it,
-//	// the pointer is set at the end of the file for appending
-//	fres = f_open(&fil, "log-file.txt", FA_OPEN_APPEND | FA_WRITE | FA_READ);
-//	if (fres == FR_OK) {
-//		printf("File opened for reading and checking the free space.\n");
-//	} else if (fres != FR_OK) {
-//		printf(
-//				"File was not opened for reading and checking the free space!\n");
-//	}
-//
-//	fres = f_getfree("", &fre_clust, &pfs);
-//	totalSpace = (uint32_t) ((pfs->n_fatent - 2) * pfs->csize * 0.5);
-//	freeSpace = (uint32_t) (fre_clust * pfs->csize * 0.5);
-//	char mSz[12];
-//	sprintf(mSz, "%lu", freeSpace);
-//	if (fres == FR_OK) {
-//		printf("The free space is: ");
-//		printf(mSz);
-//		printf("\n");
-//	} else if (fres != FR_OK) {
-//		printf("The free space could not be determined!\n");
-//	}
-//	printf("writing to file\n");
-//	for (uint8_t i = 0; i < 10; i++) {
-//		f_puts("This text is written in the file.\n", &fil);
-//	}
-//
-//	fres = f_close(&fil);
-//	if (fres == FR_OK) {
-//		printf("The file is closed.\n");
-//	} else if (fres != FR_OK) {
-//		printf("The file was not closed.\n");
-//	}
-//
-//	/* Open file to read */
-//	fres = f_open(&fil, "log-file.txt", FA_READ);
-//	if (fres == FR_OK) {
-//		printf("File opened for reading.\n");
-//	} else if (fres != FR_OK) {
-//		printf("File was not opened for reading!\n");
-//	}
-//
-//	while (f_gets(buffer, sizeof(buffer), &fil)) {
-//		char mRd[100];
-//		sprintf(mRd, "%s", buffer);
-//		printf(mRd);
-//
-//	}
-//
-//	/* Close file */
-//	fres = f_close(&fil);
-//	if (fres == FR_OK) {
-//		printf("The file is closed.\n");
-//	} else if (fres != FR_OK) {
-//		printf("The file was not closed.\n");
-//	}
-//
-//	f_mount(NULL, "", 1);
-//	if (fres == FR_OK) {
-//		printf("The Micro SD card is unmounted!\n");
-//	} else if (fres != FR_OK) {
-//		printf("The Micro SD was not unmounted!");
-//	}
+	uartRecieveCode = HAL_UART_Receive_IT(&huart1, (uint8_t*) &buf, sizeof(buf));
 
-	fres = f_mount(&fs, "", 1);
-	if (fres == FR_OK) {
-		printf("Micro SD card is mounted successfully!\n");
-	} else if (fres != FR_OK) {
-		printf("Micro SD card's mount error!\n");
-	}
 
-	fres = f_open(&fil, "BEN-file.txt", FA_OPEN_APPEND | FA_WRITE | FA_READ);
-	if (fres == FR_OK) {
-		printf("File opened for reading and checking the free space.\n");
-	} else if (fres != FR_OK) {
-		printf(
-				"File was not opened for reading and checking the free space!\n");
-	}
 
-	printf("writing to file\n");
-	for (uint8_t i = 0; i < 10; i++) {
-		f_puts(" OH YEAH This text is written in the file.\n", &fil);
-	}
-	/* Close file */
-	fres = f_close(&fil);
-	if (fres == FR_OK) {
-		printf("The file is closed.\n");
-	} else if (fres != FR_OK) {
-		printf("The file was not closed.\n");
-	}
-	f_mount(NULL, "", 1);
-	if (fres == FR_OK) {
-		printf("The Micro SD card is unmounted!\n");
-	} else if (fres != FR_OK) {
-		printf("The Micro SD was not unmounted!");
-	}
-	//END SD TEST
-
-	while(1);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -252,11 +227,15 @@ int main(void)
     /* USER CODE BEGIN 3 */
 		//buf[0] accel, buf[1] temp, buf[2] speed, buf[3] voltage, buf[4] current
 //		int delay = 0;
+
+		if(sdbufindex-sdwritebuffer >= 5*NUM_ENTRIES_PER_WRITE-1){
+			LogToSD();
+		}
+
 		if (huart1.ErrorCode == 8) {
 			HAL_UART_Receive_IT(&huart1, (uint8_t*) &buf,
 								sizeof(buf));
 			ignoreData = 1;
-
 		}
 		if (refresh == 1) {
 			LCD_updateVals(&hspi1, data);
@@ -273,7 +252,7 @@ int main(void)
 //				HAL_Delay(500);
 //				delay = 0;
 //			}
-			spiRecieveCode = HAL_UART_Receive_IT(&huart1, (uint8_t*) &buf,
+			uartRecieveCode = HAL_UART_Receive_IT(&huart1, (uint8_t*) &buf,
 					sizeof(buf));
 		}
 
@@ -560,7 +539,19 @@ static void MX_GPIO_Init(void)
 
 /* USER CODE BEGIN 4 */
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
+
+	if(ignoreData == 1){
+		ignoreData = 0;
+		uartRecieveCode = HAL_UART_Receive_IT(&huart1, (uint8_t*) &buf, sizeof(buf));
+		return;
+	}
+
 	float* fbuf = buf;
+	//copy values into sd write buffer
+	for(float* p = fbuf; p<p+5;++p){
+		*(sdbufindex++) = *p;
+	}
+
 	if ( //check if values changed
 	ignoreData == 0 && (fbuf[0] != data.accel || fbuf[1] != data.temp || fbuf[2] != data.speed
 			|| fbuf[3] != data.voltage || fbuf[4] != data.current)  ) {
@@ -569,11 +560,11 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
 		refresh = 1;
 	}
 	else{
-		ignoreData = 0;
-		spiRecieveCode = HAL_UART_Receive_IT(&huart1, (uint8_t*) &buf, sizeof(buf));
+		//ignoreData = 0;
+		uartRecieveCode = HAL_UART_Receive_IT(&huart1, (uint8_t*) &buf, sizeof(buf));
 
 	}
-	//spiRecieveCode = HAL_UART_Receive_IT(&huart1, (uint8_t*) &buf, sizeof(buf));
+	//uartRecieveCode = HAL_UART_Receive_IT(&huart1, (uint8_t*) &buf, sizeof(buf));
 	numRefresh++;
 }
 
