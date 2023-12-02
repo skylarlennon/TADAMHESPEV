@@ -22,6 +22,7 @@
 #include "stm32l4xx_it.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "lcd_smol.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -41,13 +42,15 @@
 
 /* Private variables ---------------------------------------------------------*/
 /* USER CODE BEGIN PV */
-int buf[10] = {0,1,0,1,0,1};
-//int Twarning = 0;
-//int Vwarning = 0;
-int warning = 0;
-float voltage = 44;
-int volt_percent = 44*10 - 440;
-SPI_HandleTypeDef hspi1;
+//float buf[5] = {10.5,0,22.56,45.1,10.2};
+////int Twarning = 0;
+////int Vwarning = 0;
+//int warning = 0;
+//int volt_percent = 44*10 - 440;
+//int refresh = 0;
+//extern UART_HandleTypeDef huart1;
+//extern SPI_HandleTypeDef hspi1;
+//extern SPI_HandleTypeDef hspi3;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -61,8 +64,7 @@ SPI_HandleTypeDef hspi1;
 /* USER CODE END 0 */
 
 /* External variables --------------------------------------------------------*/
-extern TIM_HandleTypeDef htim15;
-extern TIM_HandleTypeDef htim16;
+extern UART_HandleTypeDef huart1;
 extern TIM_HandleTypeDef htim2;
 
 /* USER CODE BEGIN EV */
@@ -208,45 +210,6 @@ void SysTick_Handler(void)
 /******************************************************************************/
 
 /**
-  * @brief This function handles TIM1 break interrupt and TIM15 global interrupt.
-  */
-void TIM1_BRK_TIM15_IRQHandler(void)
-{
-  /* USER CODE BEGIN TIM1_BRK_TIM15_IRQn 0 */
-
-  /* USER CODE END TIM1_BRK_TIM15_IRQn 0 */
-  HAL_TIM_IRQHandler(&htim15);
-  /* USER CODE BEGIN TIM1_BRK_TIM15_IRQn 1 */
-  buf[3]+=1;
-  HAL_GPIO_TogglePin(GPIOA,GPIO_PIN_1);
-  LCD_updateVals(&hspi1,buf);
-  HAL_GPIO_TogglePin(GPIOA,GPIO_PIN_1);
-  /* USER CODE END TIM1_BRK_TIM15_IRQn 1 */
-}
-
-/**
-  * @brief This function handles TIM1 update interrupt and TIM16 global interrupt.
-  */
-void TIM1_UP_TIM16_IRQHandler(void)
-{
-  /* USER CODE BEGIN TIM1_UP_TIM16_IRQn 0 */
-
-  /* USER CODE END TIM1_UP_TIM16_IRQn 0 */
-  HAL_TIM_IRQHandler(&htim16);
-  /* USER CODE BEGIN TIM1_UP_TIM16_IRQn 1 */
-  voltage += 0.5;
-  volt_percent = (int)(voltage*10 - 440);
-  HAL_GPIO_TogglePin(GPIOA,GPIO_PIN_3);
-  LCD_updateBattery(&hspi1,volt_percent);
-  HAL_GPIO_TogglePin(GPIOA,GPIO_PIN_3);
-  HAL_GPIO_TogglePin(GPIOA,GPIO_PIN_3);
-//	  LCD_warnings(&hspi1, (buf[2] << 4) | buf[3],volt_percent,&Twarning,&Vwarning);
-  LCD_warnings(&hspi1, (buf[2] << 4) | buf[3],volt_percent,&warning);
-  HAL_GPIO_TogglePin(GPIOA,GPIO_PIN_3);
-  /* USER CODE END TIM1_UP_TIM16_IRQn 1 */
-}
-
-/**
   * @brief This function handles TIM2 global interrupt.
   */
 void TIM2_IRQHandler(void)
@@ -258,6 +221,20 @@ void TIM2_IRQHandler(void)
   /* USER CODE BEGIN TIM2_IRQn 1 */
 
   /* USER CODE END TIM2_IRQn 1 */
+}
+
+/**
+  * @brief This function handles USART1 global interrupt.
+  */
+void USART1_IRQHandler(void)
+{
+  /* USER CODE BEGIN USART1_IRQn 0 */
+
+  /* USER CODE END USART1_IRQn 0 */
+  HAL_UART_IRQHandler(&huart1);
+  /* USER CODE BEGIN USART1_IRQn 1 */
+
+  /* USER CODE END USART1_IRQn 1 */
 }
 
 /* USER CODE BEGIN 1 */

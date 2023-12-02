@@ -9,6 +9,7 @@
 #include "stm32l4xx_hal.h"
 #include <stdlib.h>
 
+
 #ifndef _swap_int16_t
 #define _swap_int16_t(a, b)                                                    \
   {                                                                            \
@@ -17,6 +18,8 @@
     b = t;                                                                     \
   }
 #endif
+
+
 
 // Probably going to move these to a different file, but for now
 void uint16_to_bytes(uint16_t in, uint8_t *out)
@@ -888,81 +891,47 @@ void LCD_fillBattery(SPI_HandleTypeDef* spi, int16_t x, int16_t y, uint32_t size
 	//level = 0 --> y offset 22*size
 }
 
-int accel;
-int temp;
-int power;
-char accelString[3];
-char tempString[3];
-char powerString[3];
+char speedString[20];
+char tempString[20];
+char powerString[20];
 
-void LCD_updateVals(SPI_HandleTypeDef* spi, int buf[]) {
-	//buf[0:1] accel, buf[2:3] temp, buf[4:5] power
-	accel = (buf[0] << 4) | buf[1];
-	temp = (buf[2] << 4) | buf[3];
-	power = (buf[4] << 4) | buf[5];
-	itoa(accel,accelString,10);
-	itoa(temp,tempString,10);
-	itoa(power,powerString,10);
-	LCD_drawString(spi,146,30 + 80*1,accelString,3,HX8357_BLACK,4);
-	LCD_drawString(spi,146,30 + 80*2,tempString,3,HX8357_BLACK,4);
-	LCD_drawString(spi,146,30 + 80*3,powerString,3,HX8357_BLACK,4);
+void LCD_updateVals(SPI_HandleTypeDef* spi, struct TelData data) {
+	//buf[0] accel, buf[1] temp, buf[2] speed, buf[3] voltage, buf[4] current
+	sprintf(tempString,"%f", data.temp);//buf[1]);
+	LCD_drawString(spi,130,30 + 80*2,tempString,6,HX8357_BLACK,4);
+
+	sprintf(speedString,"%f", data.speed);//buf[2]);
+	LCD_drawString(spi,130,30 + 80*1,speedString,4,HX8357_BLACK,4);
+
+	sprintf(powerString,"%f", data.voltage*data.current);//buf[3]*buf[4]);
+	LCD_drawString(spi,130,30 + 80*3,powerString,6,HX8357_BLACK,4);
 }
 
-//void LCD_warnings(SPI_HandleTypeDef* spi, int temp, int level, int *Twarning, int *Vwarning) {
-//	if ((*Twarning == 0 & *Vwarning == 0) & ((temp > 50) | (level < 30))) {
-//		LCD_writePixels(spi,HX8357_WHITE,0,0,359,79);
-//	}
-//	if (temp > 50 & *Twarning == 0) {
-////		LCD_fillTriangle(spi,15,55,45,55,30,25,HX8357_GREEN);
-//		LCD_drawString(spi,20,30 + 80*0,"HIGH TEMP",9,HX8357_RED,3);
-//		*Twarning = 1;
-//	}
-//	if (level < 30 & *Vwarning == 0) {
-////		LCD_fillTriangle(spi,180,55,210,55,195,25,HX8357_GREEN);
-//		LCD_drawString(spi,198,30 + 80*0,"LOW VOLT",8,HX8357_RED,3);
-//		*Vwarning = 1;
-//	}
-//	if (*Twarning == 1 & temp <= 50) {
-//		LCD_writePixels(spi,HX8357_WHITE,0,0,195,79);
-//		*Twarning = 0;
-//	}
-//	if (*Vwarning == 1 & level >= 30) {
-//		LCD_writePixels(spi,HX8357_WHITE,196,0,163,79);
-//		*Vwarning = 0;
-//	}
-//	if (*Twarning == 0 & *Vwarning == 0) {
-//		LCD_drawString(spi,20,30 + 80*0,"TADAMHESPEV | UMSM",18,HX8357_BLACK,3);
-//	}
-//}
-
-int tempWarn = 0;
-int voltWarn = 0;
-
-void LCD_warnings(SPI_HandleTypeDef* spi, int temp, int level, int *warning) {
+void LCD_warnings(SPI_HandleTypeDef* spi, int temp, int level, int *warning, int *tempWarn, int *voltWarn) {
 	if ((temp >= 50 | level <= 30) & *warning == 0) {
-		LCD_writePixels(spi,HX8357_WHITE,0,0,359,79);
+		LCD_drawString(spi,20,30 + 80*0,"TADAMHESPEV | UMSM",18,HX8357_WHITE,3);
 		*warning = 1;
 	}
-	if (temp >= 50 & tempWarn == 0) {
-		LCD_fillTriangle(spi,15,55,45,55,30,25,HX8357_GREEN);
+	if (temp >= 50 & *tempWarn == 0) {
+		//LCD_fillTriangle(spi,15,55,45,55,30,25,HX8357_GREEN);
 		LCD_drawString(spi,55,30 + 80*0,"HIGH TEMP",9,HX8357_RED,2);
-		tempWarn = 1;
+		*tempWarn = 1;
 	}
-	if (level <= 30 & voltWarn == 0) {
-		LCD_fillTriangle(spi,180,55,210,55,195,25,HX8357_GREEN);
+	if (level <= 30 & *voltWarn == 0) {
+		//LCD_fillTriangle(spi,180,55,210,55,195,25,HX8357_GREEN);
 		LCD_drawString(spi,220,30 + 80*0,"LOW VOLT",8,HX8357_RED,2);
-		voltWarn = 1;
+		*voltWarn = 1;
 	}
-	if (temp < 50 & tempWarn == 1) {
-		LCD_writePixels(spi,HX8357_WHITE,0,0,179,79);
-		tempWarn = 0;
+	if (temp < 50 & *tempWarn == 1) {
+		LCD_drawString(spi,55,30 + 80*0,"HIGH TEMP",9,HX8357_WHITE,2);
+		*tempWarn = 0;
 	}
-	if (level > 30 & voltWarn == 1) {
-		LCD_writePixels(spi,HX8357_WHITE,180,0,179,79);
-		voltWarn = 0;
+	if (level > 30 & *voltWarn == 1) {
+		LCD_drawString(spi,220,30 + 80*0,"LOW VOLT",8,HX8357_WHITE,2);
+		*voltWarn = 0;
 	}
-	if (*warning == 1 & voltWarn == 0 & tempWarn == 0) {
-		LCD_writePixels(spi,HX8357_WHITE,0,0,359,79);
+	if (*warning == 1 & *voltWarn == 0 & *tempWarn == 0) {
+//		LCD_writePixels(spi,HX8357_WHITE,0,0,359,79);
 		LCD_drawString(spi,20,30 + 80*0,"TADAMHESPEV | UMSM",18,HX8357_BLACK,3);
 		*warning = 0;
 	}
@@ -976,4 +945,30 @@ void LCD_updateBattery(SPI_HandleTypeDef* spi, int level) {
 
 	LCD_fillBattery(spi,380,120,8,level);
 	LCD_drawString(spi,370,50,lev,3,HX8357_BLACK,4);
+}
+
+void LCD_TADAMHASPEV(SPI_HandleTypeDef* spi) {
+	LCD_begin(spi);
+	LCD_writePixels(spi,HX8357_WHITE,0,0,480,320);
+	LCD_drawBattery(spi,380,120,8);
+    LCD_drawFrame(spi);
+
+
+    char * name = "TADAMHESPEV | UMSM";
+    char * speed = "SPEED:";
+    char * temp = "TEMP:";
+    char * power = "POWER:";
+    char * mph = "mph";
+    char * deg = "C";
+    char * watt = "W";
+
+    LCD_drawString(spi,20,30 + 80*0,name,18,HX8357_BLACK,3);
+    LCD_drawString(spi,5,30 + 80*1,speed,6,HX8357_BLACK,3);
+    LCD_drawString(spi,5,30 + 80*2,temp,5,HX8357_BLACK,3);
+    LCD_drawString(spi,5,30 + 80*3,power,6,HX8357_BLACK,3);
+
+    LCD_drawString(spi,280,30 + 80*1,mph,3,HX8357_BLACK,3);
+    LCD_drawString(spi,306,30 + 80*2,deg,1,HX8357_BLACK,3);
+    LCD_drawString(spi,306,30 + 80*3,watt,1,HX8357_BLACK,3);
+    LCD_drawString(spi,442,50,"%",1,HX8357_BLACK,4);
 }

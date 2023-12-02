@@ -8,6 +8,7 @@
 #ifndef INC_LCD_H_
 #define INC_LCD_H_
 
+#include "TADAMHESPEVDataTemplate.h"
 #include "stm32l4xx_hal.h"
 
 #define HX8357_TFTWIDTH 480  ///< 480 pixels wide
@@ -102,12 +103,12 @@
 #define MADCTL_MH 0x04  ///< LCD refresh right to left
 
 // Pin definitions
-#define DC_PORT GPIOB
-#define DC_PIN GPIO_PIN_5
+#define DC_PORT GPIOA
+#define DC_PIN GPIO_PIN_3
 #define CS_PORT GPIOB
 #define CS_PIN GPIO_PIN_6
-#define RST_PORT GPIOB
-#define RST_PIN GPIO_PIN_4
+#define RST_PORT GPIOA
+#define RST_PIN GPIO_PIN_1
 
 void uint16_to_bytes(uint16_t in, uint8_t *out);
 void uint16a_to_bytes(uint16_t* in, uint8_t *out, uint32_t len);
@@ -145,9 +146,10 @@ void LCD_writeFastHLine(SPI_HandleTypeDef *spi, int16_t x, int16_t y, int16_t w,
 void LCD_drawBattery(SPI_HandleTypeDef* spi, int16_t x, int16_t y, uint32_t size);
 void LCD_drawFrame(SPI_HandleTypeDef* spi);
 void LCD_fillBattery(SPI_HandleTypeDef* spi, int16_t x, int16_t y, uint32_t size, int level);
-void LCD_updateVals(SPI_HandleTypeDef* spi, int buf[]);
+void LCD_updateVals(SPI_HandleTypeDef* spi, struct TelData data);//float buf[]);
 //void LCD_warnings(SPI_HandleTypeDef* spi, int temp, int level, int *Twarning, int *Vwarning);
-void LCD_warnings(SPI_HandleTypeDef* spi, int temp, int level, int *warning);
+void LCD_warnings(SPI_HandleTypeDef* spi, int temp, int level, int *warning, int *tempWarn, int *voltWarn);
 void LCD_updateBattery(SPI_HandleTypeDef* spi, int level);
+void LCD_TADAMHASPEV(SPI_HandleTypeDef* spi);
 
 #endif /* INC_LCD_H_ */

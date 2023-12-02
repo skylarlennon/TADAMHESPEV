@@ -1,20 +1,20 @@
 /* USER CODE BEGIN Header */
 /**
-  ******************************************************************************
-  * @file           : main.c
-  * @brief          : Main program body
-  ******************************************************************************
-  * @attention
-  *
-  * Copyright (c) 2023 STMicroelectronics.
-  * All rights reserved.
-  *
-  * This software is licensed under terms that can be found in the LICENSE file
-  * in the root directory of this software component.
-  * If no LICENSE file comes with this software, it is provided AS-IS.
-  *
-  ******************************************************************************
-  */
+ ******************************************************************************
+ * @file           : main.c
+ * @brief          : Main program body
+ ******************************************************************************
+ * @attention
+ *
+ * Copyright (c) 2023 STMicroelectronics.
+ * All rights reserved.
+ *
+ * This software is licensed under terms that can be found in the LICENSE file
+ * in the root directory of this software component.
+ * If no LICENSE file comes with this software, it is provided AS-IS.
+ *
+ ******************************************************************************
+ */
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
@@ -23,6 +23,7 @@
 /* USER CODE BEGIN Includes */
 #include "lcd_smol.h"
 #include <stdlib.h>
+#include "TADAMHESPEVDataTemplate.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -43,20 +44,23 @@
 /* Private variables ---------------------------------------------------------*/
 RTC_HandleTypeDef hrtc;
 
-extern SPI_HandleTypeDef hspi1;
-
-TIM_HandleTypeDef htim15;
-TIM_HandleTypeDef htim16;
+SPI_HandleTypeDef hspi1;
+SPI_HandleTypeDef hspi3;
 
 UART_HandleTypeDef huart1;
 
 /* USER CODE BEGIN PV */
-extern int buf[10];
-//int Twarning = 0;
-//int Vwarning = 0;
-extern int warning;
-extern float voltage;
-extern int volt_percent;
+uint8_t buf[20];
+int warning = 0;
+int volt_percent = 46*10 - 440;
+int refresh = 0;
+int batRefresh = 0;
+int numRefresh = 0;
+HAL_StatusTypeDef spiRecieveCode;
+
+struct TelData data; //global data struct
+void TADBufferToStruct(float*, struct TelData*);
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -64,16 +68,15 @@ void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_RTC_Init(void);
 static void MX_SPI1_Init(void);
-static void MX_TIM15_Init(void);
-static void MX_TIM16_Init(void);
 static void MX_USART1_UART_Init(void);
+static void MX_SPI3_Init(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-
+int ignoreData = 0;
 /* USER CODE END 0 */
 
 /**
@@ -106,50 +109,50 @@ int main(void)
   MX_GPIO_Init();
   MX_RTC_Init();
   MX_SPI1_Init();
-  MX_TIM15_Init();
-  MX_TIM16_Init();
   MX_USART1_UART_Init();
+  MX_SPI3_Init();
   /* USER CODE BEGIN 2 */
-  	LCD_begin(&hspi1);
-  	//LCD_fillRect(&hspi1, 0, 0, 480, 320, HX8357_WHITE);
-  	LCD_writePixels(&hspi1,HX8357_WHITE,0,0,480,320);
-    LCD_drawBattery(&hspi1,380,120,8);
-    LCD_drawFrame(&hspi1);
-
-
-    char * name = "TADAMHESPEV | UMSM";
-    char * speed = "SPEED:";
-    char * temp = "TEMP:";
-    char * power = "POWER:";
-
-    char * mph = "mph";
-    char * deg = "C";
-    char * watt = "W";
-    LCD_drawString(&hspi1,20,30 + 80*0,name,18,HX8357_BLACK,3);
-    LCD_drawString(&hspi1,5,30 + 80*1,speed,6,HX8357_BLACK,3);
-    LCD_drawString(&hspi1,5,30 + 80*2,temp,5,HX8357_BLACK,3);
-    LCD_drawString(&hspi1,5,30 + 80*3,power,6,HX8357_BLACK,3);
-
-    LCD_drawString(&hspi1,280,30 + 80*1,mph,3,HX8357_BLACK,3);
-    LCD_drawString(&hspi1,306,30 + 80*2,deg,1,HX8357_BLACK,3);
-    LCD_drawString(&hspi1,306,30 + 80*3,watt,1,HX8357_BLACK,3);
-    volt_percent = (voltage*10) - 440;
-    LCD_updateBattery(&hspi1,volt_percent);
-    LCD_drawString(&hspi1,442,50,"%",1,HX8357_BLACK,4);
-
-    if (HAL_TIM_Base_Start_IT(&htim15) != HAL_OK) Error_Handler();
-    if (HAL_TIM_Base_Start_IT(&htim16) != HAL_OK) Error_Handler();
+	LCD_TADAMHASPEV(&hspi1);
+	int tempWarn = 0;
+	int voltWarn = 0;
+//	HAL_Delay(3500);
+	spiRecieveCode = HAL_UART_Receive_IT(&huart1, (uint8_t*) &buf, sizeof(buf));
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  while (1)
-  {
+	while (1) {
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+		//buf[0] accel, buf[1] temp, buf[2] speed, buf[3] voltage, buf[4] current
+//		int delay = 0;
+		if (huart1.ErrorCode == 8) {
+			HAL_UART_Receive_IT(&huart1, (uint8_t*) &buf,
+								sizeof(buf));
+			ignoreData = 1;
 
-  }
+		}
+		if (refresh == 1) {
+			LCD_updateVals(&hspi1, data);
+			refresh = 0;
+
+			if (batRefresh == 1) {
+				volt_percent = (int) (data.voltage * 10 - 440);
+				LCD_updateBattery(&hspi1, volt_percent);
+				LCD_warnings(&hspi1, data.temp, volt_percent, &warning, &tempWarn, &voltWarn);
+				batRefresh = 0;
+//				delay = 1;
+			}
+//			if(delay ==1) {
+//				HAL_Delay(500);
+//				delay = 0;
+//			}
+			spiRecieveCode = HAL_UART_Receive_IT(&huart1, (uint8_t*) &buf,
+					sizeof(buf));
+		}
+
+	}
   /* USER CODE END 3 */
 }
 
@@ -290,80 +293,42 @@ static void MX_SPI1_Init(void)
 }
 
 /**
-  * @brief TIM15 Initialization Function
+  * @brief SPI3 Initialization Function
   * @param None
   * @retval None
   */
-static void MX_TIM15_Init(void)
+static void MX_SPI3_Init(void)
 {
 
-  /* USER CODE BEGIN TIM15_Init 0 */
+  /* USER CODE BEGIN SPI3_Init 0 */
 
-  /* USER CODE END TIM15_Init 0 */
+  /* USER CODE END SPI3_Init 0 */
 
-  TIM_ClockConfigTypeDef sClockSourceConfig = {0};
-  TIM_MasterConfigTypeDef sMasterConfig = {0};
+  /* USER CODE BEGIN SPI3_Init 1 */
 
-  /* USER CODE BEGIN TIM15_Init 1 */
-
-  /* USER CODE END TIM15_Init 1 */
-  htim15.Instance = TIM15;
-  htim15.Init.Prescaler = 7999;
-  htim15.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim15.Init.Period = 4999;
-  htim15.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
-  htim15.Init.RepetitionCounter = 0;
-  htim15.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
-  if (HAL_TIM_Base_Init(&htim15) != HAL_OK)
+  /* USER CODE END SPI3_Init 1 */
+  /* SPI3 parameter configuration*/
+  hspi3.Instance = SPI3;
+  hspi3.Init.Mode = SPI_MODE_MASTER;
+  hspi3.Init.Direction = SPI_DIRECTION_2LINES;
+  hspi3.Init.DataSize = SPI_DATASIZE_8BIT;
+  hspi3.Init.CLKPolarity = SPI_POLARITY_LOW;
+  hspi3.Init.CLKPhase = SPI_PHASE_1EDGE;
+  hspi3.Init.NSS = SPI_NSS_SOFT;
+  hspi3.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_4;
+  hspi3.Init.FirstBit = SPI_FIRSTBIT_MSB;
+  hspi3.Init.TIMode = SPI_TIMODE_DISABLE;
+  hspi3.Init.CRCCalculation = SPI_CRCCALCULATION_DISABLE;
+  hspi3.Init.CRCPolynomial = 7;
+  hspi3.Init.CRCLength = SPI_CRC_LENGTH_DATASIZE;
+  hspi3.Init.NSSPMode = SPI_NSS_PULSE_ENABLE;
+  if (HAL_SPI_Init(&hspi3) != HAL_OK)
   {
     Error_Handler();
   }
-  sClockSourceConfig.ClockSource = TIM_CLOCKSOURCE_INTERNAL;
-  if (HAL_TIM_ConfigClockSource(&htim15, &sClockSourceConfig) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
-  sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
-  if (HAL_TIMEx_MasterConfigSynchronization(&htim15, &sMasterConfig) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  /* USER CODE BEGIN TIM15_Init 2 */
+  /* USER CODE BEGIN SPI3_Init 2 */
 
-  /* USER CODE END TIM15_Init 2 */
-
-}
-
-/**
-  * @brief TIM16 Initialization Function
-  * @param None
-  * @retval None
-  */
-static void MX_TIM16_Init(void)
-{
-
-  /* USER CODE BEGIN TIM16_Init 0 */
-
-  /* USER CODE END TIM16_Init 0 */
-
-  /* USER CODE BEGIN TIM16_Init 1 */
-
-  /* USER CODE END TIM16_Init 1 */
-  htim16.Instance = TIM16;
-  htim16.Init.Prescaler = 39999;
-  htim16.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim16.Init.Period = 29999;
-  htim16.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
-  htim16.Init.RepetitionCounter = 0;
-  htim16.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
-  if (HAL_TIM_Base_Init(&htim16) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  /* USER CODE BEGIN TIM16_Init 2 */
-
-  /* USER CODE END TIM16_Init 2 */
+  /* USER CODE END SPI3_Init 2 */
 
 }
 
@@ -422,7 +387,7 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1|GPIO_PIN_3, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_4|GPIO_PIN_5|GPIO_PIN_6, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_6, GPIO_PIN_RESET);
 
   /*Configure GPIO pins : PA1 PA3 */
   GPIO_InitStruct.Pin = GPIO_PIN_1|GPIO_PIN_3;
@@ -447,8 +412,8 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Alternate = GPIO_AF3_USART2;
   HAL_GPIO_Init(VCP_RX_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : PB4 PB5 PB6 */
-  GPIO_InitStruct.Pin = GPIO_PIN_4|GPIO_PIN_5|GPIO_PIN_6;
+  /*Configure GPIO pin : PB6 */
+  GPIO_InitStruct.Pin = GPIO_PIN_6;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
@@ -459,6 +424,23 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
+	float* fbuf = buf;
+	if ( //check if values changed
+	ignoreData == 0 && (fbuf[0] != data.accel || fbuf[1] != data.temp || fbuf[2] != data.speed
+			|| fbuf[3] != data.voltage || fbuf[4] != data.current)  ) {
+		if (data.voltage != fbuf[3]) batRefresh = 1; //only refresh battery when voltage changes
+		TADBufferToStruct((float*)buf, &data);
+		refresh = 1;
+	}
+	else{
+		ignoreData = 0;
+		spiRecieveCode = HAL_UART_Receive_IT(&huart1, (uint8_t*) &buf, sizeof(buf));
+
+	}
+	//spiRecieveCode = HAL_UART_Receive_IT(&huart1, (uint8_t*) &buf, sizeof(buf));
+	numRefresh++;
+}
 
 /* USER CODE END 4 */
 
@@ -479,23 +461,6 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
     HAL_IncTick();
   }
   /* USER CODE BEGIN Callback 1 */
-//  if (htim->Instance == TIM15) {
-//	  buf[3]-=1;
-//	  HAL_GPIO_TogglePin(GPIOA,GPIO_PIN_1);
-//	  LCD_updateVals(&hspi1,buf);
-//	  HAL_GPIO_TogglePin(GPIOA,GPIO_PIN_1);
-//  }
-//  if (htim->Instance == TIM16) {
-//	  voltage += 0.5;
-//	  volt_percent = (int)(voltage*10 - 440);
-//	  HAL_GPIO_TogglePin(GPIOA,GPIO_PIN_3);
-//	  LCD_updateBattery(&hspi1,volt_percent);
-//	  HAL_GPIO_TogglePin(GPIOA,GPIO_PIN_3);
-//	  HAL_GPIO_TogglePin(GPIOA,GPIO_PIN_3);
-////	  LCD_warnings(&hspi1, (buf[2] << 4) | buf[3],volt_percent,&Twarning,&Vwarning);
-//	  LCD_warnings(&hspi1, (buf[2] << 4) | buf[3],volt_percent,&warning);
-//	  HAL_GPIO_TogglePin(GPIOA,GPIO_PIN_3);
-//  }
   /* USER CODE END Callback 1 */
 }
 
@@ -506,11 +471,10 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 void Error_Handler(void)
 {
   /* USER CODE BEGIN Error_Handler_Debug */
-  /* User can add his own implementation to report the HAL error return state */
-  __disable_irq();
-  while (1)
-  {
-  }
+	/* User can add his own implementation to report the HAL error return state */
+	__disable_irq();
+	while (1) {
+	}
   /* USER CODE END Error_Handler_Debug */
 }
 
