@@ -76,8 +76,9 @@ DWORD fre_clust;
 uint32_t totalSpace, freeSpace;
 //char buffer[100];
 
- int NUM_ENTRIES_PER_WRITE = 4;
-float sdwritebuffer[5 * 4]; //fill buffer before sd write
+#define LOG_FILE_NAME "TADLOG.txt"
+#define NUM_ENTRIES_PER_WRITE 4
+float sdwritebuffer[1000]; //fill buffer before sd write, make big enough to prevent overflow
 float* sdbufindex = sdwritebuffer; //current index of sd write buffer
 
 /* USER CODE END PV */
@@ -98,7 +99,7 @@ static void MX_SPI3_Init(void);
 int ignoreData = 0;
 
 FRESULT LogToSD(){
-	fres = f_open(&fil, "BEN-file.txt", FA_OPEN_APPEND | FA_WRITE | FA_READ);
+	fres = f_open(&fil, LOG_FILE_NAME, FA_OPEN_APPEND | FA_WRITE | FA_READ);
 	if (fres == FR_OK) {
 		printf("File opened for reading and checking the free space.\n");
 	} else if (fres != FR_OK) {
@@ -147,15 +148,15 @@ FRESULT InitializeSD(){
 		printf("Micro SD card's mount error!\n");
 	}
 
-	fres = f_open(&fil, "TESTLOG.csv", FA_OPEN_APPEND | FA_WRITE | FA_READ);
-	if (fres == FR_OK) {
-		printf("File opened for reading and checking the free space.\n");
-	} else if (fres != FR_OK) {
-		printf(
-				"File was not opened for reading and checking the free space!\n");
-	}
+//	fres = f_open(&fil, "NEWTESTLOG.csv", FA_OPEN_APPEND | FA_WRITE | FA_READ);
+//	if (fres == FR_OK) {
+//		printf("File opened for reading and checking the free space.\n");
+//	} else if (fres != FR_OK) {
+//		printf(
+//				"File was not opened for reading and checking the free space!\n");
+//	}
 
-	fres = f_open(&fil, "BEN-file.txt", FA_OPEN_APPEND | FA_WRITE | FA_READ);
+	fres = f_open(&fil, LOG_FILE_NAME, FA_OPEN_APPEND | FA_WRITE | FA_READ);
 	if (fres == FR_OK) {
 		printf("File opened for reading and checking the free space.\n");
 	} else if (fres != FR_OK) {
@@ -228,7 +229,7 @@ int main(void)
 		//buf[0] accel, buf[1] temp, buf[2] speed, buf[3] voltage, buf[4] current
 //		int delay = 0;
 
-		if(sdbufindex-sdwritebuffer >= 5*NUM_ENTRIES_PER_WRITE-1){
+		if(sdbufindex-sdwritebuffer >= 5*NUM_ENTRIES_PER_WRITE){
 			LogToSD();
 		}
 
@@ -548,8 +549,9 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
 
 	float* fbuf = buf;
 	//copy values into sd write buffer
-	for(float* p = fbuf; p<p+5;++p){
-		*(sdbufindex++) = *p;
+	float* end = fbuf+5;
+	for (float* p = fbuf; p < end; ++p) {
+	    *(sdbufindex++) = *p;
 	}
 
 	if ( //check if values changed

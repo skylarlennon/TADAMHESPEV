@@ -125,7 +125,7 @@ int main(void)
 				{ 1, 65.7897, 43.7897, 45.1232, 5 }, //BOTH
 				{ 2.5, 43.7897, 6.12314, 51.241, 6.0 } //temp warning
 	  	};
-	  	HAL_Delay(500);
+	  	HAL_Delay(2000);
 	  	HAL_UART_Transmit(&huart5, (uint8_t*) &(buff[++index%3]), 20, 100);
 
 
