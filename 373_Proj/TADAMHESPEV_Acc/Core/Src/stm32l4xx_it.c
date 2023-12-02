@@ -22,6 +22,7 @@
 #include "stm32l4xx_it.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "TADAMHESPEVDataTemplate.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -41,12 +42,9 @@
 
 /* Private variables ---------------------------------------------------------*/
 /* USER CODE BEGIN PV */
-float acc = 0;
-static volatile float current_time = 0;
-static volatile float previous_time = 0;
-static volatile float time_difference = 0;
-static volatile float rate = 0;
-static volatile float dist = 0.00091748328; //circumference of wheel
+static const float veloMultiplier = 3366.477273;
+static uint16_t curTime = 0;
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -56,14 +54,13 @@ static volatile float dist = 0.00091748328; //circumference of wheel
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-
 /* USER CODE END 0 */
 
 /* External variables --------------------------------------------------------*/
-extern TIM_HandleTypeDef htim15;
 extern TIM_HandleTypeDef htim17;
-/* USER CODE BEGIN EV */
 
+/* USER CODE BEGIN EV */
+extern volatile struct TelData teldata;
 /* USER CODE END EV */
 
 /******************************************************************************/
@@ -205,21 +202,6 @@ void SysTick_Handler(void)
 /******************************************************************************/
 
 /**
-  * @brief This function handles TIM1 break interrupt and TIM15 global interrupt.
-  */
-void TIM1_BRK_TIM15_IRQHandler(void)
-{
-  /* USER CODE BEGIN TIM1_BRK_TIM15_IRQn 0 */
-
-  /* USER CODE END TIM1_BRK_TIM15_IRQn 0 */
-  HAL_TIM_IRQHandler(&htim15);
-  /* USER CODE BEGIN TIM1_BRK_TIM15_IRQn 1 */
-  acc = ReadAccData();
-  printLEDs(acc);
-  /* USER CODE END TIM1_BRK_TIM15_IRQn 1 */
-}
-
-/**
   * @brief This function handles TIM1 trigger and commutation interrupts and TIM17 global interrupt.
   */
 void TIM1_TRG_COM_TIM17_IRQHandler(void)
@@ -230,9 +212,16 @@ void TIM1_TRG_COM_TIM17_IRQHandler(void)
   HAL_TIM_IRQHandler(&htim17);
   /* USER CODE BEGIN TIM1_TRG_COM_TIM17_IRQn 1 */
 
-  current_time = TIM17->CCR1; //get current time value
-  current_time /= 3600000000;
-  rate = dist / current_time;
+  curTime = TIM17->CCR1; //get current time value
+  TIM17->CNT = 0;
+//  current_time /= 1000.0; //ms to s
+//  current_time /= 3600.0; //s to h
+//  rate = dist/current_time; //mph
+//  float temp = rate;
+
+  	float temp = veloMultiplier/curTime;
+  	teldata.speed = temp;
+
   /* USER CODE END TIM1_TRG_COM_TIM17_IRQn 1 */
 }
 
