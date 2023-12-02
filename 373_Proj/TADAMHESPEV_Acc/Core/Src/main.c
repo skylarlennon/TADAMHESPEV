@@ -150,7 +150,7 @@ int main(void)
   while (1)
   {
 
-	  printf("Speed:\t%f\n",teldata.speed);
+	  printf("%f\n",teldata.speed);
 
 //	  int val = __HALs_TIM_GET_COUNTER(&htim17);
 //	  int temp = val;
