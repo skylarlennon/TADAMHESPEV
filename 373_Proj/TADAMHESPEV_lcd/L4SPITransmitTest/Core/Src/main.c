@@ -95,15 +95,16 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_LPUART1_UART_Init();
+  HAL_Delay(6000);
   MX_UART5_Init();
   /* USER CODE BEGIN 2 */
   //struct Data data = {0.0, 0.0, 0.0};
   //float buff[5] = {0, 0, 0, 44, 0};//{1.1, 2.2, 3.3, 44, 5.5};
   //int batUpdate = 1;
-  int evens = 0;
+  //int evens = 0;
   uint8_t junk[19];
   HAL_UART_Transmit(&huart5, (uint8_t*) &junk, sizeof(junk), 100);
-  HAL_Delay(5000);
+  int index = 0;
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -119,25 +120,32 @@ int main(void)
 //	  	buff[4]++;
 //	  	if(++batUpdate%30 == 0) buff[3]++;
 		//float buff[5];
+	  	float buff[3][5] = {
+	  			{ 2.5, 52.7897, 6.12314, 46.352542, 6.0 }, //no warning
+				{ 1, 65.7897, 43.7897, 45.1232, 5 }, //BOTH
+				{ 2.5, 43.7897, 6.12314, 51.241, 6.0 } //temp warning
+	  	};
+	  	HAL_Delay(500);
+	  	HAL_UART_Transmit(&huart5, (uint8_t*) &(buff[++index%3]), 20, 100);
 
-	  	HAL_Delay(1000);
-		if (evens == 0) {
-			float buff[5] = { 2.5, 4.2, 6.12314, 47.0, 6.0 };
-//			for(int i =0; i< 3; ++i){
-//				buff[i]++;
-//			}
-//			buff[4]++;
-//			if(++batUpdate%30 == 0) buff[3]++;
-			//char buff[]  = "Hello World!";
-			HAL_UART_Transmit(&huart5, (uint8_t*) &buff, sizeof(buff), 100);
 
-			evens = 1;
-		} else {
-			float buff[5] = { 1, 2, 3, 4, 5 };
-			HAL_UART_Transmit(&huart5, (uint8_t*) &buff, sizeof(buff), 100);
-
-			evens = 0;
-		}
+//		if (evens == 0) {
+//			float buff[5] = { 2.5, 52.7897, 6.12314, 46.352542, 6.0 };
+////			for(int i =0; i< 3; ++i){
+////				buff[i]++;
+////			}
+////			buff[4]++;
+////			if(++batUpdate%30 == 0) buff[3]++;
+//			//char buff[]  = "Hello World!";
+//			HAL_UART_Transmit(&huart5, (uint8_t*) &buff, sizeof(buff), 100);
+//
+//			evens = 1;
+//		} else {
+//			float buff[5] = { 1, 2, 3, 49, 5 };
+//			HAL_UART_Transmit(&huart5, (uint8_t*) &buff, sizeof(buff), 100);
+//
+//			evens = 0;
+//		}
 		//printf("SENDING DATA %f\n", buff[0]);
 		//HAL_Delay(1000);
     /* USER CODE END WHILE */
@@ -255,7 +263,7 @@ static void MX_UART5_Init(void)
 
   /* USER CODE END UART5_Init 1 */
   huart5.Instance = UART5;
-  huart5.Init.BaudRate = 2400;
+  huart5.Init.BaudRate = 9600;
   huart5.Init.WordLength = UART_WORDLENGTH_8B;
   huart5.Init.StopBits = UART_STOPBITS_1;
   huart5.Init.Parity = UART_PARITY_NONE;
