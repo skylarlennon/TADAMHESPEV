@@ -5,5 +5,5 @@
 ../Core/Src/main.c:261:13:MX_SPI1_Init	2
 ../Core/Src/main.c:301:13:MX_TIM3_Init	4
 ../Core/Src/main.c:346:13:MX_GPIO_Init	1
-../Core/Src/main.c:576:1:__io_putchar	1
-../Core/Src/main.c:588:6:Error_Handler	1
+../Core/Src/main.c:560:1:__io_putchar	1
+../Core/Src/main.c:572:6:Error_Handler	1

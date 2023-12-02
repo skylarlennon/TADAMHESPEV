@@ -1,0 +1,5 @@
+../Core/Src/led.c:36:6:setupLEDS	7
+../Core/Src/led.c:68:6:clearLEDstrip	1
+../Core/Src/led.c:76:6:ledTest	1
+../Core/Src/led.c:123:6:makeLEDFrame	5
+../Core/Src/led.c:154:6:printLEDs	5

@@ -1,0 +1,9 @@
+../Core/Src/acc.c:35:6:setupAccModule	2
+../Core/Src/acc.c:46:9:accFloat2Binary	17
+../Core/Src/acc.c:100:6:printBinaryNewline	2
+../Core/Src/acc.c:108:6:printBinary	2
+../Core/Src/acc.c:115:6:printAll	1
+../Core/Src/acc.c:121:7:ReadAccData	3
+../Core/Src/acc.c:153:6:print_raw_acc_bin	3
+../Core/Src/acc.c:184:6:write4BitGPIOs	1
+../Core/Src/acc.c:194:6:writeGPIOCountTest	1

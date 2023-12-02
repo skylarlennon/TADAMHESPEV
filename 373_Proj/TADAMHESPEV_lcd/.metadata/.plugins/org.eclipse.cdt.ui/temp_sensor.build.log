@@ -1,10 +1,29 @@
-18:00:13 **** Incremental Build of configuration Debug for project temp_sensor ****
+15:51:31 **** Incremental Build of configuration Debug for project temp_sensor ****
 make -j12 all 
+arm-none-eabi-gcc "../Core/Src/stm32l4xx_it.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4R5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/stm32l4xx_it.d" -MT"Core/Src/stm32l4xx_it.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/stm32l4xx_it.o"
+../Core/Src/stm32l4xx_it.c: In function 'HAL_TIM_PeriodElapsedCallback':
+../Core/Src/stm32l4xx_it.c:237:17: warning: implicit declaration of function 'printf' [-Wimplicit-function-declaration]
+  237 |                 printf("Average External Temperature: %.2f \n\r", average);
+      |                 ^~~~~~
+../Core/Src/stm32l4xx_it.c:23:1: note: include '<stdio.h>' or provide a declaration of 'printf'
+   22 | #include "stm32l4xx_it.h"
+  +++ |+#include <stdio.h>
+   23 | /* Private includes ----------------------------------------------------------*/
+../Core/Src/stm32l4xx_it.c:237:17: warning: incompatible implicit declaration of built-in function 'printf' [-Wbuiltin-declaration-mismatch]
+  237 |                 printf("Average External Temperature: %.2f \n\r", average);
+      |                 ^~~~~~
+../Core/Src/stm32l4xx_it.c:237:17: note: include '<stdio.h>' or provide a declaration of 'printf'
+arm-none-eabi-gcc -o "temp_sensor.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_lcd\Project Temp\Project Temp\temp_sensor\STM32L4R5ZITXP_FLASH.ld" --specs=nosys.specs -Wl,-Map="temp_sensor.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: temp_sensor.elf
+ 
 arm-none-eabi-size   temp_sensor.elf 
+arm-none-eabi-objdump -h -S  temp_sensor.elf  > "temp_sensor.list"
    text	   data	    bss	    dec	    hex	filename
-  36364	    476	   2228	  39068	   989c	temp_sensor.elf
+  36220	    476	   2228	  38924	   980c	temp_sensor.elf
 Finished building: default.size.stdout
  
+Finished building: temp_sensor.list
+ 
 
-18:00:14 Build Finished. 0 errors, 0 warnings. (took 718ms)
+15:51:33 Build Finished. 0 errors, 2 warnings. (took 1s.955ms)
 

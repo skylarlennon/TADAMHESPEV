@@ -223,8 +223,8 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef * htim) {
 		// run a loop for 5 reads from the
 		for(int i = 0; i < 5; i++) {
 			temp1sum += read_Temperature(GPIO_PIN_5); // read for the first temp sensor
-			temp2sum += read_Temperature(GPIO_PIN_8); // read for the second temp sensor
-			temp3sum += read_Temperature(GPIO_PIN_9); // read for the third temp sensor
+			temp2sum += read_Temperature(GPIO_PIN_2); // read for the second temp sensor
+			temp3sum += read_Temperature(GPIO_PIN_6); // read for the third temp sensor
 		}
 		float temp1 = temp1sum / 5.0; // take the average of the temp sensor values
 		float temp2 = temp2sum / 5.0;
