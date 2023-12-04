@@ -1,0 +1,37 @@
+14:27:17 **** Incremental Build of configuration Debug for project TADAMHESPEV_integrate ****
+make -j9 all 
+arm-none-eabi-gcc "../Core/Src/stm32l4xx_it.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4R5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/stm32l4xx_it.d" -MT"Core/Src/stm32l4xx_it.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/stm32l4xx_it.o"
+../Core/Src/stm32l4xx_it.c: In function 'TIM1_TRG_COM_TIM17_IRQHandler':
+../Core/Src/stm32l4xx_it.c:238:9: warning: implicit declaration of function 'printf' [-Wimplicit-function-declaration]
+  238 |         printf("Speed: %f\n",(veloMultiplier / curTime));
+      |         ^~~~~~
+../Core/Src/stm32l4xx_it.c:28:1: note: include '<stdio.h>' or provide a declaration of 'printf'
+   27 | #include "led.h"
+  +++ |+#include <stdio.h>
+   28 | /* USER CODE END Includes */
+../Core/Src/stm32l4xx_it.c:238:9: warning: incompatible implicit declaration of built-in function 'printf' [-Wbuiltin-declaration-mismatch]
+  238 |         printf("Speed: %f\n",(veloMultiplier / curTime));
+      |         ^~~~~~
+../Core/Src/stm32l4xx_it.c:238:9: note: include '<stdio.h>' or provide a declaration of 'printf'
+../Core/Src/stm32l4xx_it.c: In function 'HAL_TIM_PeriodElapsedCallback':
+../Core/Src/stm32l4xx_it.c:265:37: warning: implicit declaration of function 'read_Temperature' [-Wimplicit-function-declaration]
+  265 |                         temp1sum += read_Temperature(GPIO_PIN_5); // read for the first temp sensor
+      |                                     ^~~~~~~~~~~~~~~~
+../Core/Src/stm32l4xx_it.c:278:17: warning: incompatible implicit declaration of built-in function 'printf' [-Wbuiltin-declaration-mismatch]
+  278 |                 printf("Average External Temperature: %.2f \n\r", average);
+      |                 ^~~~~~
+../Core/Src/stm32l4xx_it.c:278:17: note: include '<stdio.h>' or provide a declaration of 'printf'
+arm-none-eabi-gcc -o "TADAMHESPEV_integrate.elf" @"objects.list"   -mcpu=cortex-m4 -T"/Users/skylarlennon/Desktop/F23/EECS373/Project/TADAMHESPEV/373_Proj/TADAMHESPEV_integration/TADAMHESPEV_integrate/STM32L4R5ZITXP_FLASH.ld" --specs=nosys.specs -Wl,-Map="TADAMHESPEV_integrate.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: TADAMHESPEV_integrate.elf
+ 
+arm-none-eabi-size  TADAMHESPEV_integrate.elf 
+arm-none-eabi-objdump -h -S TADAMHESPEV_integrate.elf  > "TADAMHESPEV_integrate.list"
+   text	   data	    bss	    dec	    hex	filename
+  42368	    480	   2880	  45728	   b2a0	TADAMHESPEV_integrate.elf
+Finished building: default.size.stdout
+ 
+Finished building: TADAMHESPEV_integrate.list
+ 
+
+14:27:18 Build Finished. 0 errors, 4 warnings. (took 1s.563ms)
+
