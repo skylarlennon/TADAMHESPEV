@@ -215,9 +215,9 @@ void TIM1_BRK_TIM15_IRQHandler(void)
   /* USER CODE END TIM1_BRK_TIM15_IRQn 0 */
   HAL_TIM_IRQHandler(&htim15);
   /* USER CODE BEGIN TIM1_BRK_TIM15_IRQn 1 */
-  acc = ReadAccData();
-  teldata.accel = acc;
-  printLEDs(acc);
+//  acc = ReadAccData();
+//  teldata.accel = acc;
+//  printLEDs(acc);
   /* USER CODE END TIM1_BRK_TIM15_IRQn 1 */
 }
 
@@ -275,15 +275,15 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef * htim) {
 
 		// send this average to display
 
-//		printf("Average External Temperature: %.2f \n\r", average);
+		printf("Average External Temperature: %.2f \n\r", average);
 
 		if (average > 24) {
-			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_SET);
+			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, GPIO_PIN_SET);
 //			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_6, GPIO_PIN_SET);
 //			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, GPIO_PIN_SET);
 //			printf("Fans have been turned on \n\r");
 		} else {
-			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET);
+			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, GPIO_PIN_RESET);
 //			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_6, GPIO_PIN_RESET);
 //			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, GPIO_PIN_RESET);
 		}
