@@ -39,7 +39,6 @@ if args.replay:
 def GetUpdatedLogData():
     if args.replay:
         return next(replayGen)
-    
     return LoadTADAMHESPEVLogFile(args.filename)
 
 

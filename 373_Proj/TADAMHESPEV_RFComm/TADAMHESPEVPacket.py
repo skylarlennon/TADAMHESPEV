@@ -29,7 +29,7 @@ class TADAMHESPEVPacket:
         while i < len(self.bytepacket): 
             strArr.append( self.bytepacket[i:i+4][::-1].hex() ) #reverse for endianness
             i = i+4
-        return ", ".join(strArr)
+        return ",".join(strArr)
     
     def __str__(self):
         return ", ".join(map(str, self.packet))
@@ -64,5 +64,3 @@ def ReplayTADAMHESPEVLogFile(fileName = "TADAMHESPEVLog.csv"): #generator
             colname: list(map(HexStrToFloat, list(db[colname])[:i])) for colname in COLUMNS
         }
     
-        
-#print(LoadTADAMHESPEVLogFile())
