@@ -233,7 +233,7 @@ int main(void)
 	  	}
 	  	curAvg/=numSamples;
 	  	volAvg/=numSamples;
-
+	  	printf("CUR AVG %d, VOL AVG %d\n", curAvg, volAvg);
 	  	CalculateCurrent(curAvg);
 	  	if((++voltageLoopCount)%60==0) CalculateVoltage(volAvg);
 
@@ -244,7 +244,7 @@ int main(void)
 //	  	CalculateCurrent(curVoltADC_DMA[0]);
 //	  	if((++voltageLoopCount)%60==0) CalculateVoltage(curVoltADC_DMA[1]);
 
-	  	printf("ADC CURRENT %d, ADC VOLT %d", curVoltADC_DMA[0], curVoltADC_DMA[1]);
+	  	//printf("ADC CURRENT %d, ADC VOLT %d", curVoltADC_DMA[0], curVoltADC_DMA[1]);
 
 		printf("Telemetry Data:\n");
 		printf("Acceleration: %f\n", teldata.accel);

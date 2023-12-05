@@ -230,9 +230,9 @@ void TIM1_BRK_TIM15_IRQHandler(void)
   /* USER CODE END TIM1_BRK_TIM15_IRQn 0 */
   HAL_TIM_IRQHandler(&htim15);
   /* USER CODE BEGIN TIM1_BRK_TIM15_IRQn 1 */
-//  acc = ReadAccData();
-//  teldata.accel = acc;
-//  printLEDs(acc);
+  acc = ReadAccData();
+  teldata.accel = acc;
+  printLEDs(acc);
   /* USER CODE END TIM1_BRK_TIM15_IRQn 1 */
 }
 
