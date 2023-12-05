@@ -39,7 +39,7 @@ void setupAccModule(){
 		printf("We gucci\n");
 	}
 	else{
-		printf("we not gucci\n");
+		printf("we not gucci setupAccModule\n");
 	}
 }
 
