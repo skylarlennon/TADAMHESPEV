@@ -59,7 +59,7 @@ uint8_t buf[20];
 int warning = 0;
 int volt_percent = 46*10 - 440;
 int refresh = 0;
-int batRefresh = 0;
+int batRefresh = 1;
 int numRefresh = 0;
 HAL_StatusTypeDef uartRecieveCode;
 
@@ -208,6 +208,7 @@ int main(void)
   MX_SPI3_Init();
   MX_FATFS_Init();
   /* USER CODE BEGIN 2 */
+  	HAL_Delay(250);
 	LCD_TADAMHASPEV(&hspi1);
 	int tempWarn = 0;
 	int voltWarn = 0;
@@ -241,11 +242,10 @@ int main(void)
 		if (refresh == 1) {
 			LCD_updateVals(&hspi1, data);
 			refresh = 0;
-
+			LCD_warnings(&hspi1, data.temp, volt_percent, &warning, &tempWarn, &voltWarn);
 			if (batRefresh == 1) {
 				volt_percent = (int) (data.voltage * 10 - 440);
 				LCD_updateBattery(&hspi1, volt_percent);
-				LCD_warnings(&hspi1, data.temp, volt_percent, &warning, &tempWarn, &voltWarn);
 				batRefresh = 0;
 //				delay = 1;
 			}

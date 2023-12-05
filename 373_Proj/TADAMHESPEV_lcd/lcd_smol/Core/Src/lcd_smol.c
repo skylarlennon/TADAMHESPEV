@@ -908,11 +908,11 @@ void LCD_updateVals(SPI_HandleTypeDef* spi, struct TelData data) {
 }
 
 void LCD_warnings(SPI_HandleTypeDef* spi, int temp, int level, int *warning, int *tempWarn, int *voltWarn) {
-	if ((temp >= 50 | level <= 30) & *warning == 0) {
+	if ((temp >= 24 | level <= 30) & *warning == 0) {
 		LCD_drawString(spi,20,30 + 80*0,"TADAMHESPEV | UMSM",18,HX8357_WHITE,3);
 		*warning = 1;
 	}
-	if (temp >= 50 & *tempWarn == 0) {
+	if (temp >= 24 & *tempWarn == 0) {
 		//LCD_fillTriangle(spi,15,55,45,55,30,25,HX8357_GREEN);
 		LCD_drawString(spi,55,30 + 80*0,"HIGH TEMP",9,HX8357_RED,2);
 		*tempWarn = 1;
@@ -922,7 +922,7 @@ void LCD_warnings(SPI_HandleTypeDef* spi, int temp, int level, int *warning, int
 		LCD_drawString(spi,220,30 + 80*0,"LOW VOLT",8,HX8357_RED,2);
 		*voltWarn = 1;
 	}
-	if (temp < 50 & *tempWarn == 1) {
+	if (temp < 24 & *tempWarn == 1) {
 		LCD_drawString(spi,55,30 + 80*0,"HIGH TEMP",9,HX8357_WHITE,2);
 		*tempWarn = 0;
 	}
