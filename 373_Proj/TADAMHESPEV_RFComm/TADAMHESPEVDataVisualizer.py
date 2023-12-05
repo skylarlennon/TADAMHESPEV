@@ -8,11 +8,11 @@ from matplotlib.animation import FuncAnimation
 import threading, time
 from datetime import datetime, timedelta
 import argparse, csv
-from TADAMHESPEVPacket import LoadTADAMHESPEVLogFile
+from TADAMHESPEVPacket import *
 parser = argparse.ArgumentParser(description="TADAMHESPEV Data File Visualizer")
 parser.add_argument("-s", "--seconds", default=10)
 parser.add_argument("-f", "--filename", default = "TADAMHESPEVLog.csv")
-parser.add_argument("--record-only", action="store_true")
+parser.add_argument("--replay", action="store_true")
 
 
 args = parser.parse_args()
@@ -32,11 +32,19 @@ print(TIMES)
 fig, (pVolt, pTemp, pCurr, pAcc, pVel) = plt.subplots(nrows=5, ncols=1, sharex=True)
 allPlots = [pVolt, pTemp, pCurr, pAcc, pVel]
 
+if args.replay:
+    replayGen = ReplayTADAMHESPEVLogFile(args.filename)
 
+
+def GetUpdatedLogData():
+    if args.replay:
+        return next(replayGen)
+    
+    return LoadTADAMHESPEVLogFile(args.filename)
 
 
 def UpdatePlots(i):
-    ldData = LoadTADAMHESPEVLogFile(args.filename)
+    ldData = GetUpdatedLogData()#LoadTADAMHESPEVLogFile(args.filename)
     xTime = TIMES[-len(ldData['Acceleration']):]
     yAcc = ldData['Acceleration'][-seconds:]
     yCurr = ldData['Current'][-seconds:]
@@ -83,9 +91,12 @@ updateThread = threading.Thread(target=DataUpdateThread,args=(), daemon=True)
 updateThread.start()
 """
 
-ani = FuncAnimation(plt.gcf(), UpdatePlots, interval=1000, cache_frame_data=False)
+ani = FuncAnimation(plt.gcf(), UpdatePlots, interval=500, cache_frame_data=False)
 plt.tight_layout()
 
+print("Begining plot")
+plt.show()
+"""
 if not args.record_only:
     print("Begining plot")
     plt.show()
@@ -93,5 +104,6 @@ else:
     print("record-only: Not showing graphs")
     while 1:
         time.sleep(.1)
+"""
 
 print('exit')

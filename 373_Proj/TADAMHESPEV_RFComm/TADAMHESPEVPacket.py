@@ -41,12 +41,12 @@ def HexStrToFloat(hexstr): #https://stackoverflow.com/questions/1592158/convert-
 COLUMNS = ['Acceleration', 'Temperature', 'Speed', 'Voltage', 'Current']
 def LoadTADAMHESPEVLogFile(fileName = "TADAMHESPEVLog.csv"):
     db = pandas.read_csv(fileName)#, usecols=['Acceleration', 'Temperature', 'Speed', 'Voltage', 'Current'])
+    """
     print(db)
     accVals = db["Speed"]
     print(accVals)
     print(list(accVals))
     print(list(map(HexStrToFloat, list(accVals))))
-    """
     with open(fileName, 'r') as csvfile:
         csvreader = csv.reader(csvfile)
         print(csvreader.__dict__)
@@ -55,4 +55,14 @@ def LoadTADAMHESPEVLogFile(fileName = "TADAMHESPEVLog.csv"):
         colname: list(map(HexStrToFloat, list(db[colname]))) for colname in COLUMNS
     }
 
+def ReplayTADAMHESPEVLogFile(fileName = "TADAMHESPEVLog.csv"): #generator
+    index = 0
+    db = pandas.read_csv(fileName)
+    while 1:
+        for i in range(2, len(db)):
+            yield {
+            colname: list(map(HexStrToFloat, list(db[colname])[:i])) for colname in COLUMNS
+        }
+    
+        
 #print(LoadTADAMHESPEVLogFile())
