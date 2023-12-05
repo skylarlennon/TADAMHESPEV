@@ -19,3 +19,190 @@
 2023-12-05 12:12:27,924 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at org.eclipse.osgi.internal.loader.ModuleClassLoader.loadClass(ModuleClassLoader.java:168)
 2023-12-05 12:12:27,926 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:520)
 2023-12-05 12:12:27,926 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	... 13 more
+2023-12-05 14:00:41,295 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] Exception in thread "Thread-2052" java.lang.NoClassDefFoundError: com/st/library/recent/ProjectIdentifier
+2023-12-05 14:00:41,295 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at com.st.library.analyticscore.AnalyticsContext.getProjectID(AnalyticsContext.java:527)
+2023-12-05 14:00:41,295 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+2023-12-05 14:00:41,306 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+2023-12-05 14:00:41,306 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+2023-12-05 14:00:41,306 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+2023-12-05 14:00:41,306 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at com.st.library.dynamicproxy.AnalyticsInvocationHandler.invoke(AnalyticsInvocationHandler.java:102)
+2023-12-05 14:00:41,306 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at jdk.proxy12/jdk.proxy12.$Proxy51.getProjectID(Unknown Source)
+2023-12-05 14:00:41,306 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at com.st.library.analyticscore.AnalyticsAPI.getProjectID(AnalyticsAPI.java:110)
+2023-12-05 14:00:41,306 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at com.st.stm32cube.ide.mcu.analytics.core.MCUAnalyticsUtils$ProjectId.<init>(MCUAnalyticsUtils.java:109)
+2023-12-05 14:00:41,306 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at com.st.stm32cube.ide.mcu.analytics.core.MCUAnalyticsRegister.send(MCUAnalyticsRegister.java:511)
+2023-12-05 14:00:41,306 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at com.st.stm32cube.ide.mcu.analytics.core.MCUAnalyticsRegister.send(MCUAnalyticsRegister.java:350)
+2023-12-05 14:00:41,306 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at com.st.stm32cube.ide.mcu.analytics.core.MCUAnalytics.lambda$1(MCUAnalytics.java:193)
+2023-12-05 14:00:41,306 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at java.base/java.lang.Thread.run(Thread.java:833)
+2023-12-05 14:00:41,315 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] Caused by: java.lang.ClassNotFoundException: com.st.library.recent.ProjectIdentifier cannot be found by com.st.stm32cube.ide.mcu.analytics_2.3.0.202306160841
+2023-12-05 14:00:41,315 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	... 13 more
+2023-12-05 14:21:04,422 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] Exception in thread "Thread-2082" java.lang.NoClassDefFoundError: com/st/library/recent/ProjectIdentifier
+2023-12-05 14:21:04,425 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at com.st.library.analyticscore.AnalyticsContext.getProjectID(AnalyticsContext.java:527)
+2023-12-05 14:21:04,429 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+2023-12-05 14:21:04,432 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+2023-12-05 14:21:04,434 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+2023-12-05 14:21:04,437 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+2023-12-05 14:21:04,440 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at com.st.library.dynamicproxy.AnalyticsInvocationHandler.invoke(AnalyticsInvocationHandler.java:102)
+2023-12-05 14:21:04,441 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at jdk.proxy12/jdk.proxy12.$Proxy51.getProjectID(Unknown Source)
+2023-12-05 14:21:04,443 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at com.st.library.analyticscore.AnalyticsAPI.getProjectID(AnalyticsAPI.java:110)
+2023-12-05 14:21:04,446 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at com.st.stm32cube.ide.mcu.analytics.core.MCUAnalyticsUtils$ProjectId.<init>(MCUAnalyticsUtils.java:109)
+2023-12-05 14:21:04,449 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at com.st.stm32cube.ide.mcu.analytics.core.MCUAnalyticsRegister.send(MCUAnalyticsRegister.java:511)
+2023-12-05 14:21:04,452 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at com.st.stm32cube.ide.mcu.analytics.core.MCUAnalyticsRegister.lambda$0(MCUAnalyticsRegister.java:340)
+2023-12-05 14:21:04,454 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at java.base/java.lang.Thread.run(Thread.java:833)
+2023-12-05 14:21:04,457 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] Caused by: java.lang.ClassNotFoundException: com.st.library.recent.ProjectIdentifier cannot be found by com.st.stm32cube.ide.mcu.analytics_2.3.0.202306160841
+2023-12-05 14:21:04,458 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	... 12 more
+2023-12-05 14:21:04,883 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] Exception in thread "Thread-2085" java.lang.NoClassDefFoundError: com/st/library/recent/ProjectIdentifier
+2023-12-05 14:21:04,886 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at com.st.library.analyticscore.AnalyticsContext.getProjectID(AnalyticsContext.java:527)
+2023-12-05 14:21:04,888 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+2023-12-05 14:21:04,891 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+2023-12-05 14:21:04,893 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+2023-12-05 14:21:04,897 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+2023-12-05 14:21:04,900 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at com.st.library.dynamicproxy.AnalyticsInvocationHandler.invoke(AnalyticsInvocationHandler.java:102)
+2023-12-05 14:21:04,903 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at jdk.proxy12/jdk.proxy12.$Proxy51.getProjectID(Unknown Source)
+2023-12-05 14:21:04,905 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at com.st.library.analyticscore.AnalyticsAPI.getProjectID(AnalyticsAPI.java:110)
+2023-12-05 14:21:04,908 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at com.st.stm32cube.ide.mcu.analytics.core.MCUAnalyticsUtils$ProjectId.<init>(MCUAnalyticsUtils.java:109)
+2023-12-05 14:21:04,914 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at com.st.stm32cube.ide.mcu.analytics.core.MCUAnalyticsRegister.send(MCUAnalyticsRegister.java:511)
+2023-12-05 14:21:04,917 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at com.st.stm32cube.ide.mcu.analytics.core.MCUAnalyticsRegister.send(MCUAnalyticsRegister.java:350)
+2023-12-05 14:21:04,921 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at com.st.stm32cube.ide.mcu.analytics.core.MCUAnalytics.lambda$1(MCUAnalytics.java:193)
+2023-12-05 14:21:04,923 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at java.base/java.lang.Thread.run(Thread.java:833)
+2023-12-05 14:21:04,928 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] Caused by: java.lang.ClassNotFoundException: com.st.library.recent.ProjectIdentifier cannot be found by com.st.stm32cube.ide.mcu.analytics_2.3.0.202306160841
+2023-12-05 14:21:04,930 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	... 13 more
+2023-12-05 14:29:45,480 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] Exception in thread "Thread-2117" java.lang.NoClassDefFoundError: com/st/library/recent/ProjectIdentifier
+2023-12-05 14:29:45,484 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at com.st.library.analyticscore.AnalyticsContext.getProjectID(AnalyticsContext.java:527)
+2023-12-05 14:29:45,485 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+2023-12-05 14:29:45,487 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+2023-12-05 14:29:45,490 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+2023-12-05 14:29:45,492 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+2023-12-05 14:29:45,495 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at com.st.library.dynamicproxy.AnalyticsInvocationHandler.invoke(AnalyticsInvocationHandler.java:102)
+2023-12-05 14:29:45,497 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at jdk.proxy12/jdk.proxy12.$Proxy51.getProjectID(Unknown Source)
+2023-12-05 14:29:45,499 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at com.st.library.analyticscore.AnalyticsAPI.getProjectID(AnalyticsAPI.java:110)
+2023-12-05 14:29:45,502 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at com.st.stm32cube.ide.mcu.analytics.core.MCUAnalyticsUtils$ProjectId.<init>(MCUAnalyticsUtils.java:109)
+2023-12-05 14:29:45,504 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at com.st.stm32cube.ide.mcu.analytics.core.MCUAnalyticsRegister.send(MCUAnalyticsRegister.java:511)
+2023-12-05 14:29:45,506 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at com.st.stm32cube.ide.mcu.analytics.core.MCUAnalyticsRegister.lambda$0(MCUAnalyticsRegister.java:340)
+2023-12-05 14:29:45,508 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at java.base/java.lang.Thread.run(Thread.java:833)
+2023-12-05 14:29:45,511 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] Caused by: java.lang.ClassNotFoundException: com.st.library.recent.ProjectIdentifier cannot be found by com.st.stm32cube.ide.mcu.analytics_2.3.0.202306160841
+2023-12-05 14:29:45,512 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	... 12 more
+2023-12-05 14:29:45,608 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] Exception in thread "Thread-2121" java.lang.NoClassDefFoundError: com/st/library/recent/ProjectIdentifier
+2023-12-05 14:29:45,610 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at com.st.library.analyticscore.AnalyticsContext.getProjectID(AnalyticsContext.java:527)
+2023-12-05 14:29:45,610 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+2023-12-05 14:29:45,614 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+2023-12-05 14:29:45,615 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+2023-12-05 14:29:45,617 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+2023-12-05 14:29:45,619 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at com.st.library.dynamicproxy.AnalyticsInvocationHandler.invoke(AnalyticsInvocationHandler.java:102)
+2023-12-05 14:29:45,620 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at jdk.proxy12/jdk.proxy12.$Proxy51.getProjectID(Unknown Source)
+2023-12-05 14:29:45,621 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at com.st.library.analyticscore.AnalyticsAPI.getProjectID(AnalyticsAPI.java:110)
+2023-12-05 14:29:45,624 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at com.st.stm32cube.ide.mcu.analytics.core.MCUAnalyticsUtils$ProjectId.<init>(MCUAnalyticsUtils.java:109)
+2023-12-05 14:29:45,626 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at com.st.stm32cube.ide.mcu.analytics.core.MCUAnalyticsRegister.send(MCUAnalyticsRegister.java:511)
+2023-12-05 14:29:45,628 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at com.st.stm32cube.ide.mcu.analytics.core.MCUAnalyticsRegister.send(MCUAnalyticsRegister.java:350)
+2023-12-05 14:29:45,629 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at com.st.stm32cube.ide.mcu.analytics.core.MCUAnalytics.lambda$1(MCUAnalytics.java:193)
+2023-12-05 14:29:45,630 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at java.base/java.lang.Thread.run(Thread.java:833)
+2023-12-05 14:29:45,633 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] Caused by: java.lang.ClassNotFoundException: com.st.library.recent.ProjectIdentifier cannot be found by com.st.stm32cube.ide.mcu.analytics_2.3.0.202306160841
+2023-12-05 14:29:45,635 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	... 13 more
+2023-12-05 14:30:52,969 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] Exception in thread "Thread-2136" java.lang.NoClassDefFoundError: com/st/library/recent/ProjectIdentifier
+2023-12-05 14:30:52,971 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at com.st.library.analyticscore.AnalyticsContext.getProjectID(AnalyticsContext.java:527)
+2023-12-05 14:30:52,972 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+2023-12-05 14:30:52,974 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+2023-12-05 14:30:52,976 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+2023-12-05 14:30:52,978 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+2023-12-05 14:30:52,979 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at com.st.library.dynamicproxy.AnalyticsInvocationHandler.invoke(AnalyticsInvocationHandler.java:102)
+2023-12-05 14:30:52,981 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at jdk.proxy12/jdk.proxy12.$Proxy51.getProjectID(Unknown Source)
+2023-12-05 14:30:52,984 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at com.st.library.analyticscore.AnalyticsAPI.getProjectID(AnalyticsAPI.java:110)
+2023-12-05 14:30:52,986 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at com.st.stm32cube.ide.mcu.analytics.core.MCUAnalyticsUtils$ProjectId.<init>(MCUAnalyticsUtils.java:109)
+2023-12-05 14:30:52,988 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at com.st.stm32cube.ide.mcu.analytics.core.MCUAnalyticsRegister.send(MCUAnalyticsRegister.java:511)
+2023-12-05 14:30:52,989 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at com.st.stm32cube.ide.mcu.analytics.core.MCUAnalyticsRegister.send(MCUAnalyticsRegister.java:350)
+2023-12-05 14:30:52,991 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at com.st.stm32cube.ide.mcu.analytics.core.MCUAnalytics.lambda$1(MCUAnalytics.java:193)
+2023-12-05 14:30:52,992 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at java.base/java.lang.Thread.run(Thread.java:833)
+2023-12-05 14:30:52,994 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] Caused by: java.lang.ClassNotFoundException: com.st.library.recent.ProjectIdentifier cannot be found by com.st.stm32cube.ide.mcu.analytics_2.3.0.202306160841
+2023-12-05 14:30:52,995 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	... 13 more
+2023-12-05 14:43:44,037 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] Exception in thread "Thread-2158" java.lang.NoClassDefFoundError: com/st/library/recent/ProjectIdentifier
+2023-12-05 14:43:44,040 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at com.st.library.analyticscore.AnalyticsContext.getProjectID(AnalyticsContext.java:527)
+2023-12-05 14:43:44,042 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+2023-12-05 14:43:44,045 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+2023-12-05 14:43:44,049 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+2023-12-05 14:43:44,051 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+2023-12-05 14:43:44,053 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at com.st.library.dynamicproxy.AnalyticsInvocationHandler.invoke(AnalyticsInvocationHandler.java:102)
+2023-12-05 14:43:44,055 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at jdk.proxy12/jdk.proxy12.$Proxy51.getProjectID(Unknown Source)
+2023-12-05 14:43:44,057 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at com.st.library.analyticscore.AnalyticsAPI.getProjectID(AnalyticsAPI.java:110)
+2023-12-05 14:43:44,060 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at com.st.stm32cube.ide.mcu.analytics.core.MCUAnalyticsUtils$ProjectId.<init>(MCUAnalyticsUtils.java:109)
+2023-12-05 14:43:44,062 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at com.st.stm32cube.ide.mcu.analytics.core.MCUAnalyticsRegister.send(MCUAnalyticsRegister.java:511)
+2023-12-05 14:43:44,064 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at com.st.stm32cube.ide.mcu.analytics.core.MCUAnalyticsRegister.lambda$0(MCUAnalyticsRegister.java:340)
+2023-12-05 14:43:44,065 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at java.base/java.lang.Thread.run(Thread.java:833)
+2023-12-05 14:43:44,068 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] Caused by: java.lang.ClassNotFoundException: com.st.library.recent.ProjectIdentifier cannot be found by com.st.stm32cube.ide.mcu.analytics_2.3.0.202306160841
+2023-12-05 14:43:44,069 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	... 12 more
+2023-12-05 14:43:44,100 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] Exception in thread "Thread-2160" java.lang.NoClassDefFoundError: com/st/library/recent/ProjectIdentifier
+2023-12-05 14:43:44,103 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at com.st.library.analyticscore.AnalyticsContext.getProjectID(AnalyticsContext.java:527)
+2023-12-05 14:43:44,104 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+2023-12-05 14:43:44,106 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+2023-12-05 14:43:44,108 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+2023-12-05 14:43:44,109 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+2023-12-05 14:43:44,112 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at com.st.library.dynamicproxy.AnalyticsInvocationHandler.invoke(AnalyticsInvocationHandler.java:102)
+2023-12-05 14:43:44,114 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at jdk.proxy12/jdk.proxy12.$Proxy51.getProjectID(Unknown Source)
+2023-12-05 14:43:44,116 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at com.st.library.analyticscore.AnalyticsAPI.getProjectID(AnalyticsAPI.java:110)
+2023-12-05 14:43:44,119 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at com.st.stm32cube.ide.mcu.analytics.core.MCUAnalyticsUtils$ProjectId.<init>(MCUAnalyticsUtils.java:109)
+2023-12-05 14:43:44,122 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at com.st.stm32cube.ide.mcu.analytics.core.MCUAnalyticsRegister.send(MCUAnalyticsRegister.java:511)
+2023-12-05 14:43:44,124 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at com.st.stm32cube.ide.mcu.analytics.core.MCUAnalyticsRegister.send(MCUAnalyticsRegister.java:350)
+2023-12-05 14:43:44,126 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at com.st.stm32cube.ide.mcu.analytics.core.MCUAnalytics.lambda$1(MCUAnalytics.java:193)
+2023-12-05 14:43:44,129 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at java.base/java.lang.Thread.run(Thread.java:833)
+2023-12-05 14:43:44,131 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] Caused by: java.lang.ClassNotFoundException: com.st.library.recent.ProjectIdentifier cannot be found by com.st.stm32cube.ide.mcu.analytics_2.3.0.202306160841
+2023-12-05 14:43:44,131 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	... 13 more
+2023-12-05 14:47:11,868 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] Exception in thread "Thread-2188" java.lang.NoClassDefFoundError: com/st/library/recent/ProjectIdentifier
+2023-12-05 14:47:11,872 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at com.st.library.analyticscore.AnalyticsContext.getProjectID(AnalyticsContext.java:527)
+2023-12-05 14:47:11,873 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+2023-12-05 14:47:11,875 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+2023-12-05 14:47:11,877 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+2023-12-05 14:47:11,877 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+2023-12-05 14:47:11,881 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at com.st.library.dynamicproxy.AnalyticsInvocationHandler.invoke(AnalyticsInvocationHandler.java:102)
+2023-12-05 14:47:11,882 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at jdk.proxy12/jdk.proxy12.$Proxy51.getProjectID(Unknown Source)
+2023-12-05 14:47:11,884 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at com.st.library.analyticscore.AnalyticsAPI.getProjectID(AnalyticsAPI.java:110)
+2023-12-05 14:47:11,886 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at com.st.stm32cube.ide.mcu.analytics.core.MCUAnalyticsUtils$ProjectId.<init>(MCUAnalyticsUtils.java:109)
+2023-12-05 14:47:11,887 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at com.st.stm32cube.ide.mcu.analytics.core.MCUAnalyticsRegister.send(MCUAnalyticsRegister.java:511)
+2023-12-05 14:47:11,889 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at com.st.stm32cube.ide.mcu.analytics.core.MCUAnalyticsRegister.lambda$0(MCUAnalyticsRegister.java:340)
+2023-12-05 14:47:11,890 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at java.base/java.lang.Thread.run(Thread.java:833)
+2023-12-05 14:47:11,893 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] Caused by: java.lang.ClassNotFoundException: com.st.library.recent.ProjectIdentifier cannot be found by com.st.stm32cube.ide.mcu.analytics_2.3.0.202306160841
+2023-12-05 14:47:11,893 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	... 12 more
+2023-12-05 14:47:11,941 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] Exception in thread "Thread-2190" java.lang.NoClassDefFoundError: com/st/library/recent/ProjectIdentifier
+2023-12-05 14:47:11,946 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at com.st.library.analyticscore.AnalyticsContext.getProjectID(AnalyticsContext.java:527)
+2023-12-05 14:47:11,948 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+2023-12-05 14:47:11,950 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+2023-12-05 14:47:11,952 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+2023-12-05 14:47:11,953 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+2023-12-05 14:47:11,955 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at com.st.library.dynamicproxy.AnalyticsInvocationHandler.invoke(AnalyticsInvocationHandler.java:102)
+2023-12-05 14:47:11,956 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at jdk.proxy12/jdk.proxy12.$Proxy51.getProjectID(Unknown Source)
+2023-12-05 14:47:11,959 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at com.st.library.analyticscore.AnalyticsAPI.getProjectID(AnalyticsAPI.java:110)
+2023-12-05 14:47:11,961 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at com.st.stm32cube.ide.mcu.analytics.core.MCUAnalyticsUtils$ProjectId.<init>(MCUAnalyticsUtils.java:109)
+2023-12-05 14:47:11,963 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at com.st.stm32cube.ide.mcu.analytics.core.MCUAnalyticsRegister.send(MCUAnalyticsRegister.java:511)
+2023-12-05 14:47:11,966 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at com.st.stm32cube.ide.mcu.analytics.core.MCUAnalyticsRegister.send(MCUAnalyticsRegister.java:350)
+2023-12-05 14:47:11,968 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at com.st.stm32cube.ide.mcu.analytics.core.MCUAnalytics.lambda$1(MCUAnalytics.java:193)
+2023-12-05 14:47:11,969 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at java.base/java.lang.Thread.run(Thread.java:833)
+2023-12-05 14:47:11,972 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] Caused by: java.lang.ClassNotFoundException: com.st.library.recent.ProjectIdentifier cannot be found by com.st.stm32cube.ide.mcu.analytics_2.3.0.202306160841
+2023-12-05 14:47:11,972 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	... 13 more
+2023-12-05 15:26:50,898 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] Exception in thread "Thread-2218" java.lang.NoClassDefFoundError: com/st/library/recent/ProjectIdentifier
+2023-12-05 15:26:50,901 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at com.st.library.analyticscore.AnalyticsContext.getProjectID(AnalyticsContext.java:527)
+2023-12-05 15:26:50,903 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+2023-12-05 15:26:50,905 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+2023-12-05 15:26:50,909 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+2023-12-05 15:26:50,911 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+2023-12-05 15:26:50,914 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at com.st.library.dynamicproxy.AnalyticsInvocationHandler.invoke(AnalyticsInvocationHandler.java:102)
+2023-12-05 15:26:50,916 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at jdk.proxy12/jdk.proxy12.$Proxy51.getProjectID(Unknown Source)
+2023-12-05 15:26:50,918 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at com.st.library.analyticscore.AnalyticsAPI.getProjectID(AnalyticsAPI.java:110)
+2023-12-05 15:26:50,920 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at com.st.stm32cube.ide.mcu.analytics.core.MCUAnalyticsUtils$ProjectId.<init>(MCUAnalyticsUtils.java:109)
+2023-12-05 15:26:50,923 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at com.st.stm32cube.ide.mcu.analytics.core.MCUAnalyticsRegister.send(MCUAnalyticsRegister.java:511)
+2023-12-05 15:26:50,926 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at com.st.stm32cube.ide.mcu.analytics.core.MCUAnalyticsRegister.lambda$0(MCUAnalyticsRegister.java:340)
+2023-12-05 15:26:50,928 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at java.base/java.lang.Thread.run(Thread.java:833)
+2023-12-05 15:26:50,932 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] Caused by: java.lang.ClassNotFoundException: com.st.library.recent.ProjectIdentifier cannot be found by com.st.stm32cube.ide.mcu.analytics_2.3.0.202306160841
+2023-12-05 15:26:50,934 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	... 12 more
+2023-12-05 15:26:51,468 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] Exception in thread "Thread-2221" java.lang.NoClassDefFoundError: com/st/library/recent/ProjectIdentifier
+2023-12-05 15:26:51,471 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at com.st.library.analyticscore.AnalyticsContext.getProjectID(AnalyticsContext.java:527)
+2023-12-05 15:26:51,474 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+2023-12-05 15:26:51,477 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+2023-12-05 15:26:51,479 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+2023-12-05 15:26:51,481 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+2023-12-05 15:26:51,483 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at com.st.library.dynamicproxy.AnalyticsInvocationHandler.invoke(AnalyticsInvocationHandler.java:102)
+2023-12-05 15:26:51,484 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at jdk.proxy12/jdk.proxy12.$Proxy51.getProjectID(Unknown Source)
+2023-12-05 15:26:51,486 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at com.st.library.analyticscore.AnalyticsAPI.getProjectID(AnalyticsAPI.java:110)
+2023-12-05 15:26:51,487 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at com.st.stm32cube.ide.mcu.analytics.core.MCUAnalyticsUtils$ProjectId.<init>(MCUAnalyticsUtils.java:109)
+2023-12-05 15:26:51,489 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at com.st.stm32cube.ide.mcu.analytics.core.MCUAnalyticsRegister.send(MCUAnalyticsRegister.java:511)
+2023-12-05 15:26:51,492 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at com.st.stm32cube.ide.mcu.analytics.core.MCUAnalyticsRegister.send(MCUAnalyticsRegister.java:350)
+2023-12-05 15:26:51,495 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at com.st.stm32cube.ide.mcu.analytics.core.MCUAnalytics.lambda$1(MCUAnalytics.java:193)
+2023-12-05 15:26:51,496 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	at java.base/java.lang.Thread.run(Thread.java:833)
+2023-12-05 15:26:51,499 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] Caused by: java.lang.ClassNotFoundException: com.st.library.recent.ProjectIdentifier cannot be found by com.st.stm32cube.ide.mcu.analytics_2.3.0.202306160841
+2023-12-05 15:26:51,499 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 	... 13 more
