@@ -85,10 +85,31 @@ void TADStructToBuffer(float*, volatile struct TelData*);
 /* USER CODE BEGIN 0 */
 volatile struct TelData teldata;
 uint8_t buf[20];
+struct Kalman {
+	float prev_estimate;
+	float gain;
+	float signal_estimate;
+	float error_estimate;
+};
+
+volatile struct Kalman volt_filter;
+volatile struct Kalman curr_filter;
 
 volatile uint16_t curVoltADC_DMA[2]; //https://www.youtube.com/watch?v=AloHXBk6Bfk
 const int adcChannelCount = 2;
 volatile int adcConversionComplete = 0;//set by callback
+
+float volt_constant = 69.0 / (0b1 << 12);
+float curr_constant = 3.3 / (0b1 << 12);
+
+float KalmanEstimate(struct Kalman *filter, float measurement, float meas_error, float est_error, float noise) {
+	if (filter->error_estimate == 0) filter->error_estimate = meas_error;
+	filter->gain = filter->error_estimate/(filter->error_estimate + meas_error);
+	filter->signal_estimate = filter->prev_estimate + filter->gain*(measurement - filter->prev_estimate);
+	filter->error_estimate = (1.0 - filter->gain)*filter->error_estimate + fabs(filter->prev_estimate - filter->signal_estimate)*noise;
+	filter->prev_estimate = filter->signal_estimate;
+	return filter->signal_estimate;
+}
 
 uint16_t read_Temperature(uint16_t GPIO_PIN) {
 	uint16_t spi_buf[2];
@@ -129,13 +150,13 @@ uint16_t read_Temperature(uint16_t GPIO_PIN) {
 
 #define NUM_CUR_READS 10
 void CalculateCurrent(uint16_t adcRead){
-	float adcVoltage = adcRead*3.3/(0b1<<12); //adc equation to get input voltage
-	teldata.current = (adcVoltage - 1.72)/0.0545;
+	float curr = ((adcRead*curr_constant) - 1.72)/0.0545; //adc equation to get input current
+	teldata.current = KalmanEstimate(&curr_filter,curr,1.0,1.0,0.015);
 }
 
 void CalculateVoltage(uint16_t adcRead){
-	float adcVoltage = adcRead * 3.3 / (0b1 << 12); //adc equation to get input voltage
-	teldata.voltage = (adcVoltage/3.3)*69;
+	float volt = adcRead * volt_constant; //adc equation to get input voltage
+	teldata.voltage = KalmanEstimate(&volt_filter,volt,1.0,1.0,0.015);
 }
 
 void TakeADCMeasurement(){
@@ -205,8 +226,9 @@ int main(void)
 
 	float buff[5];
 	int voltageLoopCount = 0;
-
-
+	int speedCount = 0;
+	const int numSamples = 10;
+	uint32_t curAvg = 0, volAvg = 0;
 
   /* USER CODE END 2 */
 
@@ -224,18 +246,16 @@ int main(void)
 //		teldata.current = ADC_VAL;
 //		printf("adcval: %d\n", ADC_VAL);
 
-	  	const int numSamples = 10;
-	  	uint32_t curAvg = 0, volAvg = 0;
 	  	for(int i = 0; i < numSamples ; ++i){ //take 10 samples
 	  		TakeADCMeasurement();
-	  		curAvg += curVoltADC_DMA[0];
-	  		volAvg += curVoltADC_DMA[1];
+	  		volAvg += curVoltADC_DMA[0];
+	  		curAvg += curVoltADC_DMA[1];
 	  	}
 	  	curAvg/=numSamples;
 	  	volAvg/=numSamples;
 	  	printf("CUR AVG %d, VOL AVG %d\n", curAvg, volAvg);
 	  	CalculateCurrent(curAvg);
-	  	if((++voltageLoopCount)%60==0) CalculateVoltage(volAvg);
+	  	if(voltageLoopCount == 0 || (++voltageLoopCount)%20==0) CalculateVoltage(volAvg);
 
 
 //	  	HAL_ADC_Start_DMA(&hadc1, (uint32_t*)curVoltADC_DMA, adcChannelCount);
@@ -245,6 +265,14 @@ int main(void)
 //	  	if((++voltageLoopCount)%60==0) CalculateVoltage(curVoltADC_DMA[1]);
 
 	  	//printf("ADC CURRENT %d, ADC VOLT %d", curVoltADC_DMA[0], curVoltADC_DMA[1]);
+	  	if (teldata.speed == buff[2]) {
+	  		speedCount++;
+	  	} else {
+	  		speedCount = 0;
+	  	}
+	  	if (speedCount >= 3) {
+	  		teldata.speed = 0;
+	  	}
 
 		printf("Telemetry Data:\n");
 		printf("Acceleration: %f\n", teldata.accel);

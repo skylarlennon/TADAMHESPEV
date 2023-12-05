@@ -52,9 +52,9 @@ UART_HandleTypeDef huart1;
 /* USER CODE BEGIN PV */
 uint8_t buf[20];
 int warning = 0;
-int volt_percent = 46*10 - 440;
+int volt_percent = 0;
 int refresh = 0;
-int batRefresh = 0;
+int batRefresh = 1;
 int numRefresh = 0;
 HAL_StatusTypeDef spiRecieveCode;
 
@@ -112,6 +112,7 @@ int main(void)
   MX_USART1_UART_Init();
   MX_SPI3_Init();
   /* USER CODE BEGIN 2 */
+  	HAL_Delay(250);
 	LCD_TADAMHASPEV(&hspi1);
 	int tempWarn = 0;
 	int voltWarn = 0;
@@ -135,12 +136,13 @@ int main(void)
 		}
 		if (refresh == 1) {
 			LCD_updateVals(&hspi1, data);
+			LCD_warnings(&hspi1, data.temp, volt_percent, &warning, &tempWarn, &voltWarn);
 			refresh = 0;
 
 			if (batRefresh == 1) {
 				volt_percent = (int) (data.voltage * 10 - 440);
 				LCD_updateBattery(&hspi1, volt_percent);
-				LCD_warnings(&hspi1, data.temp, volt_percent, &warning, &tempWarn, &voltWarn);
+//				LCD_warnings(&hspi1, data.temp, volt_percent, &warning, &tempWarn, &voltWarn);
 				batRefresh = 0;
 //				delay = 1;
 			}
@@ -436,7 +438,6 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
 	else{
 		ignoreData = 0;
 		spiRecieveCode = HAL_UART_Receive_IT(&huart1, (uint8_t*) &buf, sizeof(buf));
-
 	}
 	//spiRecieveCode = HAL_UART_Receive_IT(&huart1, (uint8_t*) &buf, sizeof(buf));
 	numRefresh++;

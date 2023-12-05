@@ -1,10 +1,10 @@
-17:01:16 **** Incremental Build of configuration Debug for project TADAMHESPEV_integrate ****
+15:21:07 **** Incremental Build of configuration Debug for project TADAMHESPEV_integrate ****
 make -j12 all 
-arm-none-eabi-size   TADAMHESPEV_integrate.elf 
+arm-none-eabi-size  TADAMHESPEV_integrate.elf 
    text	   data	    bss	    dec	    hex	filename
-  44392	    480	   2888	  47760	   ba90	TADAMHESPEV_integrate.elf
+  52224	    488	   3128	  55840	   da20	TADAMHESPEV_integrate.elf
 Finished building: default.size.stdout
  
 
-17:01:17 Build Finished. 0 errors, 0 warnings. (took 618ms)
+15:21:08 Build Finished. 0 errors, 0 warnings. (took 698ms)
 

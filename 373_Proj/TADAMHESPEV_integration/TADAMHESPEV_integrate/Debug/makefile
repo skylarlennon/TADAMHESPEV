@@ -60,8 +60,8 @@ all: main-build
 main-build: TADAMHESPEV_integrate.elf secondary-outputs
 
 # Tool invocations
-TADAMHESPEV_integrate.elf TADAMHESPEV_integrate.map: $(OBJS) $(USER_OBJS) C:\Users\benwo\Documents\eecs373\TADAMHESPEV\373_Proj\TADAMHESPEV_integration\TADAMHESPEV_integrate\STM32L4R5ZITXP_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "TADAMHESPEV_integrate.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\benwo\Documents\eecs373\TADAMHESPEV\373_Proj\TADAMHESPEV_integration\TADAMHESPEV_integrate\STM32L4R5ZITXP_FLASH.ld" --specs=nosys.specs -Wl,-Map="TADAMHESPEV_integrate.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -Wl,--end-group
+TADAMHESPEV_integrate.elf TADAMHESPEV_integrate.map: $(OBJS) $(USER_OBJS) C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_integration\TADAMHESPEV_integrate\STM32L4R5ZITXP_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "TADAMHESPEV_integrate.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\ndib8\Desktop\TADAMHESPEV\TADAMHESPEV\373_Proj\TADAMHESPEV_integration\TADAMHESPEV_integrate\STM32L4R5ZITXP_FLASH.ld" --specs=nosys.specs -Wl,-Map="TADAMHESPEV_integrate.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
