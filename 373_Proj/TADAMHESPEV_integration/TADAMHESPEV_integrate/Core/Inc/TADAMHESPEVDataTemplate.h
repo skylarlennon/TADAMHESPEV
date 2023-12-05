@@ -25,7 +25,7 @@ inline void TADBufferToStruct(float buf[], struct TelData *data){
 	data->current = buf[4];
 }
 
-inline void TADStructToBuffer(float buf[], struct TelData *data){
+inline void TADStructToBuffer(float buf[], volatile struct TelData *data){
 	buf[0] = data->accel;
 	buf[1] = data->temp;
 	buf[2] = data->speed;

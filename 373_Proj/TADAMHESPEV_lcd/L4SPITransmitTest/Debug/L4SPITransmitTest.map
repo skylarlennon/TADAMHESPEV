@@ -4237,16 +4237,16 @@ LOAD C:/ST/STM32CubeIDE_1.13.1/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.ext
 .debug_str      0x0000000000000000    0xfec87
  .debug_str     0x0000000000000000    0xf9b1f ./Core/Src/main.o
                                       0xf9e7b (size before relaxing)
- .debug_str     0x00000000000f9b1f      0x353 ./Core/Src/stm32l4xx_hal_msp.o
-                                      0xf678e (size before relaxing)
- .debug_str     0x00000000000f9e72       0xc9 ./Core/Src/stm32l4xx_it.o
-                                      0xf5d4e (size before relaxing)
- .debug_str     0x00000000000f9f3b     0x20db ./Core/Src/syscalls.o
+ .debug_str     0x00000000000f9b1f      0x30e ./Core/Src/stm32l4xx_hal_msp.o
+                                      0xf67a7 (size before relaxing)
+ .debug_str     0x00000000000f9e2d       0xc9 ./Core/Src/stm32l4xx_it.o
+                                      0xf5d67 (size before relaxing)
+ .debug_str     0x00000000000f9ef6     0x2120 ./Core/Src/syscalls.o
                                        0x98b0 (size before relaxing)
  .debug_str     0x00000000000fc016       0x6b ./Core/Src/sysmem.o
                                        0x6067 (size before relaxing)
  .debug_str     0x00000000000fc081       0xf2 ./Core/Src/system_stm32l4xx.o
-                                      0xf5efb (size before relaxing)
+                                      0xf5f14 (size before relaxing)
  .debug_str     0x00000000000fc173       0x35 ./Core/Startup/startup_stm32l4r5zitxp.o
                                          0x7a (size before relaxing)
  .debug_str     0x00000000000fc1a8      0xab1 ./Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal.o

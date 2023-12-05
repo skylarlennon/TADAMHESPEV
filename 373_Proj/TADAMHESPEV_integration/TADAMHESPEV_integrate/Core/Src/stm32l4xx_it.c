@@ -60,6 +60,7 @@ float acc = 0;
 /* USER CODE END 0 */
 
 /* External variables --------------------------------------------------------*/
+extern DMA_HandleTypeDef hdma_adc1;
 extern TIM_HandleTypeDef htim3;
 extern TIM_HandleTypeDef htim15;
 extern TIM_HandleTypeDef htim17;
@@ -206,6 +207,20 @@ void SysTick_Handler(void)
 /******************************************************************************/
 
 /**
+  * @brief This function handles DMA1 channel1 global interrupt.
+  */
+void DMA1_Channel1_IRQHandler(void)
+{
+  /* USER CODE BEGIN DMA1_Channel1_IRQn 0 */
+
+  /* USER CODE END DMA1_Channel1_IRQn 0 */
+  HAL_DMA_IRQHandler(&hdma_adc1);
+  /* USER CODE BEGIN DMA1_Channel1_IRQn 1 */
+
+  /* USER CODE END DMA1_Channel1_IRQn 1 */
+}
+
+/**
   * @brief This function handles TIM1 break interrupt and TIM15 global interrupt.
   */
 void TIM1_BRK_TIM15_IRQHandler(void)
@@ -235,7 +250,7 @@ void TIM1_TRG_COM_TIM17_IRQHandler(void)
 	TIM17->CNT = 0;
 
 	teldata.speed = (float)(veloMultiplier / curTime);
-	printf("Speed: %f\n",(veloMultiplier / curTime));
+	//printf("Speed: %f\n",(veloMultiplier / curTime));
   /* USER CODE END TIM1_TRG_COM_TIM17_IRQn 1 */
 }
 
@@ -275,7 +290,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef * htim) {
 
 		// send this average to display
 
-		printf("Average External Temperature: %.2f \n\r", average);
+		//printf("Average External Temperature: %.2f \n\r", average);
 
 		if (average > 24) {
 			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, GPIO_PIN_SET);
