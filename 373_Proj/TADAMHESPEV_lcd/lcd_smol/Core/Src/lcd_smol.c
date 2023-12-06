@@ -948,7 +948,9 @@ void LCD_updateBattery(SPI_HandleTypeDef* spi, int level) {
 }
 
 void LCD_TADAMHASPEV(SPI_HandleTypeDef* spi) {
+	HAL_Delay(250);
 	LCD_begin(spi);
+	HAL_Delay(250);
 	LCD_writePixels(spi,HX8357_WHITE,0,0,480,320);
 	LCD_drawBattery(spi,380,120,8);
     LCD_drawFrame(spi);

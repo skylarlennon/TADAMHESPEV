@@ -18,7 +18,7 @@
 #define MAX_ACCEL 2.0
 #define START_FRAME 0x00000000
 //#define LED_FRAME_START_BRIGHT 0xF0 // 0b111 xxxxx (for brightness)
-#define LED_FRAME_START_BRIGHT 0xE3 // 0b111 xxxxx (for brightness)
+#define LED_FRAME_START_BRIGHT 0xE1 // 0b111 xxxxx (for brightness)
 #define LED_FRAME_START_OFF 0xE0 // 0b111 000000 (for brightness)
 //#define BLANK_LED 0xE0000000
 // MAKE SURE THESE SUM TO NUM_LEDS

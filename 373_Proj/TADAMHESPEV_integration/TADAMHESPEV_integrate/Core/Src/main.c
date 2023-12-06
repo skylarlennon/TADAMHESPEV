@@ -282,9 +282,13 @@ int main(void)
 		printf("Current: %f\n\n", teldata.current);
 
 		TADStructToBuffer(buff, &teldata);
+		HAL_TIM_Base_Stop_IT(&htim15);
+//		HAL_Delay(200);
 		HAL_UART_Transmit(&huart4, (uint8_t*) &buff, sizeof(buff), 100);
+		HAL_Delay(200);
+		HAL_TIM_Base_Start_IT(&htim15);
 		printf("uart trans\n");
-		HAL_Delay(1000);
+		HAL_Delay(500);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -693,7 +697,7 @@ static void MX_TIM15_Init(void)
   htim15.Instance = TIM15;
   htim15.Init.Prescaler = 3999;
   htim15.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim15.Init.Period = 19;
+  htim15.Init.Period = 49;
   htim15.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
   htim15.Init.RepetitionCounter = 0;
   htim15.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;

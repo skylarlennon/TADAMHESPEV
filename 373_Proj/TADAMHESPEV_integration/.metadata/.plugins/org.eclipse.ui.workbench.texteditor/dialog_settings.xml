@@ -6,8 +6,9 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value=""/>
+		<item key="selection" value="ReadAccData"/>
 		<list key="findhistory">
+			<item value="ReadAccData"/>
 			<item value="spi"/>
 			<item value="spi2"/>
 			<item value="spi3"/>

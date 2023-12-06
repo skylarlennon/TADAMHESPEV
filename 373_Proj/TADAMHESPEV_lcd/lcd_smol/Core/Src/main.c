@@ -112,7 +112,7 @@ int main(void)
   MX_USART1_UART_Init();
   MX_SPI3_Init();
   /* USER CODE BEGIN 2 */
-  	HAL_Delay(250);
+//  	HAL_Delay(250);
 	LCD_TADAMHASPEV(&hspi1);
 	int tempWarn = 0;
 	int voltWarn = 0;
@@ -431,7 +431,7 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
 	if ( //check if values changed
 	ignoreData == 0 && (fbuf[0] != data.accel || fbuf[1] != data.temp || fbuf[2] != data.speed
 			|| fbuf[3] != data.voltage || fbuf[4] != data.current)  ) {
-		if (data.voltage != fbuf[3]) batRefresh = 1; //only refresh battery when voltage changes
+		if (numRefresh % 20 == 0) batRefresh = 1; //only refresh battery when voltage changes
 		TADBufferToStruct((float*)buf, &data);
 		refresh = 1;
 	}
