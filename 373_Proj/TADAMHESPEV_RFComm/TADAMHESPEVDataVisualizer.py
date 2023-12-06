@@ -7,19 +7,37 @@ import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 import threading, time
 from datetime import datetime, timedelta
-import argparse, csv
+import argparse, csv, os
 from TADAMHESPEVPacket import *
+from dateutil import parser as dtparser
 parser = argparse.ArgumentParser(description="TADAMHESPEV Data File Visualizer")
 parser.add_argument("-s", "--seconds", default=10)
-parser.add_argument("-f", "--filename", default = "TADAMHESPEVLog.csv")
+parser.add_argument("-f", "--filename", required=False)
 parser.add_argument("--replay", action="store_true")
-
-
 args = parser.parse_args()
 print(args.__dict__)
 seconds = int(args.seconds)
-#exit()
 
+logFileName = args.filename
+if not logFileName:
+    latest = None
+    for fn in os.listdir("."):
+        if fn.startswith("RFTADLOG."):
+            try:
+                dt = dtparser.parse(fn.split('.')[1].replace('_', ' ').replace('--', ':'))
+                print(dt)
+                if not latest or dt > latest:
+                    latest = dt
+                    logFileName = fn
+            except Exception as ex:
+                raise ex
+                continue
+    
+if not logFileName:
+    print("could not determine latest log file, use -f")
+    exit(1)
+
+print("VISUALIZING",  logFileName)
 plt.style.use('classic')
 
 index = count()
@@ -33,13 +51,13 @@ fig, (pVolt, pTemp, pCurr, pAcc, pVel) = plt.subplots(nrows=5, ncols=1, sharex=T
 allPlots = [pVolt, pTemp, pCurr, pAcc, pVel]
 
 if args.replay:
-    replayGen = ReplayTADAMHESPEVLogFile(args.filename)
+    replayGen = ReplayTADAMHESPEVLogFile(logFileName)
 
 
 def GetUpdatedLogData():
     if args.replay:
         return next(replayGen)
-    return LoadTADAMHESPEVLogFile(args.filename)
+    return LoadTADAMHESPEVLogFile(logFileName)
 
 
 def UpdatePlots(i):
@@ -90,7 +108,7 @@ updateThread = threading.Thread(target=DataUpdateThread,args=(), daemon=True)
 updateThread.start()
 """
 
-ani = FuncAnimation(plt.gcf(), UpdatePlots, interval=500, cache_frame_data=False)
+ani = FuncAnimation(plt.gcf(), UpdatePlots, interval=200, cache_frame_data=False)
 plt.tight_layout()
 
 print("Begining plot")

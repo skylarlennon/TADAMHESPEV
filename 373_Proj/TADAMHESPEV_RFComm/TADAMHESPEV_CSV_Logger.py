@@ -9,7 +9,8 @@ parser.add_argument("-f", "--filename", required = False)
 args = parser.parse_args()
 print("Starting read from", args.port)
 
-logFileName = "TADAMHESPEVLog.csv" if not args.filename else args.filename
+
+logFileName = f"RFTADLOG.{str(datetime.now()).replace(' ', '_').replace(':', '--')}.csv" if not args.filename else args.filename
 print("Logging to", logFileName)
 
 #initialize file
