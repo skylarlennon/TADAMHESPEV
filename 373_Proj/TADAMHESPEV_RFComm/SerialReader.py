@@ -46,27 +46,28 @@ class SerialReader:
 
     def _ReadThread(self):
         print('start read thread')
-        try:
-            self.lastReadTime = datetime.now()
-            message = bytearray()
-            while self._listening:
-                s = self.ser.read(1)
-                if len(s) == 0: #timeout 
-                    #print("timeout occur")
-                    if len(message)>0:
+        while 1:
+            try:
+                self.lastReadTime = datetime.now()
+                message = bytearray()
+                while self._listening:
+                    s = self.ser.read(1)
+                    if len(s) == 0: #timeout 
+                        if len(message)>0:
+                            self._OnMessageRecieved(message)
+                            message = bytearray()
+                        continue
+                    
+                    newReadTime = datetime.now()
+                    if newReadTime - self.lastReadTime > timedelta(milliseconds=self.messageTimeDelta) and len(message)>0: #start new message
                         self._OnMessageRecieved(message)
                         message = bytearray()
-                    continue
-                
-                newReadTime = datetime.now()
-                if newReadTime - self.lastReadTime > timedelta(milliseconds=self.messageTimeDelta) and len(message)>0: #start new message
-                    self._OnMessageRecieved(message)
-                    message = bytearray()
-                self.lastReadTime = newReadTime
-                message.extend(s)
-        except Exception as ex:
-            raise ex
-            print("EXCEPTION WHEN READING DATA: {}".format(ex))
+                    self.lastReadTime = newReadTime
+                    message.extend(s)
+            except Exception as ex:
+                print('here')
+                raise ex
+                print("EXCEPTION WHEN READING DATA: {}".format(ex))
 
     def StartRead(self):
         self._listening = True

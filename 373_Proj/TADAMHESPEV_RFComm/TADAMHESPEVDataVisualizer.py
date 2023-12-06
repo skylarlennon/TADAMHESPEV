@@ -14,6 +14,7 @@ parser = argparse.ArgumentParser(description="TADAMHESPEV Data File Visualizer")
 parser.add_argument("-s", "--seconds", default=10)
 parser.add_argument("-f", "--filename", required=False)
 parser.add_argument("--replay", action="store_true")
+parser.add_argument("--style", default='classic', help='matplotlib styles')
 args = parser.parse_args()
 print(args.__dict__)
 seconds = int(args.seconds)
@@ -38,7 +39,7 @@ if not logFileName:
     exit(1)
 
 print("VISUALIZING",  logFileName)
-plt.style.use('classic')
+plt.style.use(args.style)#('classic')
 
 index = count()
 
@@ -62,7 +63,11 @@ def GetUpdatedLogData():
 
 def UpdatePlots(i):
     ldData = GetUpdatedLogData()#LoadTADAMHESPEVLogFile(args.filename)
-    xTime = TIMES[-len(ldData['Acceleration']):]
+    numEntries = len(ldData['Acceleration'])
+    if not numEntries:
+        return
+
+    xTime = TIMES[-numEntries:]
     yAcc = ldData['Acceleration'][-seconds:]
     yCurr = ldData['Current'][-seconds:]
     yVolt = ldData['Voltage'][-seconds:]
@@ -72,9 +77,11 @@ def UpdatePlots(i):
     #clear all plots
     for p in allPlots:
         p.cla()
+        p.grid(True)
 
     pVolt.plot(xTime, yVolt, label='Voltage')
     pVolt.set_ylabel("Voltage (v)")
+    
 
     pTemp.plot(xTime, yTemp, label='Temperature')
     pTemp.set_ylabel("Temperature (C)")
