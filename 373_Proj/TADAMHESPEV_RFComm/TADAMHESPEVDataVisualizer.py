@@ -94,7 +94,7 @@ def UpdatePlots(i):
     pCurr.set_ylabel("Current Draw (amp)")
 
     pVel.plot(xTime, yVelocity, label='Velocity', color = '#c217b6')
-    pVel.set_ylabel("Velocity (m/s)")
+    pVel.set_ylabel("Velocity (mph)")
     pVel.set_xlabel("Time (s)")
     pVel.set_xlim(-seconds, -1)
     #plt.legend(loc='upper left')
